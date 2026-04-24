@@ -5,6 +5,6 @@ plugins/PawnPlus.so
 samp-npc
 samp03svr
 pawn.lock
-log*
+log.txt
 sampctl_build*
 gamemodes/modules/core/settings/database.pwn
