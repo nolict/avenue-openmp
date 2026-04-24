@@ -145,8 +145,8 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Driving School");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "This is the ~g~~h~Driving School~w~. You can take your~n~driving test here. To pass the test, you must~n~avoid the obstacles.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "A driving license is required to legally drive in~n~this state. Driving recklessly or without a~n~license will alert the police!");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Ini adalah ~g~~h~Driving School~w~. Kamu bisa mengikuti~n~driving test di sini. Untuk lulus, kamu harus~n~menghindari obstacle.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Driving license diperlukan untuk berkendara~n~secara legal di state ini. Mengemudi ugal-ugalan~n~atau tanpa license akan memicu police!");
 
 						#if SERVER_CITY == 1
                             SetPlayerPos(i, 1967.677978, -1991.190795, -3.260505);
@@ -168,8 +168,8 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Dealership");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "This is the ~g~~h~Dealership~w~. You can purchase any~n~private owned vehicle for yourself, for a~n~certain price.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Please remember to ~b~~h~/park~w~ your vehicle! Your~n~vehicle will be impounded if it's not parked~n~correctly.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Ini adalah ~g~~h~Dealership~w~. Kamu bisa membeli~n~private owned vehicle untuk dirimu sendiri~n~dengan harga tertentu.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Ingat untuk ~b~~h~/park~w~ vehicle kamu! Vehicle kamu~n~akan di-impound kalau tidak diparkir~n~dengan benar.");
 
 						#if SERVER_CITY == 1
 						    SetPlayerPos(i, 546.784729, -1256.438354, 15.406070);
@@ -191,8 +191,8 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Jobs");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "There are a wide variety of jobs around the~n~city to choose from, this one being the~n~~r~~h~Courier~w~ job.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "There are many more jobs that will bring in~n~the income. Use ~g~~h~/joblist~w~ to find your preferred~n~job!");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Ada banyak pilihan jobs di sekitar kota,~n~dan yang ini adalah job ~r~~h~Courier~w~.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Masih banyak jobs lain yang bisa menghasilkan~n~income. Gunakan ~g~~h~/joblist~w~ untuk mencari job~n~yang kamu inginkan!");
 
 						#if SERVER_CITY == 1
 						    SetPlayerPos(i, 2420.203857, -2089.423095, -1.058326);
@@ -214,8 +214,8 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Real Estate");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "There are many real estate opportunities in~n~San Andreas. To purchase a house, type ~g~~h~/buy~n~~w~near the house icon.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "You can also purchase furniture and store your~n~goods inside your house. Type ~g~~h~/help~w~ for a list~n~of house commands.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Ada banyak kesempatan real estate di~n~San Andreas. Untuk membeli house, ketik ~g~~h~/buy~n~~w~di dekat house icon.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Kamu juga bisa membeli furniture dan menyimpan~n~barang di house. Ketik ~g~~h~/help~w~ untuk melihat list~n~house commands.");
 
 						#if SERVER_CITY == 1
 						    SetPlayerPos(i, 1149.126586, -744.422912, 84.984420);
@@ -237,8 +237,8 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Businesses");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Businesses are also a way to bring in income.~n~You can adjust your business assets, including~n~the prices and a custom message.");//and even~n~hire employees to work for you!");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "This business is a ~p~~h~Retail Store~w~. You can buy~n~items using the ~g~~h~/buy~w~ command. Type ~g~~h~/help~n~~w~for more commands.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Business juga bisa menjadi sumber income.~n~Kamu bisa mengatur business assets, termasuk~n~harga dan custom message.");//and even~n~hire employees to work for you!");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Business ini adalah ~p~~h~Retail Store~w~. Kamu bisa membeli~n~items dengan command ~g~~h~/buy~w~. Ketik ~g~~h~/help~n~~w~untuk command lainnya.");
 
 						#if SERVER_CITY == 1
                             SetPlayerPos(i, 1315.212036, -916.465942, 24.322559);
@@ -259,9 +259,9 @@ public PlayerCheck()
 		                PlayerData[i][pTutorial] = 7;
 		                PlayerData[i][pTutorialTime] = 10;
 
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Hunger and Thirst");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Your hunger and thirst meter is shown on~n~the right side of the screen. After a while~n~your character will get hungry.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "This is a ~y~Fast Food~w~ business. You can purchase~n~food here. Also, you can purchase food and~n~drinks at a ~y~Retail Store.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Hunger dan Thirst");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Hunger dan thirst meter ditampilkan di~n~sisi kanan screen. Setelah beberapa waktu,~n~character kamu akan merasa lapar.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Ini adalah business ~y~Fast Food~w~. Kamu bisa membeli~n~food di sini. Kamu juga bisa membeli food dan~n~drinks di ~y~Retail Store.");
 
 						SetPlayerInterior(i, 10);
 						SetPlayerPos(i, 365.013977, -73.615165, 983.073730);
@@ -274,9 +274,9 @@ public PlayerCheck()
 		                PlayerData[i][pTutorialTime] = 10;
 
 						SetPlayerInterior(i, 0);
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Conclusion");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "This tutorial is now finished. Remember, if you~n~need any assistance, use the ~g~~h~/seekhelp~n~~w~command and wait patiently.");
-		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "South Central ~r~Roleplay~w~ wishes to thank you for~n~playing at our server! You will spawn in a~n~moment.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][59], "Tutorial: Penutup");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][60], "Tutorial ini selesai. Jika kamu butuh bantuan,~n~gunakan command ~g~~h~/seekhelp~n~~w~dan tunggu dengan sabar.");
+		                PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][61], "Terima kasih sudah bermain di server kami!~n~Kamu akan spawn sebentar lagi.");
 
 						#if SERVER_CITY == 1
                             SetPlayerPos(i, 1226.481567, -1144.220336, 31.174240);
@@ -306,7 +306,7 @@ public PlayerCheck()
 		                PlayerData[i][pTutorial] = 0;
 		                PlayerData[i][pTutorialTime] = 0;
 
-		                SendServerMessage(i, "Type /tasks to view your current tasks to complete.");
+		                SendServerMessage(i, "Ketik /tasks untuk melihat tasks yang perlu kamu selesaikan.");
 		            }
 		        }
 		    }

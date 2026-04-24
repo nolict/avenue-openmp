@@ -8,3 +8,4 @@ pawn.lock
 log.txt
 sampctl_build*
 gamemodes/modules/core/settings/database.pwn
+*.amx

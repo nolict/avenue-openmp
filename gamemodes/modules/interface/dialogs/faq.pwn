@@ -22,43 +22,43 @@ Dialog:FAQ(playerid, response, listitem, inputtext[])
 		{
 		    case 0:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can enter and exit a building by pressing the {FFFF00}'F'{FFFFFF} key.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa masuk dan keluar building dengan menekan key {FFFF00}'F'{FFFFFF}.", "OK", "Back");
 			}
             case 1:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can access your inventory by pressing the {FFFF00}'Y'{FFFFFF} key.\nYou can also type {FFFF00}/inventory{FFFFFF} to access your inventory.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa membuka inventory dengan menekan key {FFFF00}'Y'{FFFFFF}.\nKamu juga bisa ketik {FFFF00}/inventory{FFFFFF} untuk membuka inventory.", "OK", "Back");
 			}
 			case 2:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can pickup dropped items by pressing the {FFFF00}'N'{FFFFFF} key.\nYou must be crouched and close to the item.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa pickup dropped items dengan menekan key {FFFF00}'N'{FFFFFF}.\nKamu harus crouched dan dekat dengan item.", "OK", "Back");
 			}
 			case 3:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}The icons on the right side of your screen are as follows:\n\n{FFFF00}Pizza Icon:{FFFFFF} This icon represents hunger. The number beside is the percentage of hunger.\n{FFFF00}Bottle Icon:{FFFFFF} This icon represents thirst. The number beside is the percentage of thirst.\n\nIf you have an armored vest, it will also show along with the icons.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Icons di sisi kanan screen kamu adalah sebagai berikut:\n\n{FFFF00}Pizza Icon:{FFFFFF} Icon ini menunjukkan hunger. Angka di sampingnya adalah persentase hunger.\n{FFFF00}Bottle Icon:{FFFFFF} Icon ini menunjukkan thirst. Angka di sampingnya adalah persentase thirst.\n\nJika kamu punya armored vest, itu juga akan muncul bersama icons tersebut.", "OK", "Back");
 			}
 			case 4:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can refill your hunger by cooking food and eating it, or from a {FFFF00}Fast Food{FFFFFF} business.\nTo cook food, type {FFFF00}/cook{FFFFFF}. You can purchase frozen food at any {FFFF00}Retail Store{FFFFFF}.\n\nTo refill your thirst, you can purchase drinks from any {FFFF00}Retail Store{FFFFFF}.\nAdditionally, you can also purchase beverages at a fast food business.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa mengisi hunger dengan cooking food lalu memakannya, atau lewat business {FFFF00}Fast Food{FFFFFF}.\nUntuk cook food, ketik {FFFF00}/cook{FFFFFF}. Kamu bisa membeli frozen food di {FFFF00}Retail Store{FFFFFF} mana pun.\n\nUntuk mengisi thirst, kamu bisa membeli drinks dari {FFFF00}Retail Store{FFFFFF} mana pun.\nSelain itu, kamu juga bisa membeli beverages di business fast food.", "OK", "Back");
 			}
 			case 5:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can search for certain areas around the map using a {FFFF00}GPS System{FFFFFF}.\nYou can purchase a GPS System at any {FFFF00}Retail Store{FFFFFF} around the map.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa mencari area tertentu di map memakai {FFFF00}GPS System{FFFFFF}.\nKamu bisa membeli GPS System di {FFFF00}Retail Store{FFFFFF} mana pun di map.", "OK", "Back");
 			}
 			case 6:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You can type {FFFF00}/disablecp{FFFFFF} to stop your current job.\nIf you are loading crates into a truck, use {FFFF00}/stoploading{FFFFFF} to stop loading.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu bisa ketik {FFFF00}/disablecp{FFFFFF} untuk menghentikan current job.\nJika kamu sedang loading crates ke truck, gunakan {FFFF00}/stoploading{FFFFFF} untuk berhenti loading.", "OK", "Back");
 			}
 			case 7:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}You must select a weapon from your inventory and press {FFFF00}Use Item.\n{FFFFFF}Once you are holding a weapon, you must use a magazine to load it.\n\nYou can purchase magazines at any {FFFF00}Weapon Shop for your weapon.\n{FFFFFF}You can also press {FFFF00}'N'{FFFFFF} to put away the weapon you are holding.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Kamu harus memilih weapon dari inventory lalu tekan {FFFF00}Use Item.\n{FFFFFF}Setelah memegang weapon, kamu harus memakai magazine untuk reload.\n\nKamu bisa membeli magazines untuk weapon di {FFFF00}Weapon Shop mana pun.\n{FFFFFF}Kamu juga bisa tekan {FFFF00}'N'{FFFFFF} untuk menyimpan weapon yang sedang kamu pegang.", "OK", "Back");
 			}
 			case 8:
 		    {
-		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Any furniture that you've purchased will appear inside your inventory.\nPress {FFFF00}'Y'{FFFFFF}, select the furniture item and press {FFFF00}Use Item{FFFFFF} to deploy it.\n\nIf you wish to edit existing furniture, type {FFFF00}/furniture{FFFFFF} inside your house.\nSimply select the item of choice to edit the position or destroy the item.", "OK", "Back");
+		        Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Furniture yang kamu beli akan muncul di inventory.\nTekan {FFFF00}'Y'{FFFFFF}, pilih furniture item, lalu tekan {FFFF00}Use Item{FFFFFF} untuk deploy.\n\nJika ingin edit furniture yang sudah ada, ketik {FFFF00}/furniture{FFFFFF} di dalam house.\nPilih item yang diinginkan untuk edit position atau destroy item.", "OK", "Back");
 			}
 			case 9:
 			{
-			    Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}The {FFFF00}'F'{FFFFFF} key will allow you to interact with a lot of things in the server.\nThese things include vendors, weapon and drug crates, gates and entrances.\n\nTo enter a house or business, simply press the {FFFF00}'F'{FFFFFF} key near the door.\nYou can open your inventory with {FFFF00}'Y'{FFFFFF} and pickup items using {FFFF00}'N'{FFFFFF}.", "OK", "Back");
+			    Dialog_Show(playerid, FAQ1, DIALOG_STYLE_MSGBOX, inputtext, "{FFFFFF}Key {FFFF00}'F'{FFFFFF} bisa dipakai untuk interact dengan banyak hal di server.\nContohnya vendors, weapon dan drug crates, gates, serta entrances.\n\nUntuk masuk house atau business, tekan key {FFFF00}'F'{FFFFFF} di dekat door.\nKamu bisa membuka inventory dengan {FFFF00}'Y'{FFFFFF} dan pickup items dengan {FFFF00}'N'{FFFFFF}.", "OK", "Back");
 			}
 		}
 	}

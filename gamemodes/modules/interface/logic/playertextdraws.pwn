@@ -860,7 +860,7 @@ CreateTextDraws(playerid) {
 	PlayerTextDrawTextSize(playerid, PlayerData[playerid][pTextdraws][59], 420.000000, 0.000000);
 	PlayerTextDrawSetSelectable(playerid, PlayerData[playerid][pTextdraws][59], 0);
 
-	PlayerData[playerid][pTextdraws][60] = CreatePlayerTextDraw(playerid, 208.000000, 164.000000, "This is where you will spawn after the tutorial~n~ends. It is recommended that you request help~n~after spawning.");
+	PlayerData[playerid][pTextdraws][60] = CreatePlayerTextDraw(playerid, 208.000000, 164.000000, "Di sini kamu akan spawn setelah tutorial~n~selesai. Disarankan untuk meminta bantuan~n~setelah spawn.");
 	PlayerTextDrawBackgroundColor(playerid, PlayerData[playerid][pTextdraws][60], 255);
 	PlayerTextDrawFont(playerid, PlayerData[playerid][pTextdraws][60], 1);
 	PlayerTextDrawLetterSize(playerid, PlayerData[playerid][pTextdraws][60], 0.270000, 1.000000);
@@ -870,7 +870,7 @@ CreateTextDraws(playerid) {
 	PlayerTextDrawSetShadow(playerid, PlayerData[playerid][pTextdraws][60], 1);
 	PlayerTextDrawSetSelectable(playerid, PlayerData[playerid][pTextdraws][60], 0);
 
-	PlayerData[playerid][pTextdraws][61] = CreatePlayerTextDraw(playerid, 208.000000, 197.000000, "To request help, type ~g~~h~/seekhelp~w~. A tester~n~will fulfill your request if there are any on~n~duty.");
+	PlayerData[playerid][pTextdraws][61] = CreatePlayerTextDraw(playerid, 208.000000, 197.000000, "Untuk meminta bantuan, ketik ~g~~h~/seekhelp~w~.~n~Tester akan menangani request kamu jika ada~n~yang sedang on duty.");
 	PlayerTextDrawBackgroundColor(playerid, PlayerData[playerid][pTextdraws][61], 255);
 	PlayerTextDrawFont(playerid, PlayerData[playerid][pTextdraws][61], 1);
 	PlayerTextDrawLetterSize(playerid, PlayerData[playerid][pTextdraws][61], 0.270000, 1.000000);

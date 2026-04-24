@@ -400,7 +400,7 @@ CMD:stats(playerid, params[])
 // ====== CMD:faq ======
 CMD:faq(playerid, params[])
 {
-	Dialog_Show(playerid, FAQ, DIALOG_STYLE_LIST, "Frequently Asked Questions", "How do I enter a building?\nHow do I access my inventory?\nHow do I pickup dropped items?\nWhat are the icons on my screen?\nHow do I refill my hunger and thirst?\nHow do I search for certain areas?\nHow do I stop working with my job?\nHow do I take out weapons and load them?\nHow do I edit the furniture in my house?\nHow do I interact with stuff in the server?", "Select", "Cancel");
+	Dialog_Show(playerid, FAQ, DIALOG_STYLE_LIST, "Frequently Asked Questions", "Bagaimana cara masuk building?\nBagaimana cara membuka inventory?\nBagaimana cara pickup dropped items?\nApa fungsi icons di screen saya?\nBagaimana cara mengisi hunger dan thirst?\nBagaimana cara mencari area tertentu?\nBagaimana cara berhenti dari job?\nBagaimana cara mengeluarkan weapon dan reload?\nBagaimana cara edit furniture di house saya?\nBagaimana cara interact dengan sesuatu di server?", "Select", "Cancel");
 	return 1;
 }
 
