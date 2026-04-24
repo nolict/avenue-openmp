@@ -16,12 +16,12 @@ Dialog:Billboards(playerid, response, listitem, inputtext[]) {
 				BillboardCheckout[playerid] = listitem;
 		        format(szString, sizeof(szString), "{FFFFFF}Rent Billboard - {FF8000}%i{FFFFFF} - {FF8000}$%d", listitem, BillBoardData[listitem][bbPrice]);
 		        format(string, sizeof(string), "{FFFFFF}Billboard Name: {FF8000}%s{FFFFFF} ({FF8000}%i{FFFFFF})\nBillboard Price: {FF8000}$%d{FFFFFF}\n\n\n((Rent Fees are collected each payday from your bank account!))", BillBoardData[listitem][bbName], listitem, BillBoardData[listitem][bbPrice]);
-		    	Dialog_Show(playerid, BillboardRent, DIALOG_STYLE_MSGBOX, szString, string, "Rent", "Cancel");
+		    	Dialog_Show(playerid, BillboardRent, DIALOG_STYLE_MSGBOX, DialogStyle_Title(szString), string, "Rent", "Cancel");
 		    	return 1;
 		    }
 		    if(BillBoardData[listitem][bbOwner] == GetPlayerSQLID(playerid))
 		    {
-		    	Dialog_Show(playerid, MyBillboardMenu, DIALOG_STYLE_LIST, "Manage Billboard", "Edit Message\nUnrent Billboard", "Proceed", "Cancel");
+		    	Dialog_Show(playerid, MyBillboardMenu, DIALOG_STYLE_LIST, DialogStyle_Title("Manage Billboard"), DialogStyle_Body("Edit Message\nUnrent Billboard"), "Proceed", "Cancel");
 		    	return 1;
 		    }
 		    else
@@ -39,11 +39,11 @@ Dialog:MyBillboardMenu(playerid, response, listitem, inputtext[]) {
 	{
 	    if(listitem == 0)
 	    {
-	        Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, "Billboard Message", "Enter in a new billboard message!\n\n(Max Chars: 230)", "Proceed", "Cancel");
+	        Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, DialogStyle_Title("Billboard Message"), DialogStyle_Body("Enter in a new billboard message!\n\n(Max Chars: 230)"), "Proceed", "Cancel");
 	    }
 	    if(listitem == 1)
 	    {
-	        Dialog_Show(playerid, MyBillboardUnrent, DIALOG_STYLE_MSGBOX, "Unrent Billboard", "Are you sure you wish to unrent your billboard?\n\nYou'll get half the rent fee back", "Confirm", "Cancel");
+	        Dialog_Show(playerid, MyBillboardUnrent, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Unrent Billboard"), DialogStyle_Body("Are you sure you wish to unrent your billboard?\n\nYou'll get half the rent fee back"), "Confirm", "Cancel");
 	    }
 	}
 	return 1;
@@ -54,10 +54,10 @@ Dialog:MyBillboardMessage(playerid, response, listitem, inputtext[]) {
 	if (response)
 	{
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, "Billboard Message", "Enter in a new billboard message!\n\n(Max Chars: 230)", "Proceed", "Cancel");
+	        return Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, DialogStyle_Title("Billboard Message"), DialogStyle_Body("Enter in a new billboard message!\n\n(Max Chars: 230)"), "Proceed", "Cancel");
 
 		if (strlen(inputtext) > 230)
-	        return Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, "Billboard Message", "Too many characters (Max is 230)\n\nEnter in a new billboard message!\n\n(Max Chars: 230)", "Proceed", "Cancel");
+	        return Dialog_Show(playerid, MyBillboardMessage, DIALOG_STYLE_INPUT, DialogStyle_Title("Billboard Message"), DialogStyle_Body("Too many characters (Max is 230)\n\nEnter in a new billboard message!\n\n(Max Chars: 230)"), "Proceed", "Cancel");
 
 		format(BillBoardData[PlayerData[playerid][pOwnsBillboard]][bbMessage], 230, inputtext);
 

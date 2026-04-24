@@ -11,9 +11,9 @@ CMD:panel(playerid, params[])
 	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
 
 	if (g_ServerLocked)
-		Dialog_Show(playerid, ServerPanel, DIALOG_STYLE_LIST, "Server Panel", "Unlock Server\nSet Hostname\nExecute Query", "Select", "Cancel");
+		Dialog_Show(playerid, ServerPanel, DIALOG_STYLE_LIST, DialogStyle_Title("Server Panel"), DialogStyle_Body("Unlock Server\nSet Hostname\nExecute Query"), "Select", "Cancel");
 
-	else Dialog_Show(playerid, ServerPanel, DIALOG_STYLE_LIST, "Server Panel", "Lock Server\nSet Hostname\nExecute Query", "Select", "Cancel");
+	else Dialog_Show(playerid, ServerPanel, DIALOG_STYLE_LIST, DialogStyle_Title("Server Panel"), DialogStyle_Body("Lock Server\nSet Hostname\nExecute Query"), "Select", "Cancel");
 	return 1;
 }
 

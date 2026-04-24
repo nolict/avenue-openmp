@@ -139,21 +139,21 @@ Dialog:Accessory(playerid, response, listitem, inputtext[])
 	            if (!PlayerData[playerid][pGlasses])
 	                return SendErrorMessage(playerid, "You don't own a pair of glasses.");
 
-	            Dialog_Show(playerid, EditGlasses, DIALOG_STYLE_LIST, "Glasses", "Toggle Glasses\nEdit Glasses\nDelete Glasses", "Select", "Cancel");
+	            Dialog_Show(playerid, EditGlasses, DIALOG_STYLE_LIST, DialogStyle_Title("Glasses"), DialogStyle_Body("Toggle Glasses\nEdit Glasses\nDelete Glasses"), "Select", "Cancel");
 			}
 			case 1:
 			{
 			    if (!PlayerData[playerid][pHat])
 	                return SendErrorMessage(playerid, "You don't own a hat.");
 
-			    Dialog_Show(playerid, EditHat, DIALOG_STYLE_LIST, "Hat", "Toggle Hat\nEdit Hat\nDelete Hat", "Select", "Cancel");
+			    Dialog_Show(playerid, EditHat, DIALOG_STYLE_LIST, DialogStyle_Title("Hat"), DialogStyle_Body("Toggle Hat\nEdit Hat\nDelete Hat"), "Select", "Cancel");
 			}
 			case 2:
 			{
 			    if (!PlayerData[playerid][pBandana])
 	                return SendErrorMessage(playerid, "You don't own a bandana.");
 
-			    Dialog_Show(playerid, EditBandana, DIALOG_STYLE_LIST, "Bandana", "Toggle Bandana\nEdit Bandana\nDelete Bandana", "Select", "Cancel");
+			    Dialog_Show(playerid, EditBandana, DIALOG_STYLE_LIST, DialogStyle_Title("Bandana"), DialogStyle_Body("Toggle Bandana\nEdit Bandana\nDelete Bandana"), "Select", "Cancel");
 			}
 		}
 	}

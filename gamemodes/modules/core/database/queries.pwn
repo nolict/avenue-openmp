@@ -241,7 +241,7 @@ stock ViewFactions(playerid)
 	for (new i = 0; i != MAX_FACTIONS; i ++) if (FactionData[i][factionExists]) {
   		format(string, sizeof(string), "%s{FFFFFF}Faction ({FFBF00}%i{FFFFFF}) | %s\n", string, i, FactionData[i][factionName]);
 	}
-	Dialog_Show(playerid, FactionsList, DIALOG_STYLE_MSGBOX, "Factions List", string, "Close", "");
+	Dialog_Show(playerid, FactionsList, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Factions List"), string, "Close", "");
 	return 1;
 }
 

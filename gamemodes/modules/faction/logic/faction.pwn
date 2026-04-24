@@ -314,7 +314,7 @@ Faction_ShowRanks(playerid, factionid)
 		    format(string, sizeof(string), "%sRank %d: %s\n", string, i + 1, FactionRanks[factionid][i]);
 
 		PlayerData[playerid][pFactionEdit] = factionid;
-		Dialog_Show(playerid, EditRanks, DIALOG_STYLE_LIST, FactionData[factionid][factionName], string, "Change", "Cancel");
+		Dialog_Show(playerid, EditRanks, DIALOG_STYLE_LIST, DialogStyle_Title(FactionData[factionid][factionName]), string, "Change", "Cancel");
 	}
 	return 1;
 }

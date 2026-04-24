@@ -14,20 +14,20 @@ Dialog:AddVehicleModel(playerid, response, listitem, inputtext[])
 	    if (id != -1 && BusinessData[id][bizExists] && BusinessData[id][bizType] == 5)
 	    {
 	        if (isnull(inputtext))
-	            return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, "Add Vehicle", "Please enter the name or the ID of the vehicle model:", "Add", "Cancel");
+	            return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Vehicle"), DialogStyle_Body("Please enter the name or the ID of the vehicle model:"), "Add", "Cancel");
 
 			new model = GetVehicleModelByName(inputtext);
 
 			if (!model)
-			    return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, "Add Vehicle", "Error: Invalid model specified.\n\nPlease enter the name or the ID of the vehicle model:", "Add", "Cancel");
+			    return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Vehicle"), DialogStyle_Body("Error: Invalid model specified.\n\nPlease enter the name or the ID of the vehicle model:"), "Add", "Cancel");
 
         	for (new i = 0; i != MAX_DEALERSHIP_CARS; i ++)
 			{
 				if (DealershipCars[id][i][vehModel] == model)
-	            	return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, "Add Vehicle", "Error: This model is already sold at this dealership.\n\nPlease enter the name or the ID of the vehicle model:", "Add", "Cancel");
+	            	return Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Vehicle"), DialogStyle_Body("Error: This model is already sold at this dealership.\n\nPlease enter the name or the ID of the vehicle model:"), "Add", "Cancel");
 			}
 			PlayerData[playerid][pDealerCar] = model;
-			Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, "Enter Price", "Please enter a price for '%s':", "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
+			Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Price"), DialogStyle_Body("Please enter a price for '%s':"), "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
 	    }
 	}
 	return 1;
@@ -44,7 +44,7 @@ Dialog:AddVehicle(playerid, response, listitem, inputtext[])
 	    {
 			if (!listitem)
 			{
-				Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, "Add Vehicle", "Please enter the name or the ID of the vehicle model:", "Add", "Cancel");
+				Dialog_Show(playerid, AddVehicleModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Vehicle"), DialogStyle_Body("Please enter the name or the ID of the vehicle model:"), "Add", "Cancel");
 			}
 		    else
 			{
@@ -73,7 +73,7 @@ Dialog:EnterNumber(playerid, response, listitem, inputtext[])
 		strunpack(name, PlayerData[playerid][pEditingItem]);
 
 	    if (isnull(inputtext) || !Core_IsNumeric(inputtext))
-	        return Dialog_Show(playerid, EnterNumber, DIALOG_STYLE_INPUT, "Contact Number", "Contact Name: %s\n\nPlease enter the phone number for this contact:", "Submit", "Back", name);
+	        return Dialog_Show(playerid, EnterNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Contact Number"), DialogStyle_Body("Contact Name: %s\n\nPlease enter the phone number for this contact:"), "Submit", "Back", name);
 
 		for (new i = 0; i != MAX_CONTACTS; i ++)
 		{

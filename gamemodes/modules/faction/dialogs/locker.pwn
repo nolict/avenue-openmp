@@ -66,7 +66,7 @@ Dialog:Locker(playerid, response, listitem, inputtext[])
 
 						else format(string, sizeof(string), "%sEmpty Slot\n", string);
 				    }
-				    Dialog_Show(playerid, LockerWeapons, DIALOG_STYLE_LIST, "Locker Weapons", string, "Select", "Cancel");
+				    Dialog_Show(playerid, LockerWeapons, DIALOG_STYLE_LIST, DialogStyle_Title("Locker Weapons"), string, "Select", "Cancel");
 				}
 			}
 	    }
@@ -93,7 +93,7 @@ Dialog:Locker(playerid, response, listitem, inputtext[])
 
 						else format(string, sizeof(string), "%sEmpty Slot\n", string);
 				    }
-				    Dialog_Show(playerid, LockerWeapons, DIALOG_STYLE_LIST, "Locker Weapons", string, "Select", "Cancel");
+				    Dialog_Show(playerid, LockerWeapons, DIALOG_STYLE_LIST, DialogStyle_Title("Locker Weapons"), string, "Select", "Cancel");
 				}
 			}
 	    }
@@ -202,7 +202,7 @@ Dialog:FactionLocker(playerid, response, listitem, inputtext[])
 
 					else format(string, sizeof(string), "%sEmpty Slot\n", string);
 			    }
-			    Dialog_Show(playerid, FactionWeapons, DIALOG_STYLE_LIST, "Locker Weapons", string, "Select", "Cancel");
+			    Dialog_Show(playerid, FactionWeapons, DIALOG_STYLE_LIST, DialogStyle_Title("Locker Weapons"), string, "Select", "Cancel");
 			}
 		}
 	}
@@ -218,7 +218,7 @@ Dialog:FactionWeapons(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    PlayerData[playerid][pSelectedSlot] = listitem;
-	    Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, "Edit Weapon", "Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot", "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
+	    Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, DialogStyle_Title("Edit Weapon"), DialogStyle_Body("Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot"), "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
 	}
 	return 1;
 }
@@ -234,10 +234,10 @@ Dialog:FactionWeapon(playerid, response, listitem, inputtext[])
 	    switch (listitem)
 	    {
 	        case 0:
-	        	Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, "Set Weapon", "Current Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:", "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+	        	Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Weapon"), DialogStyle_Body("Current Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:"), "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
 			case 1:
-	            Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, "Set Ammunition", "Current Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:", "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+	            Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Ammunition"), DialogStyle_Body("Current Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:"), "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
 			case 2:
 			{
@@ -268,15 +268,15 @@ Dialog:FactionWeaponID(playerid, response, listitem, inputtext[])
 	    new weaponid = strval(inputtext);
 
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, "Set Weapon", "Current Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:", "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+	        return Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Weapon"), DialogStyle_Body("Current Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:"), "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
 		if (weaponid < 0 || weaponid > 46)
-		    return Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, "Set Weapon", "Error: The weapon ID can't be below 0 or above 46.\n\nCurrent Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:", "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+		    return Dialog_Show(playerid, FactionWeaponID, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Weapon"), DialogStyle_Body("Error: The weapon ID can't be below 0 or above 46.\n\nCurrent Weapon: %s (%d)\n\nPlease enter the new weapon ID for slot %d:"), "Submit", "Cancel", ReturnWeaponName(FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]]), FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
         FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]] = weaponid;
         Faction_Save(PlayerData[playerid][pFactionEdit]);
 
-		Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, "Edit Weapon", "Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot", "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
+		Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, DialogStyle_Title("Edit Weapon"), DialogStyle_Body("Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot"), "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
 
 	    if (weaponid) {
 		    SendServerMessage(playerid, "You have set the weapon in slot %d to %s.", PlayerData[playerid][pSelectedSlot] + 1, ReturnWeaponName(weaponid));
@@ -299,15 +299,15 @@ Dialog:FactionWeaponAmmo(playerid, response, listitem, inputtext[])
 	    new ammo = strval(inputtext);
 
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, "Set Ammunition", "Current Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:", "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+	        return Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Ammunition"), DialogStyle_Body("Current Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:"), "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
 		if (ammo < 1 || ammo > 15000)
-		    return Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, "Set Ammunition", "Error: The ammo can't be below 1 or above 15,000.\n\nCurrent Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:", "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
+		    return Dialog_Show(playerid, FactionWeaponAmmo, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Ammunition"), DialogStyle_Body("Error: The ammo can't be below 1 or above 15,000.\n\nCurrent Ammo: %d\n\nPlease enter the new ammunition for the weapon in slot %d:"), "Submit", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot]);
 
         FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]] = ammo;
         Faction_Save(PlayerData[playerid][pFactionEdit]);
 
-		Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, "Edit Weapon", "Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot", "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
+		Dialog_Show(playerid, FactionWeapon, DIALOG_STYLE_LIST, DialogStyle_Title("Edit Weapon"), DialogStyle_Body("Set Weapon (%d)\nSet Ammunition (%d)\nClear Slot"), "Select", "Cancel", FactionData[PlayerData[playerid][pFactionEdit]][factionWeapons][PlayerData[playerid][pSelectedSlot]], FactionData[PlayerData[playerid][pFactionEdit]][factionAmmo][PlayerData[playerid][pSelectedSlot]]);
 		SendServerMessage(playerid, "You have set the ammunition in slot %d to %d.", PlayerData[playerid][pSelectedSlot] + 1, ammo);
 	}
 	return 1;
@@ -327,7 +327,7 @@ Dialog:FactionSkin(playerid, response, listitem, inputtext[])
 		switch (listitem)
 		{
 		    case 0:
-		        Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, "Add by Model ID", "Please enter the model ID of the skin below (0-299):", "Add", "Cancel");
+		        Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add by Model ID"), DialogStyle_Body("Please enter the model ID of the skin below (0-299):"), "Add", "Cancel");
 
 			case 1:
 			{
@@ -359,10 +359,10 @@ Dialog:FactionModel(playerid, response, listitem, inputtext[])
 	    new skin = strval(inputtext);
 
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, "Add by Model ID", "Please enter the model ID of the skin below (0-299):", "Add", "Cancel");
+	        return Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add by Model ID"), DialogStyle_Body("Please enter the model ID of the skin below (0-299):"), "Add", "Cancel");
 
 		if (skin < 0 || skin > 299)
-		    return Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, "Add by Model ID", "Error: The skin ID can't be below 0 or above 299.\n\nPlease enter the model ID of the skin below (0-299):", "Add", "Cancel");
+		    return Dialog_Show(playerid, FactionModel, DIALOG_STYLE_INPUT, DialogStyle_Title("Add by Model ID"), DialogStyle_Body("Error: The skin ID can't be below 0 or above 299.\n\nPlease enter the model ID of the skin below (0-299):"), "Add", "Cancel");
 
         FactionData[PlayerData[playerid][pFactionEdit]][factionSkins][PlayerData[playerid][pSelectedSlot]] = skin;
 		Faction_Save(PlayerData[playerid][pFactionEdit]);

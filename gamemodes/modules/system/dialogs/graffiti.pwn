@@ -40,7 +40,7 @@ Dialog:GraffitiColor(playerid, response, listitem, inputtext[])
 	        case 6:
 	            PlayerData[playerid][pGraffitiColor] = 0xFF1394BF;
 	    }
-	    Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, "Graffiti Text", "Please enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters.", "Submit", "Cancel");
+	    Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, DialogStyle_Title("Graffiti Text"), DialogStyle_Body("Please enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters."), "Submit", "Cancel");
 	}
 	return 1;
 }
@@ -56,10 +56,10 @@ Dialog:GraffitiText(playerid, response, listitem, inputtext[])
 		    return 0;
 
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, "Graffiti Text", "Please enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters.", "Submit", "Cancel");
+	        return Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, DialogStyle_Title("Graffiti Text"), DialogStyle_Body("Please enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters."), "Submit", "Cancel");
 
 		if (strlen(inputtext) > 64)
-		    return Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, "Graffiti Text", "Error: Your input can't exceed 64 characters.\n\nPlease enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters.", "Submit", "Cancel");
+		    return Dialog_Show(playerid, GraffitiText, DIALOG_STYLE_INPUT, DialogStyle_Title("Graffiti Text"), DialogStyle_Body("Error: Your input can't exceed 64 characters.\n\nPlease enter the text you wish to spray below.\n\nNote: Your text input cannot exceed over 64 characters."), "Submit", "Cancel");
 
         if (IsSprayingInProgress(id))
 	        return SendErrorMessage(playerid, "There is another player spraying at this point already.");

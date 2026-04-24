@@ -178,6 +178,6 @@ public OnViewBillboards(extraid, name[])
         format(string, sizeof(string), "%s{FFFFFF}Billboard ({FFBF00}%i{FFFFFF}) | %s | $%d\n", string, i, desc, BillBoardData[i][bbPrice]);
     }
     format(desc, sizeof(desc), "Los Santos Billboards Agency", name);
-    Dialog_Show(extraid, Billboards, DIALOG_STYLE_LIST, desc, string, "Close", "");
+    Dialog_Show(extraid, Billboards, DIALOG_STYLE_LIST, DialogStyle_Title(desc), string, "Close", "");
     return 1;
 }

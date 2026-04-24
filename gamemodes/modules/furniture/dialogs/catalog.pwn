@@ -15,7 +15,7 @@ Dialog:ListedFurniture(playerid, response, listitem, inputtext[])
 	    {
 	        PlayerData[playerid][pEditFurniture] = ListedFurniture[playerid][listitem];
 
-			Dialog_Show(playerid, FurnitureList, DIALOG_STYLE_LIST, FurnitureData[PlayerData[playerid][pEditFurniture]][furnitureName], "Edit Position\nPickup Furniture\nDestroy Furniture", "Select", "Cancel");
+			Dialog_Show(playerid, FurnitureList, DIALOG_STYLE_LIST, DialogStyle_Title(FurnitureData[PlayerData[playerid][pEditFurniture]][furnitureName]), "Edit Position\nPickup Furniture\nDestroy Furniture", "Select", "Cancel");
 	    }
 	}
 	for (new i = 0; i != MAX_FURNITURE; i ++) {

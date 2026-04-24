@@ -122,6 +122,6 @@ stock ShowContacts(playerid)
 
 		ListedContacts[playerid][count++] = i;
 	}
-	Dialog_Show(playerid, Contacts, DIALOG_STYLE_LIST, "My Contacts", string, "Select", "Back");
+	Dialog_Show(playerid, Contacts, DIALOG_STYLE_LIST, DialogStyle_Title("My Contacts"), string, "Select", "Back");
 	return 1;
 }

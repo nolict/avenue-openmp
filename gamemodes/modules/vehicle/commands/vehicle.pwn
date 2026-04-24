@@ -594,7 +594,7 @@ CMD:releasecar(playerid, params[])
 	if (!count)
 	    SendErrorMessage(playerid, "You don't have any impounded vehicles.");
 
-	else Dialog_Show(playerid, ReleaseCar, DIALOG_STYLE_LIST, "Release Vehicle", string, "Select", "Cancel");
+	else Dialog_Show(playerid, ReleaseCar, DIALOG_STYLE_LIST, DialogStyle_Title("Release Vehicle"), string, "Select", "Cancel");
 	return 1;
 }
 
@@ -948,7 +948,7 @@ CMD:atune(playerid, params[])
 	if (!IsDoorVehicle(GetPlayerVehicleID(playerid)))
 	    return SendErrorMessage(playerid, "You can't tune this vehicle.");
 
-	Dialog_Show(playerid, TuneVehicle, DIALOG_STYLE_LIST, "Tune Vehicle", "Add Wheels\nAdd Nitrous\nAdd Hydraulics", "Select", "Cancel");
+	Dialog_Show(playerid, TuneVehicle, DIALOG_STYLE_LIST, DialogStyle_Title("Tune Vehicle"), DialogStyle_Body("Add Wheels\nAdd Nitrous\nAdd Hydraulics"), "Select", "Cancel");
 	return 1;
 }
 

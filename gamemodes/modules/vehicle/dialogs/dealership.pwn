@@ -106,7 +106,7 @@ Dialog:DealerCarPrice(playerid, response, listitem, inputtext[])
 	    if (id != -1 && BusinessData[id][bizExists] && BusinessData[id][bizType] == 5)
 	    {
 		    if (isnull(inputtext) || strval(inputtext) < 1)
-		        return Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, "Enter Price", "Please enter a price for '%s':", "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
+		        return Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Price"), DialogStyle_Body("Please enter a price for '%s':"), "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
 
 		    Business_AddVehicle(id, PlayerData[playerid][pDealerCar], strval(inputtext));
 	        Business_EditCars(playerid, id);
@@ -128,7 +128,7 @@ Dialog:CarPrice(playerid, response, listitem, inputtext[])
 	    if (id != -1 && BusinessData[id][bizExists] && BusinessData[id][bizType] == 5)
 	    {
 		    if (isnull(inputtext) || strval(inputtext) < 1)
-		        return Dialog_Show(playerid, CarPrice, DIALOG_STYLE_INPUT, "Set Price", "The current price for '%s' is %s.\n\nPlease enter the new price for this vehicle model below:", "Submit", "Cancel", ReturnVehicleModelName(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehModel]), FormatNumber(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehPrice]));
+		        return Dialog_Show(playerid, CarPrice, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Price"), DialogStyle_Body("The current price for '%s' is %s.\n\nPlease enter the new price for this vehicle model below:"), "Submit", "Cancel", ReturnVehicleModelName(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehModel]), FormatNumber(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehPrice]));
 
 			new
 			    string[128];
@@ -157,7 +157,7 @@ Dialog:CarOptions(playerid, response, listitem, inputtext[])
 	    {
 		    if (listitem == 0)
 		    {
-		        Dialog_Show(playerid, CarPrice, DIALOG_STYLE_INPUT, "Set Price", "The current price for '%s' is %s.\n\nPlease enter the new price for this vehicle model below:", "Submit", "Cancel", ReturnVehicleModelName(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehModel]), FormatNumber(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehPrice]));
+		        Dialog_Show(playerid, CarPrice, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Price"), DialogStyle_Body("The current price for '%s' is %s.\n\nPlease enter the new price for this vehicle model below:"), "Submit", "Cancel", ReturnVehicleModelName(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehModel]), FormatNumber(DealershipCars[id][PlayerData[playerid][pDealerCar]][vehPrice]));
 		    }
 		    else if (listitem == 1)
 		    {

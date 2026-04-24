@@ -157,7 +157,7 @@ Dialog:BusinessBuy(playerid, response, listitem, inputtext[])
 				    if (PlayerData[playerid][pLottery])
 				        return SendErrorMessage(playerid, "You have a lottery ticket already.");
 
-					Dialog_Show(playerid, LotteryNumber, DIALOG_STYLE_INPUT, "Lottery Number", "Please enter your desired lottery number below (from 1-60):", "Submit", "Cancel");
+					Dialog_Show(playerid, LotteryNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Lottery Number"), DialogStyle_Body("Please enter your desired lottery number below (from 1-60):"), "Submit", "Cancel");
 				}
 				case 7:
 		        {
@@ -692,7 +692,7 @@ Dialog:LotteryNumber(playerid, response, listitem, inputtext[])
 	    if (bizid != -1)
 	    {
 	        if (isnull(inputtext) || (strval(inputtext) < 1 || strval(inputtext) > 60)) {
-	            return Dialog_Show(playerid, LotteryNumber, DIALOG_STYLE_INPUT, "Lottery Number", "Please enter your desired lottery number below (from 1-60):", "Submit", "Cancel");
+	            return Dialog_Show(playerid, LotteryNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Lottery Number"), DialogStyle_Body("Please enter your desired lottery number below (from 1-60):"), "Submit", "Cancel");
 			}
 	        PlayerData[playerid][pLottery] = strval(inputtext);
 	        PlayerData[playerid][pLotteryB] = 1;
@@ -727,7 +727,7 @@ Dialog:EditProduct(playerid, response, listitem, inputtext[])
 		    strpack(PlayerData[playerid][pEditingItem], item, 32 char);
 
             PlayerData[playerid][pProductModify] = listitem;
-      		Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, "Business: Set Price", "Please enter the new product price for \"%s\":", "Modify", "Back", item);
+      		Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, DialogStyle_Title("Business: Set Price"), DialogStyle_Body("Please enter the new product price for \"%s\":"), "Modify", "Back", item);
 		}
 	}
 	return 1;
@@ -747,10 +747,10 @@ Dialog:PriceSet(playerid, response, listitem, inputtext[])
 		    strunpack(item, PlayerData[playerid][pEditingItem]);
 
 			if (isnull(inputtext))
-			    return Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, "Business: Set Price", "Please enter the new product price for \"%s\":", "Modify", "Back", item);
+			    return Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, DialogStyle_Title("Business: Set Price"), DialogStyle_Body("Please enter the new product price for \"%s\":"), "Modify", "Back", item);
 
 			if (strval(inputtext) < 1 || strval(inputtext) > 2000)
-			    return Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, "Business: Set Price", "Please enter the new product price for \"%s\" ($1 to $2,000):", "Modify", "Back", item);
+			    return Dialog_Show(playerid, PriceSet, DIALOG_STYLE_INPUT, DialogStyle_Title("Business: Set Price"), DialogStyle_Body("Please enter the new product price for \"%s\" ($1 to $2,000):"), "Modify", "Back", item);
 
 			BusinessData[bizid][bizPrices][PlayerData[playerid][pProductModify]] = strval(inputtext);
 			Business_Save(bizid);

@@ -29,3 +29,12 @@ Dialog:FactionsList(playerid, response, listitem, inputtext[])
 	listitem = 0;
 	inputtext[0] = '\0';
 }
+
+// ====== Dialog:ShowStats ======
+Dialog:ShowStats(playerid, response, listitem, inputtext[])
+{
+	playerid = INVALID_PLAYER_ID;
+	response = 0;
+	listitem = 0;
+	inputtext[0] = '\0';
+}

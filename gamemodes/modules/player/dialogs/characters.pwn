@@ -30,7 +30,7 @@ Dialog:RegisterScreen(playerid, response, listitem, inputtext[])
 		return Kick(playerid);
 
 	else if (isnull(inputtext))
-	    return Dialog_Show(playerid, RegisterScreen, DIALOG_STYLE_PASSWORD, "Account Registration", "Welcome to Avenue Roleplay, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:", "Register", "Cancel", ReturnName(playerid));
+	    return Dialog_Show(playerid, RegisterScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Registration"), DialogStyle_Body("Welcome to Avenue Roleplay, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:"), "Register", "Cancel", ReturnName(playerid));
 
 	else
 	{
@@ -49,7 +49,7 @@ Dialog:LoginScreen(playerid, response, listitem, inputtext[])
 	    return Kick(playerid);
 
 	else if (isnull(inputtext))
-	    return Dialog_Show(playerid, LoginScreen, DIALOG_STYLE_PASSWORD, "Account Login", "Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:", "Login", "Cancel", PlayerData[playerid][pLoginDate]);
+	    return Dialog_Show(playerid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[playerid][pLoginDate]);
 
 	else
 	{
@@ -105,10 +105,10 @@ Dialog:CreateChar(playerid, response, listitem, inputtext[])
 	    return PlayerData[playerid][pCharacter] = 0;
 
 	else if (isnull(inputtext) || strlen(inputtext) > 20)
-        return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, "Create Character", "Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters.", "Create", "Cancel");
+        return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters."), "Create", "Cancel");
 
 	else if (!IsValidRoleplayName(inputtext))
-	    return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, "Create Character", "Error: You have entered an invalid roleplay name.\n\nPlease enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters.", "Create", "Cancel");
+	    return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Error: You have entered an invalid roleplay name.\n\nPlease enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters."), "Create", "Cancel");
 
 	else
 	{
@@ -166,16 +166,16 @@ Dialog:DateBirth(playerid, response, listitem, inputtext[])
 	        arrMonthDays[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 	    if (sscanf(inputtext, "p</>ddd", iDay, iMonth, iYear)) {
-	        Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, "Date of Birth", "Error: Invalid format specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):", "Submit", "Cancel");
+	        Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, DialogStyle_Title("Date of Birth"), DialogStyle_Body("Error: Invalid format specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):"), "Submit", "Cancel");
 		}
 		else if (iYear < 1900 || iYear > 2014) {
-		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, "Date of Birth", "Error: Invalid year specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):", "Submit", "Cancel");
+		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, DialogStyle_Title("Date of Birth"), DialogStyle_Body("Error: Invalid year specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):"), "Submit", "Cancel");
 		}
 		else if (iMonth < 1 || iMonth > 12) {
-		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, "Date of Birth", "Error: Invalid month specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):", "Submit", "Cancel");
+		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, DialogStyle_Title("Date of Birth"), DialogStyle_Body("Error: Invalid month specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):"), "Submit", "Cancel");
 		}
 		else if (iDay < 1 || iDay > arrMonthDays[iMonth - 1]) {
-		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, "Date of Birth", "Error: Invalid day specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):", "Submit", "Cancel");
+		    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, DialogStyle_Title("Date of Birth"), DialogStyle_Body("Error: Invalid day specified!\n\nPlease enter your date of birth below (DD/MM/YYYY):"), "Submit", "Cancel");
 		}
 		else {
 		    format(PlayerData[playerid][pBirthdate], 24, inputtext);
@@ -195,13 +195,13 @@ Dialog:Origin(playerid, response, listitem, inputtext[])
 	    new str[64];
 
 	    if (isnull(inputtext) || strlen(inputtext) > 32) {
-	        Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, "Origin", "Please enter the geographical origin of your character below:", "Submit", "Cancel");
+	        Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, DialogStyle_Title("Origin"), DialogStyle_Body("Please enter the geographical origin of your character below:"), "Submit", "Cancel");
 		}
 		else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
 		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.'))
 				continue;
 
-			else return Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, "Origin", "Error: Only letters and numbers are accepted in the origin.\n\nPlease enter the geographical origin of your character below:", "Submit", "Cancel");
+			else return Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, DialogStyle_Title("Origin"), DialogStyle_Body("Error: Only letters and numbers are accepted in the origin.\n\nPlease enter the geographical origin of your character below:"), "Submit", "Cancel");
 		}
 		format(PlayerData[playerid][pOrigin], 32, inputtext);
 
@@ -217,7 +217,7 @@ Dialog:NewPass(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, NewPass, DIALOG_STYLE_PASSWORD, "Enter New Password", "Please enter your new password below.\n\nNote: Please use a strong and safe password for additional security.", "Change", "Cancel");
+	        return Dialog_Show(playerid, NewPass, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Enter New Password"), DialogStyle_Body("Please enter your new password below.\n\nNote: Please use a strong and safe password for additional security."), "Change", "Cancel");
 
 		static
 		    buffer[129],

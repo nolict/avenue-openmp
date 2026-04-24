@@ -27,10 +27,10 @@ public OnQueryExecute(playerid, query[])
 	cache_get_data(rows, fields, g_iHandle);
 
 	if (strfind(query, "SELECT", true) != -1)
-		Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Success: MySQL returned %d rows from your query.\n\nPlease specify the MySQL query to execute below:", "Execute", "Back", rows);
+		Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Success: MySQL returned %d rows from your query.\n\nPlease specify the MySQL query to execute below:"), "Execute", "Back", rows);
 
 	else
-		Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Success: Query executed successfully (affected rows: %d).\n\nPlease specify the MySQL query to execute below:", "Execute", "Back", cache_affected_rows());
+		Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Success: Query executed successfully (affected rows: %d).\n\nPlease specify the MySQL query to execute below:"), "Execute", "Back", cache_affected_rows());
 
 	PlayerData[playerid][pExecute] = 0;
 	return 1;
@@ -44,7 +44,7 @@ public OnQueryError(errorid, error[], callback[], query[], connectionHandle)
 		if (PlayerData[i][pAdmin] >= 6 && PlayerData[i][pExecute])
 		{
 	    	PlayerData[i][pExecute] = 0;
-	    	Dialog_Show(i, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Error: \"%s\"\n\nPlease specify the MySQL query to execute below:", "Execute", "Back", error);
+	    	Dialog_Show(i, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Error: \"%s\"\n\nPlease specify the MySQL query to execute below:"), "Execute", "Back", error);
 		}
 	}
  	printf("** [MySQL]: %s", error);
@@ -88,11 +88,11 @@ public OnQueryFinished(extraid, threadid)
 			    cache_get_row(0, 0, loginDate, g_iHandle);
 
 				format(PlayerData[extraid][pLoginDate], 36, loginDate);
-		        Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, "Account Login", "Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:", "Login", "Cancel", PlayerData[extraid][pLoginDate]);
+		        Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
 			}
 			else
 			{
-			    Dialog_Show(extraid, RegisterScreen, DIALOG_STYLE_PASSWORD, "Account Registration", "Welcome to Avenue Roleplay, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:", "Register", "Cancel", ReturnName(extraid));
+			    Dialog_Show(extraid, RegisterScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Registration"), DialogStyle_Body("Welcome to Avenue Roleplay, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:"), "Register", "Cancel", ReturnName(extraid));
 			}
     	}
     	case THREAD_LOGIN:
@@ -110,7 +110,7 @@ public OnQueryFinished(extraid, threadid)
 				}
 				else
 				{
-    	        	Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, "Account Login", "Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:", "Login", "Cancel", PlayerData[extraid][pLoginDate]);
+    	        	Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
     	        	SendClientMessageEx(extraid, COLOR_LIGHTRED, "Notice: Incorrect password specified (%d/3 attempts).", PlayerData[extraid][pLoginAttempts]);
 				}
 			}
@@ -323,7 +323,7 @@ public OnQueryFinished(extraid, threadid)
 		    cache_get_data(rows, fields, g_iHandle);
 
 		    if (rows)
-				Dialog_Show(extraid, NewPass, DIALOG_STYLE_PASSWORD, "Enter New Password", "Please enter your new password below.\n\nNote: Please use a strong and safe password for additional security.", "Change", "Cancel");
+				Dialog_Show(extraid, NewPass, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Enter New Password"), DialogStyle_Body("Please enter your new password below.\n\nNote: Please use a strong and safe password for additional security."), "Change", "Cancel");
 
 			else
 				SendErrorMessage(extraid, "You have entered an incorrect password.");
@@ -423,12 +423,12 @@ public OnQueryFinished(extraid, threadid)
 
 				if (!strcmp(username, "null", true) || !username[0])
 				{
-				    Dialog_Show(extraid, ShowOnly, DIALOG_STYLE_MSGBOX, "Ban Notice", "Your IP is banned from this server.\n\nIP: %s\nDate: %s\nReason: %s\n\nTo request a ban appeal, please visit our website and submit a ban appeal.", "Close", "", PlayerData[extraid][pIP], date, reason);
+				    Dialog_Show(extraid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Ban Notice"), DialogStyle_Body("Your IP is banned from this server.\n\nIP: %s\nDate: %s\nReason: %s\n\nTo request a ban appeal, please visit our website and submit a ban appeal."), "Close", "", PlayerData[extraid][pIP], date, reason);
 					KickEx(extraid);
 				}
 				else
 				{
-				    Dialog_Show(extraid, ShowOnly, DIALOG_STYLE_MSGBOX, "Ban Notice", "You are banned from this server.\n\nUsername: %s\nDate: %s\nReason: %s\n\nTo request a ban appeal, please visit our website and submit a ban appeal.", "Close", "", PlayerData[extraid][pUsername], date, reason);
+				    Dialog_Show(extraid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Ban Notice"), DialogStyle_Body("You are banned from this server.\n\nUsername: %s\nDate: %s\nReason: %s\n\nTo request a ban appeal, please visit our website and submit a ban appeal."), "Close", "", PlayerData[extraid][pUsername], date, reason);
 					KickEx(extraid);
 				}
 		    }
@@ -513,7 +513,7 @@ public OnViewCharges(extraid, name[])
 	    format(string, sizeof(string), "%s%s (%s)\n", string, desc, date);
 	}
 	format(desc, sizeof(desc), "Charges: %s", name);
-	Dialog_Show(extraid, ChargeList, DIALOG_STYLE_LIST, desc, string, "Close", "");
+	Dialog_Show(extraid, ChargeList, DIALOG_STYLE_LIST, DialogStyle_Title(desc), string, "Close", "");
 	return 1;
 }
 
@@ -1193,7 +1193,7 @@ public OnCharacterCheck(extraid, character[])
 
 	if (rows)
 	{
-	    Dialog_Show(extraid, CreateChar, DIALOG_STYLE_INPUT, "Create Character", "Error: The specified name \"%s\" is in use!\n\nPlease enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 24 characters.", "Create", "Cancel", character);
+	    Dialog_Show(extraid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Error: The specified name \"%s\" is in use!\n\nPlease enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 24 characters."), "Create", "Cancel", character);
 	}
 	else
 	{

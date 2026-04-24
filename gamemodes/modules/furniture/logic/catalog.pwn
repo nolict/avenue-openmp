@@ -230,7 +230,7 @@ Business_ProductMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][16]),
 				FormatNumber(BusinessData[bizid][bizPrices][17])
 			);
-			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, "Business: Modify Item", string, "Modify", "Cancel");
+			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, DialogStyle_Title("Business: Modify Item"), string, "Modify", "Cancel");
 		}
 		case 2:
 	    {
@@ -242,7 +242,7 @@ Business_ProductMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][4]),
 				FormatNumber(BusinessData[bizid][bizPrices][5])
 			);
-			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, "Business: Modify Item", string, "Modify", "Cancel");
+			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, DialogStyle_Title("Business: Modify Item"), string, "Modify", "Cancel");
 		}
 		case 3:
 	    {
@@ -252,7 +252,7 @@ Business_ProductMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][2]),
 				FormatNumber(BusinessData[bizid][bizPrices][3])
 			);
-			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, "Business: Modify Item", string, "Modify", "Cancel");
+			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, DialogStyle_Title("Business: Modify Item"), string, "Modify", "Cancel");
 		}
 		case 4:
 	    {
@@ -265,7 +265,7 @@ Business_ProductMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][5]),
 				FormatNumber(BusinessData[bizid][bizPrices][6])
 			);
-			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, "Business: Modify Item", string, "Modify", "Cancel");
+			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, DialogStyle_Title("Business: Modify Item"), string, "Modify", "Cancel");
 		}
 		case 7:
 	    {
@@ -274,7 +274,7 @@ Business_ProductMenu(playerid, bizid)
 	        for (new i = 0; i < sizeof(g_aFurnitureTypes); i ++) {
 	            format(string, sizeof(string), "%s%s - %s\n", string, g_aFurnitureTypes[i], FormatNumber(BusinessData[bizid][bizPrices][i]));
 			}
-			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, "Business: Modify Item", string, "Modify", "Cancel");
+			Dialog_Show(playerid, EditProduct, DIALOG_STYLE_LIST, DialogStyle_Title("Business: Modify Item"), string, "Modify", "Cancel");
 		}
 	}
 	return 1;
@@ -313,7 +313,7 @@ Business_PurchaseMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][16]),
 				FormatNumber(BusinessData[bizid][bizPrices][17])
 			);
-			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, BusinessData[bizid][bizName], string, "Purchase", "Cancel");
+			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, DialogStyle_Title(BusinessData[bizid][bizName]), string, "Purchase", "Cancel");
 		}
 		case 2:
 	    {
@@ -325,7 +325,7 @@ Business_PurchaseMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][4]),
 				FormatNumber(BusinessData[bizid][bizPrices][5])
 			);
-			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, BusinessData[bizid][bizName], string, "Purchase", "Cancel");
+			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, DialogStyle_Title(BusinessData[bizid][bizName]), string, "Purchase", "Cancel");
 		}
 		case 3:
 	    {
@@ -335,7 +335,7 @@ Business_PurchaseMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][2]),
 				FormatNumber(BusinessData[bizid][bizPrices][3])
 			);
-			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, BusinessData[bizid][bizName], string, "Purchase", "Cancel");
+			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, DialogStyle_Title(BusinessData[bizid][bizName]), string, "Purchase", "Cancel");
 		}
 		case 4:
 		{
@@ -348,7 +348,7 @@ Business_PurchaseMenu(playerid, bizid)
 				FormatNumber(BusinessData[bizid][bizPrices][5]),
 				FormatNumber(BusinessData[bizid][bizPrices][6])
 			);
-			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, BusinessData[bizid][bizName], string, "Purchase", "Cancel");
+			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, DialogStyle_Title(BusinessData[bizid][bizName]), string, "Purchase", "Cancel");
 		}
 		case 7:
 	    {
@@ -357,7 +357,7 @@ Business_PurchaseMenu(playerid, bizid)
 	        for (new i = 0; i < sizeof(g_aFurnitureTypes); i ++) {
 	            format(string, sizeof(string), "%s%s - %s\n", string, g_aFurnitureTypes[i], FormatNumber(BusinessData[bizid][bizPrices][i]));
 			}
-			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, BusinessData[bizid][bizName], string, "Purchase", "Cancel");
+			Dialog_Show(playerid, BusinessBuy, DIALOG_STYLE_LIST, DialogStyle_Title(BusinessData[bizid][bizName]), string, "Purchase", "Cancel");
 		}
 	}
 	return 1;

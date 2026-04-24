@@ -10,7 +10,7 @@ CMD:atm(playerid, params[])
 	if (ATM_Nearest(playerid) == -1)
 	    return SendErrorMessage(playerid, "You are not in range of any ATM machine.");
 
-	Dialog_Show(playerid, Bank, DIALOG_STYLE_LIST, "Bank Account", "Bank Balance: %s", "Select", "Cancel", FormatNumber(PlayerData[playerid][pBankMoney]), FormatNumber(PlayerData[playerid][pSavings]));
+	Dialog_Show(playerid, Bank, DIALOG_STYLE_LIST, DialogStyle_Title("Bank Account"), DialogStyle_Body("Bank Balance: %s"), "Select", "Cancel", FormatNumber(PlayerData[playerid][pBankMoney]), FormatNumber(PlayerData[playerid][pSavings]));
 	return 1;
 }
 
@@ -21,7 +21,7 @@ CMD:bank(playerid, params[])
 	if (!IsPlayerInBank(playerid))
 	    return SendErrorMessage(playerid, "You are not in range of any bank.");
 
-	Dialog_Show(playerid, Bank, DIALOG_STYLE_LIST, "Bank Account", "Bank Balance: %s", "Select", "Cancel", FormatNumber(PlayerData[playerid][pBankMoney]), FormatNumber(PlayerData[playerid][pSavings]));
+	Dialog_Show(playerid, Bank, DIALOG_STYLE_LIST, DialogStyle_Title("Bank Account"), DialogStyle_Body("Bank Balance: %s"), "Select", "Cancel", FormatNumber(PlayerData[playerid][pBankMoney]), FormatNumber(PlayerData[playerid][pSavings]));
 	return 1;
 }
 

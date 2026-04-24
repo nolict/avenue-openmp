@@ -734,7 +734,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 					else
 						SendErrorMessage(playerid, "You don't have any room in your inventory.");
 				}
-				else Dialog_Show(playerid, PickupItems, DIALOG_STYLE_LIST, "Pickup Items", string, "Pickup", "Cancel");
+				else Dialog_Show(playerid, PickupItems, DIALOG_STYLE_LIST, DialogStyle_Title("Pickup Items"), string, "Pickup", "Cancel");
 			}
 		}
 	}
@@ -825,7 +825,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		        SendClientMessage(playerid, -1, "");
 			}
 		    SetDefaultSpawn(playerid);
-		    Dialog_Show(playerid, TutorialConfirm, DIALOG_STYLE_MSGBOX, "Tutorial", "Apakah kamu ingin melihat main tutorial server?", "Yes", "No");
+		    Dialog_Show(playerid, TutorialConfirm, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial"), DialogStyle_Body("Apakah kamu ingin melihat main tutorial server?"), "Yes", "No");
 		}
 		if (IsPlayerInRangeOfPoint(playerid, 2.5, -204.5334, -1735.3131, 675.7687) && PlayerData[playerid][pHospitalInt] != -1)
 		{
@@ -940,7 +940,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			if (PlayerData[playerid][pTask] && !PlayerData[playerid][pStoreTask])
 			{
 			    PlayerData[playerid][pStoreTask] = 1;
-			    Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, "Retail Store", "This business is a Retail Store. You can purchase many items here using the /buy command.\nThere are many useful things that you can purchase here, which are added to your inventory.\n\nThe most useful item is the GPS System, as this device allows you to find what you need.\nYou can leave this business at any time by pressing the 'F' key at the door.", "Close", "");
+			    Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Retail Store"), DialogStyle_Body("This business is a Retail Store. You can purchase many items here using the /buy command.\nThere are many useful things that you can purchase here, which are added to your inventory.\n\nThe most useful item is the GPS System, as this device allows you to find what you need.\nYou can leave this business at any time by pressing the 'F' key at the door."), "Close", "");
 
 			    if (IsTaskCompleted(playerid))
 				{
@@ -984,7 +984,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 				if (EntranceData[id][entranceType] == 2 && !PlayerData[playerid][pBankTask])
 				{
 			    	PlayerData[playerid][pBankTask] = 1;
-			    	Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, "Banking", "This is one of the banks of San Andreas. You can manage your bank accounts here.\nEach player has a standard bank account and a savings account for extra funds.\n\nYou can type /bank inside this building to manage either of your bank accounts.\nIf you are near any ATM machine, you can use the /atm command for your banking needs.", "Close", "");
+			    	Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Banking"), DialogStyle_Body("This is one of the banks of San Andreas. You can manage your bank accounts here.\nEach player has a standard bank account and a savings account for extra funds.\n\nYou can type /bank inside this building to manage either of your bank accounts.\nIf you are near any ATM machine, you can use the /atm command for your banking needs."), "Close", "");
 
 				    if (IsTaskCompleted(playerid))
 					{
@@ -995,7 +995,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 				else if (EntranceData[id][entranceType] == 1 && !PlayerData[playerid][pTestTask])
 				{
 			    	PlayerData[playerid][pTestTask] = 1;
-			    	Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, "DMV", "The DMV is where a player can attempt the driving test to obtain their license.\nYou must avoid hitting obstacles, damaging the vehicle or speeding during the test.\n\nIt is legally required to possess a driving license to drive in San Andreas.\nDriving without a license can result in several consequences by law enforcement.", "Close", "");
+			    	Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("DMV"), DialogStyle_Body("The DMV is where a player can attempt the driving test to obtain their license.\nYou must avoid hitting obstacles, damaging the vehicle or speeding during the test.\n\nIt is legally required to possess a driving license to drive in San Andreas.\nDriving without a license can result in several consequences by law enforcement."), "Close", "");
 
 				    if (IsTaskCompleted(playerid))
 					{
@@ -1106,7 +1106,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
     if (PlayerData[playerid][pDrivingTest])
 	{
 	    SetTimerEx("PutInsideVehicle", 500, false, "dd", playerid, vehicleid);
-		Dialog_Show(playerid, LeaveTest, DIALOG_STYLE_MSGBOX, "Confirm Test Leave", "Warning: Are you sure you want to exit the driving test?", "Yes", "No");
+		Dialog_Show(playerid, LeaveTest, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Confirm Test Leave"), DialogStyle_Body("Warning: Are you sure you want to exit the driving test?"), "Yes", "No");
 	}
 	if (PlayerData[playerid][pJob] == JOB_UNLOADER && GetVehicleModel(vehicleid) == 530)
 	{

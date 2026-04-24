@@ -15,10 +15,10 @@ Dialog:GatePass(playerid, response, listitem, inputtext[])
 	        return 0;
 
         if (isnull(inputtext))
-        	return Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, "Enter Password", "Please enter the password for this gate below:", "Submit", "Cancel");
+        	return Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Password"), DialogStyle_Body("Please enter the password for this gate below:"), "Submit", "Cancel");
 
 		if (strcmp(inputtext, GateData[id][gatePass]) != 0)
-  			return Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, "Enter Password", "Error: Incorrect password specified.\n\nPlease enter the password for this gate below:", "Submit", "Cancel");
+  			return Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Password"), DialogStyle_Body("Error: Incorrect password specified.\n\nPlease enter the password for this gate below:"), "Submit", "Cancel");
 
 		Gate_Operate(id);
 	}
@@ -34,7 +34,7 @@ Dialog:EditRanks(playerid, response, listitem, inputtext[])
 			return 0;
 
 		PlayerData[playerid][pSelectedSlot] = listitem;
-		Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, "Set Rank", "Rank: %s (%d)\n\nPlease enter a new name for this rank below:", "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
+		Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Rank"), DialogStyle_Body("Rank: %s (%d)\n\nPlease enter a new name for this rank below:"), "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
 	}
 	return 1;
 }
@@ -45,10 +45,10 @@ Dialog:SetRankName(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-			return Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, "Set Rank", "Rank: %s (%d)\n\nPlease enter a new name for this rank below:", "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
+			return Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Rank"), DialogStyle_Body("Rank: %s (%d)\n\nPlease enter a new name for this rank below:"), "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
 
 	    if (strlen(inputtext) > 32)
-	        return Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, "Set Rank", "Error: The rank can't exceed 32 characters.\n\nRank: %s (%d)\n\nPlease enter a new name for this rank below:", "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
+	        return Dialog_Show(playerid, SetRankName, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Rank"), DialogStyle_Body("Error: The rank can't exceed 32 characters.\n\nRank: %s (%d)\n\nPlease enter a new name for this rank below:"), "Submit", "Back", FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], PlayerData[playerid][pSelectedSlot] + 1);
 
 		format(FactionRanks[PlayerData[playerid][pFactionEdit]][PlayerData[playerid][pSelectedSlot]], 32, inputtext);
 		Faction_SaveRanks(PlayerData[playerid][pFactionEdit]);

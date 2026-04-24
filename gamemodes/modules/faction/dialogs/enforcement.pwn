@@ -27,7 +27,7 @@ Dialog:Warrants(playerid, response, listitem, inputtext[])
 		PlayerData[playerid][pMDCPlayer] = targetid;
 
 		format(name, sizeof(name), "MDC: %s", name);
-		Dialog_Show(playerid, WarrantList, DIALOG_STYLE_LIST, name, "Track Player\nClear Warrants", "Select", "Back");
+		Dialog_Show(playerid, WarrantList, DIALOG_STYLE_LIST, DialogStyle_Title(name), "Track Player\nClear Warrants", "Select", "Back");
 	}
 	else cmd_mdc(playerid, "\1");
 	return 1;
@@ -78,16 +78,16 @@ Dialog:ChargeName(playerid, response, listitem, inputtext[])
 	    new targetid;
 
 	    if (sscanf(inputtext, "u", targetid))
-	        return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, "Place Charges", "Error: Please enter a valid user.\n\nPlease enter the name or ID of the player:", "Submit", "Back");
+	        return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charges"), DialogStyle_Body("Error: Please enter a valid user.\n\nPlease enter the name or ID of the player:"), "Submit", "Back");
 
 		if (targetid == INVALID_PLAYER_ID)
-		    return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, "Place Charges", "Error: Invalid user specified.\n\nPlease enter the name or ID of the player:", "Submit", "Back");
+		    return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charges"), DialogStyle_Body("Error: Invalid user specified.\n\nPlease enter the name or ID of the player:"), "Submit", "Back");
 
         if (PlayerData[targetid][pWarrants] > 14)
-		    return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, "Place Charges", "Error: The user already has 15 active warrants.\n\nPlease enter the name or ID of the player:", "Submit", "Back");
+		    return Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charges"), DialogStyle_Body("Error: The user already has 15 active warrants.\n\nPlease enter the name or ID of the player:"), "Submit", "Back");
 
 		PlayerData[playerid][pMDCPlayer] = targetid;
-		Dialog_Show(playerid, PlaceCharge, DIALOG_STYLE_INPUT, "Place Charge", "Please enter the description of the crime committed by %s:", "Submit", "Back", ReturnName(PlayerData[playerid][pMDCPlayer], 0));
+		Dialog_Show(playerid, PlaceCharge, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charge"), DialogStyle_Body("Please enter the description of the crime committed by %s:"), "Submit", "Back", ReturnName(PlayerData[playerid][pMDCPlayer], 0));
 	}
 	else cmd_mdc(playerid, "\1");
 	return 1;
@@ -102,7 +102,7 @@ Dialog:PlaceCharge(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-			return Dialog_Show(playerid, PlaceCharge, DIALOG_STYLE_INPUT, "Place Charge", "Please enter the description of the crime committed by %s:", "Submit", "Back", ReturnName(PlayerData[playerid][pMDCPlayer], 0));
+			return Dialog_Show(playerid, PlaceCharge, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charge"), DialogStyle_Body("Please enter the description of the crime committed by %s:"), "Submit", "Back", ReturnName(PlayerData[playerid][pMDCPlayer], 0));
 
 	    PlayerData[PlayerData[playerid][pMDCPlayer]][pWarrants]++;
 
@@ -142,15 +142,15 @@ Dialog:MainMDC(playerid, response, listitem, inputtext[])
 				if (!strlen(string))
 				    return SendErrorMessage(playerid, "There are no active warrants.");
 
-				Dialog_Show(playerid, Warrants, DIALOG_STYLE_LIST, "Active Warrants", string, "Select", "Back");
+				Dialog_Show(playerid, Warrants, DIALOG_STYLE_LIST, DialogStyle_Title("Active Warrants"), string, "Select", "Back");
     		}
     		case 1:
     		{
-    		    Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, "Place Charges", "Please enter the name or ID of the player:", "Submit", "Back");
+    		    Dialog_Show(playerid, ChargeName, DIALOG_STYLE_INPUT, DialogStyle_Title("Place Charges"), DialogStyle_Body("Please enter the name or ID of the player:"), "Submit", "Back");
 			}
 			case 2:
     		{
-    		    Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, "View Charges", "Please enter the name or ID of the player:", "Submit", "Back");
+    		    Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, DialogStyle_Title("View Charges"), DialogStyle_Body("Please enter the name or ID of the player:"), "Submit", "Back");
 			}
 	    }
 	}
@@ -166,7 +166,7 @@ Dialog:ViewCharges(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 		if (isnull(inputtext) || strlen(inputtext) > 24)
-		    return Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, "View Charges", "Please enter the name or ID of the player:", "Submit", "Back");
+		    return Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, DialogStyle_Title("View Charges"), DialogStyle_Body("Please enter the name or ID of the player:"), "Submit", "Back");
 
 		if (Core_IsNumeric(inputtext) && IsPlayerConnected(strval(inputtext))) {
 	        ViewCharges(playerid, ReturnName(strval(inputtext)));
@@ -175,7 +175,7 @@ Dialog:ViewCharges(playerid, response, listitem, inputtext[])
 	        ViewCharges(playerid, inputtext);
 		}
 		else {
-		    Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, "View Charges", "Error: Invalid user specified.\n\nPlease enter the name or ID of the player:", "Submit", "Back");
+		    Dialog_Show(playerid, ViewCharges, DIALOG_STYLE_INPUT, DialogStyle_Title("View Charges"), DialogStyle_Body("Error: Invalid user specified.\n\nPlease enter the name or ID of the player:"), "Submit", "Back");
 		}
 	}
 	else cmd_mdc(playerid, "\1");

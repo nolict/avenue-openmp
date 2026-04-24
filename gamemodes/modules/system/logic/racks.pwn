@@ -64,7 +64,7 @@ Rack_ShowGuns(playerid, rackid)
 
 			else format(string, sizeof(string), "%s%d: %s - %d bullets\n", string, i + 1, ReturnWeaponName(RackData[rackid][rackWeapons][i]), RackData[rackid][rackAmmo][i]);
 		}
-		Dialog_Show(playerid, RackWeapons, DIALOG_STYLE_LIST, "Weapon Rack", string, "Select", "Cancel");
+		Dialog_Show(playerid, RackWeapons, DIALOG_STYLE_LIST, DialogStyle_Title("Weapon Rack"), string, "Select", "Cancel");
 	}
 	return 1;
 }

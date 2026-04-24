@@ -10,14 +10,14 @@ Dialog:NewContact(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-			return Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, "New Contact", "Error: Please enter a contact name.\n\nPlease enter the name of the contact below:", "Submit", "Back");
+			return Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, DialogStyle_Title("New Contact"), DialogStyle_Body("Error: Please enter a contact name.\n\nPlease enter the name of the contact below:"), "Submit", "Back");
 
 	    if (strlen(inputtext) > 32)
-	        return Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, "New Contact", "Error: The contact name can't exceed 32 characters.\n\nPlease enter the name of the contact below:", "Submit", "Back");
+	        return Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, DialogStyle_Title("New Contact"), DialogStyle_Body("Error: The contact name can't exceed 32 characters.\n\nPlease enter the name of the contact below:"), "Submit", "Back");
 
 		strpack(PlayerData[playerid][pEditingItem], inputtext, 32);
 
-	    Dialog_Show(playerid, EnterNumber, DIALOG_STYLE_INPUT, "Contact Number", "Contact Name: %s\n\nPlease enter the phone number for this contact:", "Submit", "Back", inputtext);
+	    Dialog_Show(playerid, EnterNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Contact Number"), DialogStyle_Body("Contact Name: %s\n\nPlease enter the phone number for this contact:"), "Submit", "Back", inputtext);
 	}
 	else {
 		ShowContacts(playerid);
@@ -68,12 +68,12 @@ Dialog:Contacts(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (!listitem) {
-	        Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, "New Contact", "Please enter the name of the contact below:", "Submit", "Back");
+	        Dialog_Show(playerid, NewContact, DIALOG_STYLE_INPUT, DialogStyle_Title("New Contact"), DialogStyle_Body("Please enter the name of the contact below:"), "Submit", "Back");
 	    }
 	    else {
 		    PlayerData[playerid][pContact] = ListedContacts[playerid][listitem - 1];
 
-	        Dialog_Show(playerid, ContactInfo, DIALOG_STYLE_LIST, ContactData[playerid][PlayerData[playerid][pContact]][contactName], "Call Contact\nDelete Contact", "Select", "Back");
+	        Dialog_Show(playerid, ContactInfo, DIALOG_STYLE_LIST, DialogStyle_Title(ContactData[playerid][PlayerData[playerid][pContact]][contactName]), "Call Contact\nDelete Contact", "Select", "Back");
 	    }
 	}
 	else {
@@ -94,7 +94,7 @@ Dialog:DialNumber(playerid, response, listitem, inputtext[])
 	        string[16];
 
 	    if (isnull(inputtext) || !Core_IsNumeric(inputtext))
-	        return Dialog_Show(playerid, DialNumber, DIALOG_STYLE_INPUT, "Dial Number", "Please enter the number that you wish to dial below:", "Dial", "Back");
+	        return Dialog_Show(playerid, DialNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Dial Number"), DialogStyle_Body("Please enter the number that you wish to dial below:"), "Dial", "Back");
 
         format(string, 16, "%d", strval(inputtext));
 		cmd_call(playerid, string);
@@ -113,13 +113,13 @@ Dialog:SendText(playerid, response, listitem, inputtext[])
 	    new number = strval(inputtext);
 
 	    if (isnull(inputtext) || !Core_IsNumeric(inputtext))
-	        return Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, "Send Text Message", "Please enter the number that you wish to send a text message to:", "Dial", "Back");
+	        return Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, DialogStyle_Title("Send Text Message"), DialogStyle_Body("Please enter the number that you wish to send a text message to:"), "Dial", "Back");
 
         if (GetNumberOwner(number) == INVALID_PLAYER_ID)
-            return Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, "Send Text Message", "Error: That number is not online right now.\n\nPlease enter the number that you wish to send a text message to:", "Dial", "Back");
+            return Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, DialogStyle_Title("Send Text Message"), DialogStyle_Body("Error: That number is not online right now.\n\nPlease enter the number that you wish to send a text message to:"), "Dial", "Back");
 
 		PlayerData[playerid][pContact] = GetNumberOwner(number);
-		Dialog_Show(playerid, TextMessage, DIALOG_STYLE_INPUT, "Text Message", "Please enter the message to send to %s:", "Send", "Back", ReturnName(PlayerData[playerid][pContact], 0));
+		Dialog_Show(playerid, TextMessage, DIALOG_STYLE_INPUT, DialogStyle_Title("Text Message"), DialogStyle_Body("Please enter the message to send to %s:"), "Send", "Back", ReturnName(PlayerData[playerid][pContact], 0));
 	}
 	else {
 		cmd_phone(playerid, "\1");
@@ -133,7 +133,7 @@ Dialog:TextMessage(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 		if (isnull(inputtext))
-			return Dialog_Show(playerid, TextMessage, DIALOG_STYLE_INPUT, "Text Message", "Error: Please enter a message to send.\n\nPlease enter the message to send to %s:", "Send", "Back", ReturnName(PlayerData[playerid][pContact], 0));
+			return Dialog_Show(playerid, TextMessage, DIALOG_STYLE_INPUT, DialogStyle_Title("Text Message"), DialogStyle_Body("Error: Please enter a message to send.\n\nPlease enter the message to send to %s:"), "Send", "Back", ReturnName(PlayerData[playerid][pContact], 0));
 
 		new targetid = PlayerData[playerid][pContact];
 
@@ -150,7 +150,7 @@ Dialog:TextMessage(playerid, response, listitem, inputtext[])
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their phone and sends a text.", ReturnName(playerid, 0));
 	}
 	else {
-        Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, "Send Text Message", "Please enter the number that you wish to send a text message to:", "Submit", "Back");
+        Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, DialogStyle_Title("Send Text Message"), DialogStyle_Body("Please enter the number that you wish to send a text message to:"), "Submit", "Back");
 	}
 	return 1;
 }
@@ -167,7 +167,7 @@ Dialog:MyPhone(playerid, response, listitem, inputtext[])
 		        if (PlayerData[playerid][pPhoneOff])
 		            return SendErrorMessage(playerid, "Your phone must be powered on.");
 
-				Dialog_Show(playerid, DialNumber, DIALOG_STYLE_INPUT, "Dial Number", "Please enter the number that you wish to dial below:", "Dial", "Back");
+				Dialog_Show(playerid, DialNumber, DIALOG_STYLE_INPUT, DialogStyle_Title("Dial Number"), DialogStyle_Body("Please enter the number that you wish to dial below:"), "Dial", "Back");
 			}
 			case 1:
 			{
@@ -181,7 +181,7 @@ Dialog:MyPhone(playerid, response, listitem, inputtext[])
 		        if (PlayerData[playerid][pPhoneOff])
 		            return SendErrorMessage(playerid, "Your phone must be powered on.");
 
-		        Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, "Send Text Message", "Please enter the number that you wish to send a text message to:", "Dial", "Back");
+		        Dialog_Show(playerid, SendText, DIALOG_STYLE_INPUT, DialogStyle_Title("Send Text Message"), DialogStyle_Body("Please enter the number that you wish to send a text message to:"), "Dial", "Back");
 			}
 			case 3:
 			{

@@ -47,20 +47,20 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 				SQL_LoadCharacter(playerid, PlayerData[playerid][pCharacter]);
 
 			else if (playertextid == PlayerData[playerid][pTextdraws][79]) {
-			    Dialog_Show(playerid, DeleteChar, DIALOG_STYLE_MSGBOX, "Delete Character", "Warning: Are you sure you wish to delete character \"%s\"?\n\nYou will not be issued a refund for any lost property.", "Confirm", "Cancel", PlayerCharacters[playerid][PlayerData[playerid][pCharacter] - 1]);
+			    Dialog_Show(playerid, DeleteChar, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Delete Character"), "Warning: Are you sure you wish to delete character \"%s\"?\n\nYou will not be issued a refund for any lost property.", "Confirm", "Cancel", PlayerCharacters[playerid][PlayerData[playerid][pCharacter] - 1]);
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][80]) {
 			    ShowCharacterMenu(playerid);
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][19]) {
 			    CancelSelectTextDraw(playerid);
-			    Dialog_Show(playerid, Gender, DIALOG_STYLE_LIST, "Gender", "Male\nFemale", "Select", "Cancel");
+			    Dialog_Show(playerid, Gender, DIALOG_STYLE_LIST, DialogStyle_Title("Gender"), DialogStyle_Body("Male\nFemale"), "Select", "Cancel");
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][20]) {
-			    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, "Date of Birth", "Please enter your date of birth below (DD/MM/YYYY):", "Submit", "Cancel");
+			    Dialog_Show(playerid, DateBirth, DIALOG_STYLE_INPUT, DialogStyle_Title("Date of Birth"), DialogStyle_Body("Please enter your date of birth below (DD/MM/YYYY):"), "Submit", "Cancel");
 			}
             else if (playertextid == PlayerData[playerid][pTextdraws][21]) {
-			    Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, "Origin", "Please enter the geographical origin of your character below:", "Submit", "Cancel");
+			    Dialog_Show(playerid, Origin, DIALOG_STYLE_INPUT, DialogStyle_Title("Origin"), DialogStyle_Body("Please enter the geographical origin of your character below:"), "Submit", "Cancel");
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][22])
 			{
@@ -151,7 +151,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 				CancelSelectTextDraw(playerid);
 
 				format(string, sizeof(string), "%s\n%s\n%s", (!PlayerCharacters[playerid][0][0]) ? ("Empty Slot") : (PlayerCharacters[playerid][0]), (!PlayerCharacters[playerid][1][0]) ? ("Empty Slot") : (PlayerCharacters[playerid][1]), (!PlayerCharacters[playerid][2][0]) ? ("Empty Slot") : (PlayerCharacters[playerid][2]));
-				Dialog_Show(playerid, CharList, DIALOG_STYLE_LIST, "My Characters", string, "Select", "Cancel");
+				Dialog_Show(playerid, CharList, DIALOG_STYLE_LIST, DialogStyle_Title("My Characters"), string, "Select", "Cancel");
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][48])
 			{
@@ -182,21 +182,18 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
             else if (playertextid == PlayerData[playerid][pTextdraws][56])
 			{
 			    for (new i = 40; i < 58; i ++)
-			    {
-			        if (i >= 50)
-				        PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
+			        PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
 
-					else if (i < 50)
-					    PlayerTextDrawShow(playerid, PlayerData[playerid][pTextdraws][i]);
-			    }
-			    PlayerData[playerid][pDisplayStats] = true;
+				CancelSelectTextDraw(playerid);
+			    PlayerData[playerid][pDisplayStats] = false;
+			    ShowStatsForPlayer(playerid, playerid);
 			}
 			else if (playertextid == PlayerData[playerid][pTextdraws][57])
 			{
 			    if (PlayerData[playerid][pCharacterMenu] == PlayerData[playerid][pCharacter])
 			        return SendErrorMessage(playerid, "You are playing on this character, you can't delete it.");
 
-                Dialog_Show(playerid, DeleteCharacter, DIALOG_STYLE_MSGBOX, "Delete Character", "Warning: Are you sure you wish to delete character \"%s\"?\n\nYou will not be issued a refund for any lost property.", "Confirm", "Cancel", PlayerCharacters[playerid][PlayerData[playerid][pCharacterMenu] - 1]);
+                Dialog_Show(playerid, DeleteCharacter, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Delete Character"), "Warning: Are you sure you wish to delete character \"%s\"?\n\nYou will not be issued a refund for any lost property.", "Confirm", "Cancel", PlayerCharacters[playerid][PlayerData[playerid][pCharacterMenu] - 1]);
 			}
 		}
 	}

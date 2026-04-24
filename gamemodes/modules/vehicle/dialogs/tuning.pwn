@@ -20,7 +20,7 @@ Dialog:TuneVehicle(playerid, response, listitem, inputtext[])
 	            ShowModelSelectionMenu(playerid, "Add Wheels", MODEL_SELECTION_WHEELS, {1025, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1096, 1097, 1098}, 17, 0.0, 0.0, 90.0);
 
 			case 1:
-			    Dialog_Show(playerid, AddNOS, DIALOG_STYLE_LIST, "Add Nitrous", "2x NOS\n5x NOS\n10x NOS", "Select", "Cancel");
+			    Dialog_Show(playerid, AddNOS, DIALOG_STYLE_LIST, DialogStyle_Title("Add Nitrous"), DialogStyle_Body("2x NOS\n5x NOS\n10x NOS"), "Select", "Cancel");
 
 			case 2:
 			{

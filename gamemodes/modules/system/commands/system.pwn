@@ -63,10 +63,10 @@ CMD:phone(playerid, params[])
 	format(str, sizeof(str), "Phone (#%d)", PlayerData[playerid][pPhone]);
 
 	if (PlayerData[playerid][pPhoneOff]) {
-		Dialog_Show(playerid, MyPhone, DIALOG_STYLE_LIST, str, "Dial Number\nMy Contacts\nSend Text Message\nTurn On Phone", "Select", "Cancel");
+		Dialog_Show(playerid, MyPhone, DIALOG_STYLE_LIST, DialogStyle_Title(str), DialogStyle_Body("Dial Number\nMy Contacts\nSend Text Message\nTurn On Phone"), "Select", "Cancel");
 	}
 	else {
-	    Dialog_Show(playerid, MyPhone, DIALOG_STYLE_LIST, str, "Dial Number\nMy Contacts\nSend Text Message\nTurn Off Phone", "Select", "Cancel");
+	    Dialog_Show(playerid, MyPhone, DIALOG_STYLE_LIST, DialogStyle_Title(str), DialogStyle_Body("Dial Number\nMy Contacts\nSend Text Message\nTurn Off Phone"), "Select", "Cancel");
 	}
 	return 1;
 }
@@ -328,7 +328,7 @@ CMD:crates(playerid, params[])
 			format(string, sizeof(string), "%sCrate #%d: %s Parts\n", string, j, Crate_GetType(CrateData[j][crateType]));
 		}
 		PlayerData[playerid][pCrateVehicle] = i;
-		return Dialog_Show(playerid, Crates, DIALOG_STYLE_LIST, "Vehicle Crates", string, "Take", "Cancel");
+		return Dialog_Show(playerid, Crates, DIALOG_STYLE_LIST, DialogStyle_Title("Vehicle Crates"), string, "Take", "Cancel");
 	}
 	SendErrorMessage(playerid, "You are not in range of any loadable vehicle.");
 	return 1;
@@ -566,7 +566,7 @@ CMD:itemlist(playerid, params[])
 			format(string, sizeof(string), "%s%s\n", string, g_aInventoryItems[i][e_InventoryItem]);
 		}
 	}
-	return Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_LIST, "List of Items", string, "Select", "Cancel");
+	return Dialog_Show(playerid, ShowOnly, DIALOG_STYLE_LIST, DialogStyle_Title("List of Items"), string, "Select", "Cancel");
 }
 
 
@@ -2042,7 +2042,7 @@ CMD:take(playerid, params[])
 	    return SendErrorMessage(playerid, "This player has no illegal items to take.");
 
 	PlayerData[playerid][pTakeItems] = userid;
-	Dialog_Show(playerid, TakeItems, DIALOG_STYLE_LIST, "Take Items", string, "Take", "Cancel");
+	Dialog_Show(playerid, TakeItems, DIALOG_STYLE_LIST, DialogStyle_Title("Take Items"), string, "Take", "Cancel");
 	return 1;
 }
 
@@ -2645,7 +2645,7 @@ CMD:fspray(playerid, params[])
 	if (GetFactionType(playerid) != FACTION_GANG)
 	    return SendErrorMessage(playerid, "You are not a member of an illegal faction.");
 
-	Dialog_Show(playerid, GraffitiColor, DIALOG_STYLE_LIST, "Select Color", "{FFFFFF}White\n{FF0000}Red\n{FFFF00}Yellow\n{33CC33}Green\n{33CCFF}Light Blue\n{FFA500}Orange\n{1394BF}Dark Blue", "Select", "Cancel");
+	Dialog_Show(playerid, GraffitiColor, DIALOG_STYLE_LIST, DialogStyle_Title("Select Color"), DialogStyle_Body("{FFFFFF}White\n{FF0000}Red\n{FFFF00}Yellow\n{33CC33}Green\n{33CCFF}Light Blue\n{FFA500}Orange\n{1394BF}Dark Blue"), "Select", "Cancel");
 	return 1;
 }
 

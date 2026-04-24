@@ -25,7 +25,7 @@ stock Backpack_Items(playerid, id)
 		strcat(string, "Take Backpack");
 
 		PlayerData[playerid][pBackpackLoot] = id;
-		Dialog_Show(playerid, BackpackLoot, DIALOG_STYLE_LIST, "Backpack", string, "Select", "Cancel");
+		Dialog_Show(playerid, BackpackLoot, DIALOG_STYLE_LIST, DialogStyle_Title("Backpack"), string, "Select", "Cancel");
 	}
 	return 1;
 }
@@ -52,7 +52,7 @@ stock Backpack_Open(playerid)
 
 			BackpackListed[playerid][count++] = i;
 		}
-		Dialog_Show(playerid, Backpack, DIALOG_STYLE_LIST, "My Backpack", string, "Select", "Cancel");
+		Dialog_Show(playerid, Backpack, DIALOG_STYLE_LIST, DialogStyle_Title("My Backpack"), string, "Select", "Cancel");
 	}
 	return 1;
 }

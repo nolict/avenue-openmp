@@ -289,7 +289,7 @@ CMD:lock(playerid, params[])
 	{
 		if (strlen(EntranceData[id][entrancePass]))
 		{
-			Dialog_Show(playerid, EntrancePass, DIALOG_STYLE_INPUT, "Entrance Pass", "Please enter the password for this entrance:", "Submit", "Cancel");
+			Dialog_Show(playerid, EntrancePass, DIALOG_STYLE_INPUT, DialogStyle_Title("Entrance Pass"), DialogStyle_Body("Please enter the password for this entrance:"), "Submit", "Cancel");
 		}
 	}
 	else if ((id = Car_Nearest(playerid)) != -1)

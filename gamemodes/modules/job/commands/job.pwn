@@ -577,7 +577,7 @@ CMD:sellfood(playerid, params[])
 // ====== CMD:joblist ======
 CMD:joblist(playerid, params[])
 {
-	Dialog_Show(playerid, JobList, DIALOG_STYLE_LIST, "Job List", "Courier\nMechanic\nTaxi Driver\nCargo Unloader\nMiner\nFood Vendor\nGarbage Man\nPackage Sorter\nWeapon Smuggler", "Select", "Cancel");
+	Dialog_Show(playerid, JobList, DIALOG_STYLE_LIST, DialogStyle_Title("Job List"), DialogStyle_Body("Courier\nMechanic\nTaxi Driver\nCargo Unloader\nMiner\nFood Vendor\nGarbage Man\nPackage Sorter\nWeapon Smuggler"), "Select", "Cancel");
 	return 1;
 }
 
@@ -619,7 +619,7 @@ CMD:startdelivery(playerid, params[])
     if (IsPlayerInAnyVehicle(playerid))
     	return SendErrorMessage(playerid, "You must exit the vehicle first.");
 
-	Dialog_Show(playerid, StartDelivery, DIALOG_STYLE_LIST, "Select Type", "Retail Supplies\nAmmunition\nClothing\nFood Supplies\nGasoline\nFurniture", "Select", "Cancel");
+	Dialog_Show(playerid, StartDelivery, DIALOG_STYLE_LIST, DialogStyle_Title("Select Type"), DialogStyle_Body("Retail Supplies\nAmmunition\nClothing\nFood Supplies\nGasoline\nFurniture"), "Select", "Cancel");
 	return 1;
 }
 

@@ -118,7 +118,7 @@ CMD:open(playerid, params[])
 	{
 		if (strlen(GateData[id][gatePass]))
 		{
-		    Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, "Enter Password", "Please enter the password for this gate below:", "Submit", "Cancel");
+		    Dialog_Show(playerid, GatePass, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Password"), DialogStyle_Body("Please enter the password for this gate below:"), "Submit", "Cancel");
 		}
 		else
 		{
@@ -367,7 +367,7 @@ CMD:editfaction(playerid, params[])
 	else if (!strcmp(type, "locker", true))
 	{
         PlayerData[playerid][pFactionEdit] = id;
-		Dialog_Show(playerid, FactionLocker, DIALOG_STYLE_LIST, "Faction Locker", "Set Location\nLocker Weapons", "Select", "Cancel");
+		Dialog_Show(playerid, FactionLocker, DIALOG_STYLE_LIST, DialogStyle_Title("Faction Locker"), DialogStyle_Body("Set Location\nLocker Weapons"), "Select", "Cancel");
 	}
 	return 1;
 }
@@ -402,9 +402,9 @@ CMD:flocker(playerid, params[])
 	    return SendErrorMessage(playerid, "You are not in range of your faction's locker.");
 
  	if (FactionData[factionid][factionType] != FACTION_GANG)
-		Dialog_Show(playerid, Locker, DIALOG_STYLE_LIST, "Faction Locker", "Toggle Duty\nArmored Vest\nLocker Skins\nLocker Weapons", "Select", "Cancel");
+		Dialog_Show(playerid, Locker, DIALOG_STYLE_LIST, DialogStyle_Title("Faction Locker"), DialogStyle_Body("Toggle Duty\nArmored Vest\nLocker Skins\nLocker Weapons"), "Select", "Cancel");
 
-	else Dialog_Show(playerid, Locker, DIALOG_STYLE_LIST, "Faction Locker", "Locker Skins\nLocker Weapons", "Select", "Cancel");
+	else Dialog_Show(playerid, Locker, DIALOG_STYLE_LIST, DialogStyle_Title("Faction Locker"), DialogStyle_Body("Locker Skins\nLocker Weapons"), "Select", "Cancel");
 	return 1;
 }
 
@@ -1018,7 +1018,7 @@ CMD:mdc(playerid, params[])
 	if (!IsACruiser(GetPlayerVehicleID(playerid)))
 	    return SendErrorMessage(playerid, "You must be inside a police cruiser.");
 
-	Dialog_Show(playerid, MainMDC, DIALOG_STYLE_LIST, "Mobile Data Computer", "Active Warrants\nPlace Charges\nView Charges", "Select", "Cancel");
+	Dialog_Show(playerid, MainMDC, DIALOG_STYLE_LIST, DialogStyle_Title("Mobile Data Computer"), DialogStyle_Body("Active Warrants\nPlace Charges\nView Charges"), "Select", "Cancel");
 	return 1;
 }
 
@@ -1389,7 +1389,7 @@ CMD:tickets(playerid, params[])
 
 		else format(string, sizeof(string), "%sEmpty Slot\n", string);
 	}
-	return Dialog_Show(playerid, MyTickets, DIALOG_STYLE_LIST, "My Tickets", string, "Pay", "Cancel");
+	return Dialog_Show(playerid, MyTickets, DIALOG_STYLE_LIST, DialogStyle_Title("My Tickets"), string, "Pay", "Cancel");
 }
 
 
@@ -1977,7 +1977,7 @@ CMD:setradio(playerid, params[])
 	if (!IsEngineVehicle(vehicleid))
 	    return SendErrorMessage(playerid, "This vehicle doesn't have any radio.");
 
-	Dialog_Show(playerid, Radio, DIALOG_STYLE_LIST, "Radio Channels", "Cultural\nOldies\nOther\nPop\nRhythm & Blues\nRock\nTalk\nUrban\nElectric\nTurn Radio Off", "Select", "Cancel");
+	Dialog_Show(playerid, Radio, DIALOG_STYLE_LIST, DialogStyle_Title("Radio Channels"), DialogStyle_Body("Cultural\nOldies\nOther\nPop\nRhythm & Blues\nRock\nTalk\nUrban\nElectric\nTurn Radio Off"), "Select", "Cancel");
 	return 1;
 }
 

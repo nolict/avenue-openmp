@@ -20,7 +20,7 @@ Dialog:CarDeposit(playerid, response, listitem, inputtext[])
 			new amount = strval(inputtext);
 
 			if (amount < 1 || amount > InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity])
-			    return Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, "Car Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+			    return Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Car Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 
 			Car_AddItem(carid, string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invModel], amount);
 			Inventory_Remove(playerid, string, amount);
@@ -49,7 +49,7 @@ Dialog:CarTake(playerid, response, listitem, inputtext[])
 			new amount = strval(inputtext);
 
 			if (amount < 1 || amount > CarStorage[carid][PlayerData[playerid][pStorageItem]][cItemQuantity])
-			    return Dialog_Show(playerid, CarTake, DIALOG_STYLE_INPUT, "Car Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, CarStorage[carid][PlayerData[playerid][pInventoryItem]][cItemQuantity]);
+			    return Dialog_Show(playerid, CarTake, DIALOG_STYLE_INPUT, DialogStyle_Title("Car Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, CarStorage[carid][PlayerData[playerid][pInventoryItem]][cItemQuantity]);
 
 			new id = Inventory_Add(playerid, string, CarStorage[carid][PlayerData[playerid][pStorageItem]][cItemModel], amount);
 
@@ -88,7 +88,7 @@ Dialog:CarStorage(playerid, response, listitem, inputtext[])
 				strunpack(string, CarStorage[carid][listitem][cItemName]);
 
 				format(string, sizeof(string), "%s (Quantity: %d)", string, CarStorage[carid][listitem][cItemQuantity]);
-				Dialog_Show(playerid, TrunkOptions, DIALOG_STYLE_LIST, string, "Take Item\nStore Item", "Select", "Back");
+				Dialog_Show(playerid, TrunkOptions, DIALOG_STYLE_LIST, DialogStyle_Title(string), DialogStyle_Body("Take Item\nStore Item"), "Select", "Back");
 			}
 			else {
    				OpenInventory(playerid);
@@ -146,7 +146,7 @@ Dialog:TrunkOptions(playerid, response, listitem, inputtext[])
 			        }
 			        else
 			        {
-			            Dialog_Show(playerid, CarTake, DIALOG_STYLE_INPUT, "Car Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, CarStorage[carid][itemid][cItemQuantity]);
+			            Dialog_Show(playerid, CarTake, DIALOG_STYLE_INPUT, DialogStyle_Title("Car Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, CarStorage[carid][itemid][cItemQuantity]);
 			        }
 			    }
 				case 1:
@@ -174,7 +174,7 @@ Dialog:TrunkOptions(playerid, response, listitem, inputtext[])
 					else if (InventoryData[playerid][id][invQuantity] > 1) {
 					    PlayerData[playerid][pInventoryItem] = id;
 
-                        Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, "Car Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][id][invQuantity]);
+                        Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Car Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][id][invQuantity]);
 					}
 				}
 			}

@@ -12,16 +12,16 @@ Dialog:MainGPS(playerid, response, listitem, inputtext[])
 	    switch (listitem)
 	    {
 	        case 0:
-	            Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, "Find House", "Please enter the address of the house below:", "Submit", "Cancel");
+	            Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, DialogStyle_Title("Find House"), DialogStyle_Body("Please enter the address of the house below:"), "Submit", "Cancel");
 
 			case 1:
-			    Dialog_Show(playerid, FindBusiness, DIALOG_STYLE_LIST, "Find Business", "Retail Store\nWeapon Store\nClothing Store\nFast Food\nDealership\nGas Station\nFurniture Store", "Submit", "Cancel");
+			    Dialog_Show(playerid, FindBusiness, DIALOG_STYLE_LIST, DialogStyle_Title("Find Business"), DialogStyle_Body("Retail Store\nWeapon Store\nClothing Store\nFast Food\nDealership\nGas Station\nFurniture Store"), "Submit", "Cancel");
 
 			case 2:
-			    Dialog_Show(playerid, FindEntrance, DIALOG_STYLE_LIST, "Find Entrance", "Nearest DMV\nNearest Bank\nNearest Warehouse\nNearest City Hall", "Select", "Cancel");
+			    Dialog_Show(playerid, FindEntrance, DIALOG_STYLE_LIST, DialogStyle_Title("Find Entrance"), DialogStyle_Body("Nearest DMV\nNearest Bank\nNearest Warehouse\nNearest City Hall"), "Select", "Cancel");
 
 			case 3:
-			    Dialog_Show(playerid, FindJob, DIALOG_STYLE_LIST, "Find Job", "Courier\nMechanic\nTaxi Driver\nCargo Unloader\nMiner\nFood Vendor\nGarbage Man\nPackage Sorter", "Select", "Cancel");
+			    Dialog_Show(playerid, FindJob, DIALOG_STYLE_LIST, DialogStyle_Title("Find Job"), DialogStyle_Body("Courier\nMechanic\nTaxi Driver\nCargo Unloader\nMiner\nFood Vendor\nGarbage Man\nPackage Sorter"), "Select", "Cancel");
 
 			case 4:
 			{
@@ -33,7 +33,7 @@ Dialog:MainGPS(playerid, response, listitem, inputtext[])
 				for (new i = 0; i != MAX_GPS_LOCATIONS; i ++) if (LocationData[playerid][i][locationExists]) {
 				    format(string, sizeof(string), "%s%s\n", string, LocationData[playerid][i][locationName]);
 				}
-				Dialog_Show(playerid, CustomLocations, DIALOG_STYLE_LIST, "Custom Locations", string, "Select", "Back");
+				Dialog_Show(playerid, CustomLocations, DIALOG_STYLE_LIST, DialogStyle_Title("Custom Locations"), string, "Select", "Back");
 			}
 		}
 	}
@@ -46,7 +46,7 @@ Dialog:FindHouse(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 		if (isnull(inputtext) || strlen(inputtext) > 32)
-		    return Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, "Find House", "Please enter the address of the house below:", "Submit", "Cancel");
+		    return Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, DialogStyle_Title("Find House"), DialogStyle_Body("Please enter the address of the house below:"), "Submit", "Cancel");
 
 		for (new i = 0; i != MAX_HOUSES; i ++)
 		{
@@ -56,7 +56,7 @@ Dialog:FindHouse(playerid, response, listitem, inputtext[])
 	        	return SendServerMessage(playerid, "Waypoint set to \"%s\" (marked on radar).", HouseData[i][houseAddress]);
 			}
 		}
-        Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, "Find House", "Error: No results found for \"%s\".\n\nPlease enter the address of the house below:", "Submit", "Cancel", inputtext);
+        Dialog_Show(playerid, FindHouse, DIALOG_STYLE_INPUT, DialogStyle_Title("Find House"), "Error: No results found for \"%s\".\n\nPlease enter the address of the house below:", "Submit", "Cancel", inputtext);
 	}
 	else cmd_gps(playerid, "\1");
 	return 1;
@@ -136,7 +136,7 @@ Dialog:CustomLocations(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (!listitem) {
-			Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, "Add Location", "Please enter the desired name of the location below:", "Submit", "Cancel");
+			Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Location"), DialogStyle_Body("Please enter the desired name of the location below:"), "Submit", "Cancel");
 	    }
 	    else
 		{
@@ -145,7 +145,7 @@ Dialog:CustomLocations(playerid, response, listitem, inputtext[])
 		    if (id != -1) {
 		        PlayerData[playerid][pSelectedSlot] = id;
 
-		        Dialog_Show(playerid, LocationInfo, DIALOG_STYLE_LIST, inputtext, "Set Waypoint\nDelete Location", "Select", "Back");
+		        Dialog_Show(playerid, LocationInfo, DIALOG_STYLE_LIST, DialogStyle_Title(inputtext), "Set Waypoint\nDelete Location", "Select", "Back");
 			}
 		}
 	}
@@ -159,10 +159,10 @@ Dialog:AddLocation(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, "Add Location", "Please enter the desired name of the location below:", "Submit", "Cancel");
+	        return Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Location"), DialogStyle_Body("Please enter the desired name of the location below:"), "Submit", "Cancel");
 
 		if (strlen(inputtext) > 32)
-		    return Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, "Add Location", "Error: The name can't exceed 32 characters.\n\nPlease enter the desired name of the location below:", "Submit", "Cancel");
+		    return Dialog_Show(playerid, AddLocation, DIALOG_STYLE_INPUT, DialogStyle_Title("Add Location"), DialogStyle_Body("Error: The name can't exceed 32 characters.\n\nPlease enter the desired name of the location below:"), "Submit", "Cancel");
 
 		static
 		    Float:fX,

@@ -230,7 +230,7 @@ CMD:help(playerid, params[])
 {
 	SendClientMessage(playerid, COLOR_CLIENT, "ACCOUNT:{FFFFFF} /changepass, /lastlogged, /username, /properties.");
 	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /stats, /report, /seekhelp, /acc, /me, /do, /(s)hout, /(o)oc, /inventory, /switch.");
-	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /approve, /faq, /sell, /paint, /drink, /bank, /cook, /vest, /ammo, /usekit, /phone.");
+	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /approve, /sell, /paint, /drink, /bank, /cook, /vest, /ammo, /usekit, /phone.");
 	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /id, /call, /hangup, /text, /drop, /flist, /crates, /fill, /pay, /gps, /open, /usedrug.");
 	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /animcmds, /backpack, /boombox, /channel, /jobcmds, /supporters, /disablecp, /stopanim.");
 	SendClientMessage(playerid, COLOR_CLIENT, "GENERAL:{FFFFFF} /shakehand, /showlicense, /frisk, /toghud, /passwep, /setradio, /picklock, /resetvw.");
@@ -275,7 +275,7 @@ CMD:help(playerid, params[])
 // ====== CMD:changepass ======
 CMD:changepass(playerid, params[])
 {
-	Dialog_Show(playerid, ChangePassword, DIALOG_STYLE_PASSWORD, "Change Password", "Please enter your existing password below:", "Submit", "Cancel");
+	Dialog_Show(playerid, ChangePassword, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Change Password"), DialogStyle_Body("Please enter your existing password below:"), "Submit", "Cancel");
 	return 1;
 }
 
@@ -397,14 +397,6 @@ CMD:stats(playerid, params[])
 }
 
 
-// ====== CMD:faq ======
-CMD:faq(playerid, params[])
-{
-	Dialog_Show(playerid, FAQ, DIALOG_STYLE_LIST, "Frequently Asked Questions", "Bagaimana cara masuk building?\nBagaimana cara membuka inventory?\nBagaimana cara pickup dropped items?\nApa fungsi icons di screen saya?\nBagaimana cara mengisi hunger dan thirst?\nBagaimana cara mencari area tertentu?\nBagaimana cara berhenti dari job?\nBagaimana cara mengeluarkan weapon dan reload?\nBagaimana cara edit furniture di house saya?\nBagaimana cara interact dengan sesuatu di server?", "Select", "Cancel");
-	return 1;
-}
-
-
 // ====== CMD:usekit ======
 CMD:usekit(playerid, params[])
 {
@@ -488,7 +480,7 @@ CMD:gps(playerid, params[])
 	if (PlayerData[playerid][pInjured] || PlayerData[playerid][pLoading] > 0 || PlayerData[playerid][pUnloading] != -1 || PlayerData[playerid][pDeliverShipment] > 0)
 	    return SendErrorMessage(playerid, "You can't use this command at the moment.");
 
-	Dialog_Show(playerid, MainGPS, DIALOG_STYLE_LIST, "GPS System", "Find House\nFind Business\nFind Entrance\nFind Job\nCustom Locations", "Select", "Cancel");
+	Dialog_Show(playerid, MainGPS, DIALOG_STYLE_LIST, DialogStyle_Title("GPS System"), DialogStyle_Body("Find House\nFind Business\nFind Entrance\nFind Job\nCustom Locations"), "Select", "Cancel");
 	return 1;
 }
 
@@ -944,7 +936,7 @@ CMD:tasks(playerid, params[])
 	if (!PlayerData[playerid][pTestTask])
 	    strcat(string, "Visit DMV (pending)\n");
 
-	Dialog_Show(playerid, NewTasks, DIALOG_STYLE_LIST, "Task List", string, "Select", "Cancel");
+	Dialog_Show(playerid, NewTasks, DIALOG_STYLE_LIST, DialogStyle_Title("Task List"), string, "Select", "Cancel");
 	return 1;
 }
 
@@ -1247,4 +1239,3 @@ CMD:call(playerid, params[])
 	}
 	return 1;
 }
-

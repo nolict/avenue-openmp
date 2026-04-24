@@ -709,7 +709,7 @@ CMD:ban(playerid, params[])
 		    KickEx(i);
 		}
 	}
-	Dialog_Show(userid, ShowOnly, DIALOG_STYLE_MSGBOX, "Banned", "Your account has been banned by the server.\n\nUsername: %s\nReason: %s\nAdmin who banned you: %s\n\nPress F8 to take a screenshot and request a ban appeal on our forums.", "Close", "", PlayerData[userid][pUsername], reason, ReturnName(playerid, 0));
+	Dialog_Show(userid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Banned"), DialogStyle_Body("Your account has been banned by the server.\n\nUsername: %s\nReason: %s\nAdmin who banned you: %s\n\nPress F8 to take a screenshot and request a ban appeal on our forums."), "Close", "", PlayerData[userid][pUsername], reason, ReturnName(playerid, 0));
 
 	SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s was banned by %s for: %s.", ReturnName(userid, 0), ReturnName(playerid, 0), reason);
 	Log_Write("logs/ban_log.txt", "[%s] %s was banned by %s for: %s.", ReturnDate(), ReturnName(userid, 0), ReturnName(playerid, 0), reason);
@@ -768,7 +768,7 @@ CMD:acc(playerid, params[])
 	    string[128];
 
 	format(string, sizeof(string), "Glasses: %s\nHat: %s\nBandana: %s", (PlayerData[playerid][pGlasses]) ? ("Yes") : ("No"), (PlayerData[playerid][pHat]) ? ("Yes") : ("No"), (PlayerData[playerid][pBandana]) ? ("Yes") : ("No"));
-	Dialog_Show(playerid, Accessory, DIALOG_STYLE_LIST, "Accessories", string, "Select", "Cancel");
+	Dialog_Show(playerid, Accessory, DIALOG_STYLE_LIST, DialogStyle_Title("Accessories"), string, "Select", "Cancel");
 
 	return 1;
 }
@@ -937,7 +937,7 @@ CMD:goto(playerid, params[])
 			    strcat(str, g_arrInteriorData[i][e_InteriorName]);
 			    strcat(str, "\n");
 		    }
-		    Dialog_Show(playerid, TeleportInterior, DIALOG_STYLE_LIST, "Teleport: Interior List", str, "Select", "Cancel");
+		    Dialog_Show(playerid, TeleportInterior, DIALOG_STYLE_LIST, DialogStyle_Title("Teleport: Interior List"), str, "Select", "Cancel");
 		    return 1;
 		}
 	    else return SendErrorMessage(playerid, "You have specified an invalid player.");

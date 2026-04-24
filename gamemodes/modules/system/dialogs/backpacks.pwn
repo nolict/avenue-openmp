@@ -61,7 +61,7 @@ Dialog:BackpackDeposit(playerid, response, listitem, inputtext[])
 		new amount = strval(inputtext);
 
 		if (amount < 1 || amount > InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity])
-		    return Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, "Backpack Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+		    return Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Backpack Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 
 		Backpack_Add(GetPlayerBackpack(playerid), string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invModel], amount);
 		Inventory_Remove(playerid, string, amount);
@@ -89,7 +89,7 @@ Dialog:BackpackTake(playerid, response, listitem, inputtext[])
 		strunpack(string, BackpackItems[id][bItemName]);
 
 		if (amount < 1 || amount > BackpackItems[id][bItemQuantity])
-		    return Dialog_Show(playerid, BackpackTake, DIALOG_STYLE_INPUT, "Backpack Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, BackpackItems[id][bItemQuantity]);
+		    return Dialog_Show(playerid, BackpackTake, DIALOG_STYLE_INPUT, DialogStyle_Title("Backpack Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, BackpackItems[id][bItemQuantity]);
 
 		Inventory_Add(playerid, string, BackpackItems[id][bItemModel], amount);
         Backpack_Remove(GetPlayerBackpack(playerid), string, amount);
@@ -124,7 +124,7 @@ Dialog:BackpackOptions(playerid, response, listitem, inputtext[])
 	            }
 	            else
 	            {
-	                Dialog_Show(playerid, BackpackTake, DIALOG_STYLE_INPUT, "Backpack Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, BackpackItems[id][bItemQuantity]);
+	                Dialog_Show(playerid, BackpackTake, DIALOG_STYLE_INPUT, DialogStyle_Title("Backpack Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, BackpackItems[id][bItemQuantity]);
 	            }
 			}
 	        case 1:
@@ -150,7 +150,7 @@ Dialog:BackpackOptions(playerid, response, listitem, inputtext[])
 	            else
 	            {
 	                PlayerData[playerid][pInventoryItem] = itemid;
-	                Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, "Backpack Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+	                Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Backpack Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 	            }
 			}
    		}
@@ -179,7 +179,7 @@ Dialog:Backpack(playerid, response, listitem, inputtext[])
 	        PlayerData[playerid][pStorageItem] = id;
 
 			format(string, sizeof(string), "%s (Quantity: %d)", BackpackItems[id][bItemName], BackpackItems[id][bItemQuantity]);
-	        Dialog_Show(playerid, BackpackOptions, DIALOG_STYLE_LIST, string, "Take Item\nStore Item\nDrop Item", "Select", "Back");
+	        Dialog_Show(playerid, BackpackOptions, DIALOG_STYLE_LIST, DialogStyle_Title(string), DialogStyle_Body("Take Item\nStore Item\nDrop Item"), "Select", "Back");
 		}
 	}
 	return 1;

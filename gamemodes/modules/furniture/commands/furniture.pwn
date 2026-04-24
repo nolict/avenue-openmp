@@ -22,7 +22,7 @@ CMD:furniture(playerid, params[])
     		format(string, sizeof(string), "%s%s (%.2f meters)\n", string, FurnitureData[i][furnitureName], GetPlayerDistanceFromPoint(playerid, FurnitureData[i][furniturePos][0], FurnitureData[i][furniturePos][1], FurnitureData[i][furniturePos][2]));
 		}
 		if (count) {
-			Dialog_Show(playerid, ListedFurniture, DIALOG_STYLE_LIST, "Listed Furniture", string, "Select", "Cancel");
+			Dialog_Show(playerid, ListedFurniture, DIALOG_STYLE_LIST, DialogStyle_Title("Listed Furniture"), string, "Select", "Cancel");
      	}
      	else SendErrorMessage(playerid, "This house doesn't have any furniture spawned.");
 	}

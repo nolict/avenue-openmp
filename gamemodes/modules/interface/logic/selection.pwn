@@ -51,7 +51,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 							SetAccessories(playerid);
 					    }
 		        	}
-		        	else Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, "House Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+		        	else Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("House Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 				}
 				PlayerData[playerid][pStorageSelect] = 0;
 			}
@@ -79,7 +79,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 							SetAccessories(playerid);
 					    }
 		        	}
-		        	else Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, "Car Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+		        	else Dialog_Show(playerid, CarDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Car Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 				}
 				PlayerData[playerid][pStorageSelect] = 0;
 			}
@@ -98,7 +98,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 				}
    				else
 	   			{
-				   	Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, "Backpack Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+				   	Dialog_Show(playerid, BackpackDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("Backpack Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", name, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 				}
 				PlayerData[playerid][pStorageSelect] = 0;
 			}
@@ -111,10 +111,10 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 		    	format(name, sizeof(name), "%s (%d)", name, InventoryData[playerid][index][invQuantity]);
 
 		    	if (Garbage_Nearest(playerid) != -1) {
-					Dialog_Show(playerid, Inventory, DIALOG_STYLE_LIST, name, "Use Item\nGive Item\nThrow Out", "Select", "Cancel");
+					Dialog_Show(playerid, Inventory, DIALOG_STYLE_LIST, DialogStyle_Title(name), "Use Item\nGive Item\nThrow Out", "Select", "Cancel");
 				}
 				else {
-				    Dialog_Show(playerid, Inventory, DIALOG_STYLE_LIST, name, "Use Item\nGive Item\nDrop Item", "Select", "Cancel");
+				    Dialog_Show(playerid, Inventory, DIALOG_STYLE_LIST, DialogStyle_Title(name), "Use Item\nGive Item\nDrop Item", "Select", "Cancel");
 				}
 			}
 		}
@@ -269,12 +269,12 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
  	    {
 	        if (!DealershipCars[id][index][vehModel])
 	        {
-	            Dialog_Show(playerid, AddVehicle, DIALOG_STYLE_LIST, "Add Vehicle", "Add by Name\nAdd by Thumbnail", "Select", "Cancel");
+	            Dialog_Show(playerid, AddVehicle, DIALOG_STYLE_LIST, DialogStyle_Title("Add Vehicle"), DialogStyle_Body("Add by Name\nAdd by Thumbnail"), "Select", "Cancel");
 			}
 			else
 			{
 			    PlayerData[playerid][pDealerCar] = index;
-			    Dialog_Show(playerid, CarOptions, DIALOG_STYLE_LIST, "Dealership Vehicle", "Set Price (%s)\nRemove Vehicle", "Select", "Cancel", FormatNumber(DealershipCars[id][index][vehPrice]));
+			    Dialog_Show(playerid, CarOptions, DIALOG_STYLE_LIST, DialogStyle_Title("Dealership Vehicle"), DialogStyle_Body("Set Price (%s)\nRemove Vehicle"), "Select", "Cancel", FormatNumber(DealershipCars[id][index][vehPrice]));
 			}
 	    }
 	}
@@ -290,7 +290,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 	            	return SendErrorMessage(playerid, "This vehicle is already sold at this dealership.");
 			}
 			PlayerData[playerid][pDealerCar] = modelid;
-			Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, "Enter Price", "Please enter a price for '%s':", "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
+			Dialog_Show(playerid, DealerCarPrice, DIALOG_STYLE_INPUT, DialogStyle_Title("Enter Price"), DialogStyle_Body("Please enter a price for '%s':"), "Submit", "Cancel", ReturnVehicleModelName(PlayerData[playerid][pDealerCar]));
 		}
 	}
 	if ((response) && (extraid == MODEL_SELECTION_BUY_CAR))
@@ -306,7 +306,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 	    	    return SendErrorMessage(playerid, "You can't afford this vehicle (%s).", FormatNumber(DealershipCars[id][index][vehPrice]));
 
 			PlayerData[playerid][pDealerCar] = index;
-			Dialog_Show(playerid, ConfirmCarBuy, DIALOG_STYLE_MSGBOX, "Confirm Purchase", "Are you sure you want to buy this '%s'?\n\nNote: This vehicle costs %s at this dealership.", "Yes", "No", ReturnVehicleModelName(modelid), FormatNumber(DealershipCars[id][index][vehPrice]));
+			Dialog_Show(playerid, ConfirmCarBuy, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Confirm Purchase"), DialogStyle_Body("Are you sure you want to buy this '%s'?\n\nNote: This vehicle costs %s at this dealership."), "Yes", "No", ReturnVehicleModelName(modelid), FormatNumber(DealershipCars[id][index][vehPrice]));
 		}
 	}
 	if ((response) && (extraid == MODEL_SELECTION_FURNITURE))
@@ -360,7 +360,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 	}
 	if ((response) && (extraid == MODEL_SELECTION_SKINS))
 	{
-	    Dialog_Show(playerid, FactionSkin, DIALOG_STYLE_LIST, "Edit Skin", "Add by Model ID\nAdd by Thumbnail\nClear Slot", "Select", "Cancel");
+	    Dialog_Show(playerid, FactionSkin, DIALOG_STYLE_LIST, DialogStyle_Title("Edit Skin"), DialogStyle_Body("Add by Model ID\nAdd by Thumbnail\nClear Slot"), "Select", "Cancel");
 	    PlayerData[playerid][pSelectedSlot] = index;
 	}
 	if ((response) && (extraid == MODEL_SELECTION_ADD_SKIN))

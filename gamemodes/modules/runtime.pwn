@@ -13,6 +13,7 @@
 #include "modules/vehicle/logic/businesscleanup.pwn"
 #include "modules/player/logic/runtime.pwn"
 #include "modules/system/logic/reports.pwn"
+#include "modules/interface/dialogs/styles.pwn"
 #include "modules/interface/logic/playertextdraws.pwn"
 
 #include "modules/player/logic/session.pwn"
@@ -61,7 +62,6 @@
 #include "modules/furniture/dialogs/catalog.pwn"
 #include "modules/vehicle/dialogs/dealership.pwn"
 #include "modules/economy/dialogs/banking.pwn"
-#include "modules/interface/dialogs/faq.pwn"
 #include "modules/player/dialogs/teleport.pwn"
 #include "modules/job/dialogs/drivingschool.pwn"
 #include "modules/system/dialogs/inventory.pwn"

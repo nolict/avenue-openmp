@@ -309,7 +309,7 @@ SelectCharacter(playerid, id)
 	PlayerData[playerid][pCharacter] = id;
 
 	if (!PlayerCharacters[playerid][id - 1][0])
-	    return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, "Create Character", "Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters.", "Create", "Cancel");
+	    return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters."), "Create", "Cancel");
 
 	static
 	    query[200];

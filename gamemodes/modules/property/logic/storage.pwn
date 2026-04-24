@@ -23,7 +23,7 @@ stock House_WeaponStorage(playerid, houseid)
 		else
 			format(string, sizeof(string), "%s%s (Ammo: %d)\n", string, ReturnWeaponName(HouseData[houseid][houseWeapons][i]), HouseData[houseid][houseAmmo][i]);
 	}
-	Dialog_Show(playerid, HouseWeapons, DIALOG_STYLE_LIST, "Weapon Storage", string, "Select", "Cancel");
+	Dialog_Show(playerid, HouseWeapons, DIALOG_STYLE_LIST, DialogStyle_Title("Weapon Storage"), string, "Select", "Cancel");
 	return 1;
 }
 
@@ -53,7 +53,7 @@ stock House_ShowItems(playerid, houseid)
 			else format(string, sizeof(string), "%s%s (%d)\n", string, name, HouseStorage[houseid][i][hItemQuantity]);
 		}
 	}
-	Dialog_Show(playerid, HouseItems, DIALOG_STYLE_LIST, "Item Storage", string, "Select", "Cancel");
+	Dialog_Show(playerid, HouseItems, DIALOG_STYLE_LIST, DialogStyle_Title("Item Storage"), string, "Select", "Cancel");
 	return 1;
 }
 
@@ -79,7 +79,7 @@ stock House_OpenStorage(playerid, houseid)
 	else
 		format(string, sizeof(string), "Item Storage (%d/%d)\nWeapon Storage (%d/10)\nMoney Safe (%s)", items[0], MAX_HOUSE_STORAGE, items[1], FormatNumber(HouseData[houseid][houseMoney]));
 
-	Dialog_Show(playerid, HouseStorage, DIALOG_STYLE_LIST, "House Storage", string, "Select", "Cancel");
+	Dialog_Show(playerid, HouseStorage, DIALOG_STYLE_LIST, DialogStyle_Title("House Storage"), string, "Select", "Cancel");
 	return 1;
 }
 

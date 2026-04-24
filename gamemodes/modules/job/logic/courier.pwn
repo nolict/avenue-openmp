@@ -50,6 +50,6 @@ stock ShowShipments(playerid)
 	if (!strlen(string)) {
 	    SendErrorMessage(playerid, "There are no shipments to accept.");
 	}
-	else Dialog_Show(playerid, AcceptShipment, DIALOG_STYLE_LIST, "Shipments", string, "Accept", "Cancel");
+	else Dialog_Show(playerid, AcceptShipment, DIALOG_STYLE_LIST, DialogStyle_Title("Shipments"), string, "Accept", "Cancel");
 	return 1;
 }

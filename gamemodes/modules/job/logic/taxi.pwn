@@ -18,7 +18,7 @@ stock Taxi_ShowCalls(playerid)
 	if (!strlen(string)) {
 	    SendErrorMessage(playerid, "There are no taxi calls to accept.");
 	}
-	else Dialog_Show(playerid, AcceptTaxi, DIALOG_STYLE_LIST, "Taxi Calls", string, "Accept", "Cancel");
+	else Dialog_Show(playerid, AcceptTaxi, DIALOG_STYLE_LIST, DialogStyle_Title("Taxi Calls"), string, "Accept", "Cancel");
 	return 1;
 }
 

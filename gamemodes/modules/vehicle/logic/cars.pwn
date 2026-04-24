@@ -191,7 +191,7 @@ Car_WeaponStorage(playerid, carid)
 		else
 		    format(string, sizeof(string), "%s%s\n", string, (CarData[carid][carWeapons][i]) ? (ReturnWeaponName(CarData[carid][carWeapons][i])) : ("Empty Slot"));
 	}
-	Dialog_Show(playerid, Trunk, DIALOG_STYLE_LIST, "Car Trunk", string, "Select", "Cancel");
+	Dialog_Show(playerid, Trunk, DIALOG_STYLE_LIST, DialogStyle_Title("Car Trunk"), string, "Select", "Cancel");
 	return 1;
 }
 
@@ -221,7 +221,7 @@ Car_ShowTrunk(playerid, carid)
 	strcat(string, "Weapon Storage");
 
 	PlayerData[playerid][pStorageSelect] = 0;
-	Dialog_Show(playerid, CarStorage, DIALOG_STYLE_LIST, "Car Storage", string, "Select", "Cancel");
+	Dialog_Show(playerid, CarStorage, DIALOG_STYLE_LIST, DialogStyle_Title("Car Storage"), string, "Select", "Cancel");
 	return 1;
 }
 

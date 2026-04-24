@@ -76,7 +76,7 @@ Dialog:HouseDeposit(playerid, response, listitem, inputtext[])
 			new amount = strval(inputtext);
 
 			if (amount < 1 || amount > InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity])
-			    return Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, "House Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
+			    return Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("House Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invQuantity]);
 
 			House_AddItem(houseid, string, InventoryData[playerid][PlayerData[playerid][pInventoryItem]][invModel], amount);
 			Inventory_Remove(playerid, string, amount);
@@ -105,7 +105,7 @@ Dialog:HouseTake(playerid, response, listitem, inputtext[])
 			new amount = strval(inputtext);
 
 			if (amount < 1 || amount > HouseStorage[houseid][PlayerData[playerid][pStorageItem]][hItemQuantity])
-			    return Dialog_Show(playerid, HouseTake, DIALOG_STYLE_INPUT, "House Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, HouseStorage[houseid][PlayerData[playerid][pInventoryItem]][hItemQuantity]);
+			    return Dialog_Show(playerid, HouseTake, DIALOG_STYLE_INPUT, DialogStyle_Title("House Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, HouseStorage[houseid][PlayerData[playerid][pInventoryItem]][hItemQuantity]);
 
 			new id = Inventory_Add(playerid, string, HouseStorage[houseid][PlayerData[playerid][pStorageItem]][hItemModel], amount);
 
@@ -136,10 +136,10 @@ Dialog:HouseWithdrawCash(playerid, response, listitem, inputtext[])
 		    new amount = strval(inputtext);
 
 		    if (isnull(inputtext))
-		        return Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, "Withdraw from safe", "Safe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+		        return Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Withdraw from safe"), DialogStyle_Body("Safe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 
 			if (amount < 1 || amount > HouseData[houseid][houseMoney])
-			    return Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, "Withdraw from safe", "Error: Insufficient funds.\n\nSafe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+			    return Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Withdraw from safe"), DialogStyle_Body("Error: Insufficient funds.\n\nSafe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 
 			HouseData[houseid][houseMoney] -= amount;
 			GiveMoney(playerid, amount);
@@ -149,7 +149,7 @@ Dialog:HouseWithdrawCash(playerid, response, listitem, inputtext[])
 
 			SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has withdrawn %s from their house safe.", ReturnName(playerid, 0), FormatNumber(amount));
 		}
-		else Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, "Money Safe", "Withdraw from safe\nDeposit into safe", "Select", "Back");
+		else Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, DialogStyle_Title("Money Safe"), DialogStyle_Body("Withdraw from safe\nDeposit into safe"), "Select", "Back");
 	}
 	return 1;
 }
@@ -167,10 +167,10 @@ Dialog:HouseDepositCash(playerid, response, listitem, inputtext[])
 		    new amount = strval(inputtext);
 
 		    if (isnull(inputtext))
-		        return Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, "Deposit into safe", "Safe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+		        return Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Deposit into safe"), DialogStyle_Body("Safe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 
 			if (amount < 1 || amount > GetMoney(playerid))
-			    return Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, "Deposit into safe", "Error: Insufficient funds.\n\nSafe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+			    return Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Deposit into safe"), DialogStyle_Body("Error: Insufficient funds.\n\nSafe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 
 			HouseData[houseid][houseMoney] += amount;
 			GiveMoney(playerid, -amount);
@@ -180,7 +180,7 @@ Dialog:HouseDepositCash(playerid, response, listitem, inputtext[])
 
 			SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has deposited %s into their house safe.", ReturnName(playerid, 0), FormatNumber(amount));
 		}
-		else Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, "Money Safe", "Withdraw from safe\nDeposit into safe", "Select", "Back");
+		else Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, DialogStyle_Title("Money Safe"), DialogStyle_Body("Withdraw from safe\nDeposit into safe"), "Select", "Back");
 	}
 	return 1;
 }
@@ -198,10 +198,10 @@ Dialog:HouseMoney(playerid, response, listitem, inputtext[])
 			switch (listitem)
 			{
 			    case 0: {
-					Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, "Withdraw from safe", "Safe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+					Dialog_Show(playerid, HouseWithdrawCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Withdraw from safe"), DialogStyle_Body("Safe Balance: %s\n\nPlease enter how much money you wish to withdraw from the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 				}
 				case 1: {
-				    Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, "Deposit into safe", "Safe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:", "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
+				    Dialog_Show(playerid, HouseDepositCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Deposit into safe"), DialogStyle_Body("Safe Balance: %s\n\nPlease enter how much money you wish to deposit into the safe:"), "Withdraw", "Back", FormatNumber(HouseData[houseid][houseMoney]));
 				}
 			}
 		}
@@ -229,7 +229,7 @@ Dialog:HouseItems(playerid, response, listitem, inputtext[])
 				strunpack(string, HouseStorage[houseid][listitem][hItemName]);
 
 				format(string, sizeof(string), "%s (Quantity: %d)", string, HouseStorage[houseid][listitem][hItemQuantity]);
-				Dialog_Show(playerid, StorageOptions, DIALOG_STYLE_LIST, string, "Take Item\nStore Item", "Select", "Back");
+				Dialog_Show(playerid, StorageOptions, DIALOG_STYLE_LIST, DialogStyle_Title(string), DialogStyle_Body("Take Item\nStore Item"), "Select", "Back");
 			}
 			else {
    				OpenInventory(playerid);
@@ -259,7 +259,7 @@ Dialog:HouseStorage(playerid, response, listitem, inputtext[])
 				House_WeaponStorage(playerid, houseid);
 		    }
 		    else if (listitem == 2) {
-		        Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, "Money Safe", "Withdraw from safe\nDeposit into safe", "Select", "Back");
+		        Dialog_Show(playerid, HouseMoney, DIALOG_STYLE_LIST, DialogStyle_Title("Money Safe"), DialogStyle_Body("Withdraw from safe\nDeposit into safe"), "Select", "Back");
 			}
 		}
 	}
@@ -313,7 +313,7 @@ Dialog:StorageOptions(playerid, response, listitem, inputtext[])
 			        }
 			        else
 			        {
-			            Dialog_Show(playerid, HouseTake, DIALOG_STYLE_INPUT, "House Take", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:", "Take", "Back", string, HouseStorage[houseid][itemid][hItemQuantity]);
+			            Dialog_Show(playerid, HouseTake, DIALOG_STYLE_INPUT, DialogStyle_Title("House Take"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to take for this item:"), "Take", "Back", string, HouseStorage[houseid][itemid][hItemQuantity]);
 			        }
 			    }
 				case 1:
@@ -341,7 +341,7 @@ Dialog:StorageOptions(playerid, response, listitem, inputtext[])
 					else if (InventoryData[playerid][id][invQuantity] > 1) {
 					    PlayerData[playerid][pInventoryItem] = id;
 
-                        Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, "House Deposit", "Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:", "Store", "Back", string, InventoryData[playerid][id][invQuantity]);
+                        Dialog_Show(playerid, HouseDeposit, DIALOG_STYLE_INPUT, DialogStyle_Title("House Deposit"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the quantity that you wish to store for this item:"), "Store", "Back", string, InventoryData[playerid][id][invQuantity]);
 					}
 				}
 			}

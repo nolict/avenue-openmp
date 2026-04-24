@@ -23,13 +23,13 @@ Dialog:ServerPanel(playerid, response, listitem, inputtext[])
 				    SendRconCommand("password 0");
 				    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has unlocked the server.", ReturnName(playerid, 0));
 				}
-				else Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, "Lock Server", "Please enter the specified password below to lock the server with:", "Lock", "Back");
+				else Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, DialogStyle_Title("Lock Server"), DialogStyle_Body("Please enter the specified password below to lock the server with:"), "Lock", "Back");
 			}
 			case 1:
-			    Dialog_Show(playerid, SetHostname, DIALOG_STYLE_INPUT, "Set Hostname", "Please enter the new server hostname below:", "Submit", "Back");
+			    Dialog_Show(playerid, SetHostname, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Hostname"), DialogStyle_Body("Please enter the new server hostname below:"), "Submit", "Back");
 
 			case 2:
-			    Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Please specify the MySQL query to execute below:", "Execute", "Back");
+			    Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Please specify the MySQL query to execute below:"), "Execute", "Back");
 	    }
 	}
 	return 1;
@@ -44,10 +44,10 @@ Dialog:LockServer(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext) || !strcmp(inputtext, "0"))
-	        return Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, "Lock Server", "Please enter the specified password below to lock the server with:", "Lock", "Back");
+	        return Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, DialogStyle_Title("Lock Server"), DialogStyle_Body("Please enter the specified password below to lock the server with:"), "Lock", "Back");
 
 		if (strlen(inputtext) > 32)
-		    return Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, "Lock Server", "Error: Please type a password shorter than 32 characters.\n\nPlease enter the specified password below to lock the server with:", "Lock", "Back");
+		    return Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, DialogStyle_Title("Lock Server"), DialogStyle_Body("Error: Please type a password shorter than 32 characters.\n\nPlease enter the specified password below to lock the server with:"), "Lock", "Back");
 
 		static
 		    str[48];
@@ -71,7 +71,7 @@ Dialog:SetHostname(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, SetHostname, DIALOG_STYLE_INPUT, "Set Hostname", "Please enter the new server hostname below:", "Submit", "Back");
+	        return Dialog_Show(playerid, SetHostname, DIALOG_STYLE_INPUT, DialogStyle_Title("Set Hostname"), DialogStyle_Body("Please enter the new server hostname below:"), "Submit", "Back");
 
 		static
 		    str[128];
@@ -94,10 +94,10 @@ Dialog:ExecuteQuery(playerid, response, listitem, inputtext[])
 	if (response)
 	{
         if (isnull(inputtext))
-            return Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Please specify the MySQL query to execute below:", "Execute", "Back");
+            return Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Please specify the MySQL query to execute below:"), "Execute", "Back");
 
         if (strfind(inputtext, "DELETE", true) != -1 || strfind(inputtext, "DROP", true) != -1)
-            return Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, "Execute Query", "Error: You can't execute \"DROP\" or \"DELETE\" queries.\n\nPlease specify the MySQL query to execute below:", "Execute", "Back");
+            return Dialog_Show(playerid, ExecuteQuery, DIALOG_STYLE_INPUT, DialogStyle_Title("Execute Query"), DialogStyle_Body("Error: You can't execute \"DROP\" or \"DELETE\" queries.\n\nPlease specify the MySQL query to execute below:"), "Execute", "Back");
 
 		PlayerData[playerid][pExecute] = 1;
 		mysql_tquery(g_iHandle, inputtext, "OnQueryExecute", "ds", playerid, inputtext);

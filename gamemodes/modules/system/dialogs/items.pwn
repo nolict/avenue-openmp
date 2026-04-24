@@ -15,16 +15,16 @@ Dialog:GiveItem(playerid, response, listitem, inputtext[])
 			string[32];
 
 		if (sscanf(inputtext, "u", userid))
-		    return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, "Give Item", "Please enter the name or the ID of the player:", "Submit", "Cancel");
+		    return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Please enter the name or the ID of the player:"), "Submit", "Cancel");
 
 		if (userid == INVALID_PLAYER_ID)
-		    return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, "Give Item", "Error: Invalid player specified.\n\nPlease enter the name or the ID of the player:", "Submit", "Cancel");
+		    return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Error: Invalid player specified.\n\nPlease enter the name or the ID of the player:"), "Submit", "Cancel");
 
 	    if (!IsPlayerNearPlayer(playerid, userid, 6.0))
-			return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, "Give Item", "Error: You are not near that player.\n\nPlease enter the name or the ID of the player:", "Submit", "Cancel");
+			return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Error: You are not near that player.\n\nPlease enter the name or the ID of the player:"), "Submit", "Cancel");
 
 	    if (userid == playerid)
-			return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, "Give Item", "Error: You can't give items to yourself.\n\nPlease enter the name or the ID of the player:", "Submit", "Cancel");
+			return Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Error: You can't give items to yourself.\n\nPlease enter the name or the ID of the player:"), "Submit", "Cancel");
 
 		itemid = PlayerData[playerid][pInventoryItem];
 
@@ -59,7 +59,7 @@ Dialog:GiveItem(playerid, response, listitem, inputtext[])
   		}
 		else
 		{
-		    Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, "Give Item", "Item: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:", "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
+		    Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:"), "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
 		    PlayerData[playerid][pGiveItem] = userid;
 		}
 	}
@@ -79,10 +79,10 @@ Dialog:GiveQuantity(playerid, response, listitem, inputtext[])
 		strunpack(string, InventoryData[playerid][itemid][invItem]);
 
 		if (isnull(inputtext))
-			return Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, "Give Item", "Item: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:", "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
+			return Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Item: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:"), "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
 
 		if (strval(inputtext) < 1 || strval(inputtext) > InventoryData[playerid][itemid][invQuantity])
-		    return  Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, "Give Item", "Error: You don't have that much.\n\nItem: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:", "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
+		    return  Dialog_Show(playerid, GiveQuantity, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Error: You don't have that much.\n\nItem: %s (Quantity: %d)\n\nPlease enter the amount of this item you wish to give %s:"), "Give", "Cancel", string, InventoryData[playerid][itemid][invQuantity], ReturnName(userid, 0));
 
         new id = Inventory_Add(userid, string, InventoryData[playerid][itemid][invModel], strval(inputtext));
 

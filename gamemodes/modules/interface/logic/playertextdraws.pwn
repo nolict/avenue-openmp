@@ -20,63 +20,60 @@ ShowStatsForPlayer(playerid, targetid)
 {
     new
 	    account[24],
-	    origin[32],
-	    string[128],
+	    header[128],
+	    string[2048],
+	    value[64],
 		count;
 
-	for (new i = 0; i < MAX_INVENTORY; i ++) if (InventoryData[playerid][i][invExists]) {
+	for (new i = 0; i < MAX_INVENTORY; i ++) if (InventoryData[targetid][i][invExists]) {
 	    count++;
 	}
 	if (PlayerData[targetid][pAdmin] > 0) account = "Admin";
- 	else if (PlayerData[targetid][pTester] > 0) account = "Tester";
+	else if (PlayerData[targetid][pTester] > 0) account = "Tester";
 	else account = "Player";
 
-	format(origin, 32, "%.16s", PlayerData[targetid][pOrigin]);
+	for (new i = 40; i < 58; i ++)
+		PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
 
-	if (strlen(PlayerData[targetid][pOrigin]) > 16)
-		strcat(origin, "...");
+	CancelSelectTextDraw(playerid);
+	PlayerData[playerid][pDisplayStats] = false;
 
-	format(string, sizeof(string), "~g~Sex:~w~ %s~n~~g~Birthdate:~w~ %s~n~~g~Origin:~w~ %s", (PlayerData[targetid][pGender] == 2) ? ("Female") : ("Male"), PlayerData[targetid][pBirthdate], origin);
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][42], string);
+	DialogStyle_Header(header, sizeof(header), ReturnName(targetid, 0), ReturnDate(), PlayerData[targetid][pID]);
+	DialogStyle_Reset(string);
 
-	format(string, sizeof(string), "%s (ID: %d)", ReturnName(targetid), targetid);
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][43], string);
+	DialogStyle_AddSection(string, sizeof(string), "In Character");
+	DialogStyle_AddField(string, sizeof(string), "Gender", (PlayerData[targetid][pGender] == 2) ? ("Female") : ("Male"));
+	DialogStyle_AddField(string, sizeof(string), "Origin", PlayerData[targetid][pOrigin]);
+	DialogStyle_AddField(string, sizeof(string), "Money", FormatNumber(PlayerData[targetid][pMoney]), DIALOG_STYLE_GREEN);
+	DialogStyle_AddField(string, sizeof(string), "Bank", FormatNumber(PlayerData[targetid][pBankMoney]), DIALOG_STYLE_GREEN, true);
+	DialogStyle_AddField(string, sizeof(string), "Savings", FormatNumber(PlayerData[targetid][pSavings]), DIALOG_STYLE_GREEN);
+	DialogStyle_AddField(string, sizeof(string), "Birthdate", PlayerData[targetid][pBirthdate]);
+	DialogStyle_AddField(string, sizeof(string), "Job", Job_GetName(PlayerData[targetid][pJob]));
+	DialogStyle_AddField(string, sizeof(string), "Faction", Faction_GetName(targetid), DIALOG_STYLE_LIGHT_BLUE, true);
+	format(value, sizeof(value), "%d", PlayerData[targetid][pPhone]);
+	DialogStyle_AddField(string, sizeof(string), "Phone Number", value);
+	DialogStyle_AddField(string, sizeof(string), "Faction Rank", Faction_GetRank(targetid), DIALOG_STYLE_LIGHT_BLUE, true);
 
-	//format(string, sizeof(string), "~g~Ping:~w~ %d~n~~g~Packetloss:~w~ %.1f%%~n~~g~Time Online:~w~ %02d:%02d:%02d", GetPlayerPing(targetid), NetStats_PacketLossPercent(targetid), hours, minutes, seconds);
-	format(string, sizeof(string), "~g~Hours:~w~ %d~n~~g~Job:~w~ %s~n~~g~Inventory:~w~ %d/%d", PlayerData[targetid][pPlayingHours], Job_GetName(PlayerData[targetid][pJob]), count, MAX_INVENTORY);
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][46], string);
+	DialogStyle_AddBlankLine(string, sizeof(string));
+	DialogStyle_AddSection(string, sizeof(string), "Out of Character");
+	DialogStyle_AddField(string, sizeof(string), "Username", PlayerData[targetid][pUsername]);
+	format(value, sizeof(value), "%d/60", PlayerData[targetid][pMinutes]);
+	DialogStyle_AddField(string, sizeof(string), "Paycheck", value, DIALOG_STYLE_YELLOW);
+	format(value, sizeof(value), "%d/%d", count, MAX_INVENTORY);
+	DialogStyle_AddField(string, sizeof(string), "Inventory", value, DIALOG_STYLE_YELLOW);
+	DialogStyle_AddField(string, sizeof(string), "Account", account, DIALOG_STYLE_YELLOW, true);
+	format(value, sizeof(value), "%d hour(s) %d minute(s)", PlayerData[targetid][pPlayingHours], PlayerData[targetid][pMinutes]);
+	DialogStyle_AddField(string, sizeof(string), "Time Played", value, DIALOG_STYLE_YELLOW, true);
+	format(value, sizeof(value), "%d", GetPlayerInterior(targetid));
+	DialogStyle_AddField(string, sizeof(string), "Interior", value, DIALOG_STYLE_YELLOW);
+	format(value, sizeof(value), "%d", GetPlayerVirtualWorld(targetid));
+	DialogStyle_AddField(string, sizeof(string), "Virtual World", value, DIALOG_STYLE_YELLOW);
+	format(value, sizeof(value), "%d/3", PlayerData[targetid][pWarnings]);
+	DialogStyle_AddField(string, sizeof(string), "Warnings", value, DIALOG_STYLE_RED);
+	DialogStyle_AddField(string, sizeof(string), "Tester", (PlayerData[targetid][pTester]) ? ("Yes") : ("No"), DIALOG_STYLE_YELLOW);
+	DialogStyle_AddField(string, sizeof(string), "Admin", (PlayerData[targetid][pAdmin]) ? ("Yes") : ("No"), DIALOG_STYLE_YELLOW, true);
 
-    format(string, sizeof(string), "~g~Money:~w~ %s~n~~g~Bank:~w~ %s~n~~g~Savings:~w~ %s", FormatNumber(PlayerData[targetid][pMoney]), FormatNumber(PlayerData[targetid][pBankMoney]), FormatNumber(PlayerData[targetid][pSavings]));
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][44], string);
-
-	format(string, sizeof(string), "~g~Account:~w~ %s~n~~g~Tester:~w~ %s~n~~g~Admin:~w~ %s", account, (PlayerData[targetid][pTester]) ? ("Yes") : ("No"), (PlayerData[targetid][pAdmin]) ? ("Yes") : ("No"));
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][45], string);
-
-	if (!PlayerData[playerid][pDisplayStats])
-	{
-	    if (targetid != playerid)
-		{
-		    for (new i = 40; i < 50; i ++) if (i != 47 && i != 48) {
-				PlayerTextDrawShow(playerid, PlayerData[playerid][pTextdraws][i]);
-			}
-		}
-		else for (new i = 40; i < 50; i ++) {
-			PlayerTextDrawShow(playerid, PlayerData[playerid][pTextdraws][i]);
-		}
-		SelectTextDraw(playerid, -1);
-		PlayerData[playerid][pDisplayStats] = true;
-	}
-	else
-	{
-	    if (PlayerData[playerid][pDisplayStats] == 2) {
-	        for (new i = 50; i < 58; i ++) PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
-	    }
-	    else for (new i = 40; i < 50; i ++) {
-			PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
-		}
-		CancelSelectTextDraw(playerid);
-		PlayerData[playerid][pDisplayStats] = false;
-	}
+	Dialog_Show(playerid, ShowStats, DIALOG_STYLE_MSGBOX, header, string, "Close", "");
 	return 1;
 }
 

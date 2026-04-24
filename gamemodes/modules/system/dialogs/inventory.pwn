@@ -22,7 +22,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 	            if (!strcmp(string, "Demo Soda") && PlayerData[playerid][pTutorialStage] == 3)
 			    {
         			PlayerData[playerid][pThirst] = 100;
-        			Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, "Tutorial Message", "Kamu sudah belajar cara pickup items dan menggunakannya dengan benar.\nKamu baru saja pickup soda bottle dan memakainya untuk mengisi thirst.\n\nIcon hunger dan thirst ditampilkan di sisi kanan screen kamu.\nJika hunger atau thirst mencapai nol persen, player kamu akan mulai kehilangan energy.", "Continue", "");
+        			Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("Kamu sudah belajar cara pickup items dan menggunakannya dengan benar.\nKamu baru saja pickup soda bottle dan memakainya untuk mengisi thirst.\n\nIcon hunger dan thirst ditampilkan di sisi kanan screen kamu.\nJika hunger atau thirst mencapai nol persen, player kamu akan mulai kehilangan energy."), "Continue", "");
 			    }
 			    else
 			    {
@@ -35,7 +35,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 	                return 0;
 
 				PlayerData[playerid][pInventoryItem] = itemid;
-				Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, "Give Item", "Please enter the name or the ID of the player:", "Submit", "Cancel");
+				Dialog_Show(playerid, GiveItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Give Item"), DialogStyle_Body("Please enter the name or the ID of the player:"), "Submit", "Cancel");
 	        }
 	        case 2:
 	        {
@@ -47,7 +47,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 				if (PlayerData[playerid][pTutorialStage] == 4)
 				{
 					Inventory_Remove(playerid, "Demo Soda");
-					Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, "Tutorial Message", "Kamu sudah drop soda bottle. Kamu bisa pickup dropped items dengan 'N'.\nKamu juga bisa give atau trade items dari inventory ke player lain.\n\nKamu juga bisa menyimpan items ke house storage atau vehicle trunk.\nInventory character kamu hanya bisa memuat sampai %d unique items sekaligus.", "Next", "", MAX_INVENTORY);
+					Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("Kamu sudah drop soda bottle. Kamu bisa pickup dropped items dengan 'N'.\nKamu juga bisa give atau trade items dari inventory ke player lain.\n\nKamu juga bisa menyimpan items ke house storage atau vehicle trunk.\nInventory character kamu hanya bisa memuat sampai %d unique items sekaligus."), "Next", "", MAX_INVENTORY);
 					return 1;
 				}
 	            if (IsPlayerInAnyVehicle(playerid) || !IsPlayerSpawned(playerid))
@@ -74,7 +74,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 					DropPlayerItem(playerid, itemid);
 
 				else
-					Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, "Drop Item", "Item: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:", "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
+					Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Drop Item"), DialogStyle_Body("Item: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:"), "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
 	        }
 	    }
 	}
@@ -93,10 +93,10 @@ Dialog:DropItem(playerid, response, listitem, inputtext[])
 	if (response)
 	{
 	    if (isnull(inputtext))
-	        return Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, "Drop Item", "Item: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:", "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
+	        return Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Drop Item"), DialogStyle_Body("Item: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:"), "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
 
 		if (strval(inputtext) < 1 || strval(inputtext) > InventoryData[playerid][itemid][invQuantity])
-		    return Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, "Drop Item", "Error: Insufficient amount specified.\n\nItem: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:", "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
+		    return Dialog_Show(playerid, DropItem, DIALOG_STYLE_INPUT, DialogStyle_Title("Drop Item"), DialogStyle_Body("Error: Insufficient amount specified.\n\nItem: %s - Quantity: %d\n\nPlease specify how much of this item you wish to drop:"), "Drop", "Cancel", string, InventoryData[playerid][itemid][invQuantity]);
 
 		DropPlayerItem(playerid, itemid, strval(inputtext));
 	}
