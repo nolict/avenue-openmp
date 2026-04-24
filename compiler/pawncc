@@ -1,0 +1,22 @@
+#!/bin/bash
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SCRIPT_DIR"
+
+# Get the working directory where the command was run from
+WORK_DIR="$(pwd)"
+
+# Add prefix file flag if not already specified
+# This disables default.inc auto-include to prevent duplicate print/printf
+if [[ ! " $@ " =~ " -p" ]]; then
+    set -- -p/dev/null "$@"
+fi
+
+# Detect architecture and decide whether to use box86
+ARCH=$(uname -m)
+if [[ "$ARCH" == "arm64" || "$ARCH" == "aarch64" ]]; then
+    # ARM64 - need box86 for x86 binary
+    exec box86 "$SCRIPT_DIR/pawncc.orig" "$@"
+else
+    # x86/x64 - can run native
+    exec "$SCRIPT_DIR/pawncc.orig" "$@"
+fi

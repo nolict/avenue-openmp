@@ -1,0 +1,10 @@
+announce
+dependencies/
+log-core.so
+plugins/PawnPlus.so
+samp-npc
+samp03svr
+pawn.lock
+log*
+sampctl_build*
+gamemodes/modules/core/settings/database.pwn

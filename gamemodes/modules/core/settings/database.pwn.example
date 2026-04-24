@@ -1,0 +1,26 @@
+/*
+    File: modules/core/settings/database.pwn
+    Purpose: Contains core settings definitions and helpers for database.
+    Notes: Copy this file to database.pwn and fill local credentials before running the server.
+*/
+
+// ====== Database Settings ======
+
+#define SQL_HOSTNAME "127.0.0.1"
+#define SQL_USERNAME "root"
+#define SQL_DATABASE "avenue_roleplay"
+#define SQL_PASSWORD ""
+
+#define THREAD_CREATE_CHAR (1)
+#define THREAD_CHECK_ACCOUNT (2)
+#define THREAD_LOGIN (3)
+#define THREAD_CHARACTERS (4)
+#define THREAD_LOAD_CHARACTER (5)
+#define THREAD_VERIFY_PASS (6)
+#define THREAD_FIND_USERNAME (7)
+#define THREAD_LOAD_INVENTORY (8)
+#define THREAD_BAN_LOOKUP (9)
+#define THREAD_LOAD_CONTACTS (10)
+#define THREAD_LOAD_LOCATIONS (11)
+#define THREAD_LOAD_TICKETS (12)
+#define THREAD_SHOW_CHARACTER (13)
