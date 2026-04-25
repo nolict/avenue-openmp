@@ -678,7 +678,7 @@ public PlayerCheck()
         		else if (PlayerData[i][pHunger] <= 0)
 				{
     	        	SetPlayerHealth(i, health - 10);
-        	    	FlashTextDraw(i, PlayerData[i][pTextdraws][65]);
+        	    	FlashTextDraw(i, PlayerData[i][pTextdraws][INDIKATOR_LAPAR_DEPAN]);
         		}
         		PlayerData[i][pHungerTime] = 0;
         	}
@@ -691,7 +691,7 @@ public PlayerCheck()
 				else if (PlayerData[i][pThirst] <= 0)
 				{
 		        	SetPlayerHealth(i, health - 5);
-        	    	FlashTextDraw(i, PlayerData[i][pTextdraws][66]);
+        	    	FlashTextDraw(i, PlayerData[i][pTextdraws][INDIKATOR_HAUS_DEPAN]);
         		}
         		PlayerData[i][pThirstTime] = 0;
 			}
@@ -721,11 +721,7 @@ public PlayerCheck()
 		{
 			Booth_Leave(i);
 		}
-		format(str, sizeof(str), "%d%c", PlayerData[i][pHunger], '%');
-		PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][63], str);
-
-		format(str, sizeof(str), "%d%c", PlayerData[i][pThirst], '%');
-		PlayerTextDrawSetString(i, PlayerData[i][pTextdraws][64], str);
+		Interface_UpdateHungerTextdraw(i);
 	}
 	return 1;
 }

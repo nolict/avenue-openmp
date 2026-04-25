@@ -1,0 +1,91 @@
+####################################################################################################
+
+new PlayerText: Text_Player[MAX_PLAYERS][4];
+
+Text_Player[playerid][0] = CreatePlayerTextDraw(playerid, 420.000, 352.000, "LD_SPAC:white");
+PlayerTextDrawTextSize(playerid, Text_Player[playerid][0], 118.000, 66.000);
+PlayerTextDrawAlignment(playerid, Text_Player[playerid][0], 1);
+PlayerTextDrawColor(playerid, Text_Player[playerid][0], 189);
+PlayerTextDrawSetShadow(playerid, Text_Player[playerid][0], 0);
+PlayerTextDrawSetOutline(playerid, Text_Player[playerid][0], 0);
+PlayerTextDrawBackgroundColor(playerid, Text_Player[playerid][0], 255);
+PlayerTextDrawFont(playerid, Text_Player[playerid][0], 4);
+PlayerTextDrawSetProportional(playerid, Text_Player[playerid][0], 1);
+
+Text_Player[playerid][1] = CreatePlayerTextDraw(playerid, 423.000, 342.000, "Stats");
+PlayerTextDrawLetterSize(playerid, Text_Player[playerid][1], 0.589, 2.499);
+PlayerTextDrawAlignment(playerid, Text_Player[playerid][1], 1);
+PlayerTextDrawColor(playerid, Text_Player[playerid][1], -1);
+PlayerTextDrawSetShadow(playerid, Text_Player[playerid][1], 1);
+PlayerTextDrawSetOutline(playerid, Text_Player[playerid][1], 1);
+PlayerTextDrawBackgroundColor(playerid, Text_Player[playerid][1], 150);
+PlayerTextDrawFont(playerid, Text_Player[playerid][1], 0);
+PlayerTextDrawSetProportional(playerid, Text_Player[playerid][1], 1);
+
+Text_Player[playerid][2] = CreatePlayerTextDraw(playerid, 427.000, 371.000, "HUNGER");
+PlayerTextDrawLetterSize(playerid, Text_Player[playerid][2], 0.300, 1.500);
+PlayerTextDrawAlignment(playerid, Text_Player[playerid][2], 1);
+PlayerTextDrawColor(playerid, Text_Player[playerid][2], -1);
+PlayerTextDrawSetShadow(playerid, Text_Player[playerid][2], 0);
+PlayerTextDrawSetOutline(playerid, Text_Player[playerid][2], 0);
+PlayerTextDrawBackgroundColor(playerid, Text_Player[playerid][2], 150);
+PlayerTextDrawFont(playerid, Text_Player[playerid][2], 1);
+PlayerTextDrawSetProportional(playerid, Text_Player[playerid][2], 1);
+
+Text_Player[playerid][3] = CreatePlayerTextDraw(playerid, 427.000, 392.000, "THIRST");
+PlayerTextDrawLetterSize(playerid, Text_Player[playerid][3], 0.300, 1.500);
+PlayerTextDrawAlignment(playerid, Text_Player[playerid][3], 1);
+PlayerTextDrawColor(playerid, Text_Player[playerid][3], -1);
+PlayerTextDrawSetShadow(playerid, Text_Player[playerid][3], 0);
+PlayerTextDrawSetOutline(playerid, Text_Player[playerid][3], 0);
+PlayerTextDrawBackgroundColor(playerid, Text_Player[playerid][3], 150);
+PlayerTextDrawFont(playerid, Text_Player[playerid][3], 1);
+PlayerTextDrawSetProportional(playerid, Text_Player[playerid][3], 1);
+
+####################################################################################################
+
+new PlayerText: INDIKATOR BELAKANG LAPAR[MAX_PLAYERS];
+new PlayerText: INDIKATOR DEPAN LAPAR[MAX_PLAYERS];
+new PlayerText: INDIKATOR BELAKANG HAUS[MAX_PLAYERS];
+new PlayerText: INDIKATOR DEPAN HAUS[MAX_PLAYERS];
+
+INDIKATOR BELAKANG LAPAR[playerid] = CreatePlayerTextDraw(playerid, 470.000, 373.000, "LD_SPAC:white");
+PlayerTextDrawTextSize(playerid, INDIKATOR BELAKANG LAPAR[playerid], 61.000, 10.000);
+PlayerTextDrawAlignment(playerid, INDIKATOR BELAKANG LAPAR[playerid], 1);
+PlayerTextDrawColor(playerid, INDIKATOR BELAKANG LAPAR[playerid], -104);
+PlayerTextDrawSetShadow(playerid, INDIKATOR BELAKANG LAPAR[playerid], 0);
+PlayerTextDrawSetOutline(playerid, INDIKATOR BELAKANG LAPAR[playerid], 0);
+PlayerTextDrawBackgroundColor(playerid, INDIKATOR BELAKANG LAPAR[playerid], 255);
+PlayerTextDrawFont(playerid, INDIKATOR BELAKANG LAPAR[playerid], 4);
+PlayerTextDrawSetProportional(playerid, INDIKATOR BELAKANG LAPAR[playerid], 1);
+
+INDIKATOR DEPAN LAPAR[playerid] = CreatePlayerTextDraw(playerid, 470.000, 373.000, "LD_SPAC:white");
+PlayerTextDrawTextSize(playerid, INDIKATOR DEPAN LAPAR[playerid], 61.000, 10.000);
+PlayerTextDrawAlignment(playerid, INDIKATOR DEPAN LAPAR[playerid], 1);
+PlayerTextDrawColor(playerid, INDIKATOR DEPAN LAPAR[playerid], -1);
+PlayerTextDrawSetShadow(playerid, INDIKATOR DEPAN LAPAR[playerid], 0);
+PlayerTextDrawSetOutline(playerid, INDIKATOR DEPAN LAPAR[playerid], 0);
+PlayerTextDrawBackgroundColor(playerid, INDIKATOR DEPAN LAPAR[playerid], 255);
+PlayerTextDrawFont(playerid, INDIKATOR DEPAN LAPAR[playerid], 4);
+PlayerTextDrawSetProportional(playerid, INDIKATOR DEPAN LAPAR[playerid], 1);
+
+INDIKATOR BELAKANG HAUS[playerid] = CreatePlayerTextDraw(playerid, 470.000, 394.000, "LD_SPAC:white");
+PlayerTextDrawTextSize(playerid, INDIKATOR BELAKANG HAUS[playerid], 61.000, 10.000);
+PlayerTextDrawAlignment(playerid, INDIKATOR BELAKANG HAUS[playerid], 1);
+PlayerTextDrawColor(playerid, INDIKATOR BELAKANG HAUS[playerid], -104);
+PlayerTextDrawSetShadow(playerid, INDIKATOR BELAKANG HAUS[playerid], 0);
+PlayerTextDrawSetOutline(playerid, INDIKATOR BELAKANG HAUS[playerid], 0);
+PlayerTextDrawBackgroundColor(playerid, INDIKATOR BELAKANG HAUS[playerid], 255);
+PlayerTextDrawFont(playerid, INDIKATOR BELAKANG HAUS[playerid], 4);
+PlayerTextDrawSetProportional(playerid, INDIKATOR BELAKANG HAUS[playerid], 1);
+
+INDIKATOR DEPAN HAUS[playerid] = CreatePlayerTextDraw(playerid, 470.000, 394.000, "LD_SPAC:white");
+PlayerTextDrawTextSize(playerid, INDIKATOR DEPAN HAUS[playerid], 61.000, 10.000);
+PlayerTextDrawAlignment(playerid, INDIKATOR DEPAN HAUS[playerid], 1);
+PlayerTextDrawColor(playerid, INDIKATOR DEPAN HAUS[playerid], -1);
+PlayerTextDrawSetShadow(playerid, INDIKATOR DEPAN HAUS[playerid], 0);
+PlayerTextDrawSetOutline(playerid, INDIKATOR DEPAN HAUS[playerid], 0);
+PlayerTextDrawBackgroundColor(playerid, INDIKATOR DEPAN HAUS[playerid], 255);
+PlayerTextDrawFont(playerid, INDIKATOR DEPAN HAUS[playerid], 4);
+PlayerTextDrawSetProportional(playerid, INDIKATOR DEPAN HAUS[playerid], 1);
+

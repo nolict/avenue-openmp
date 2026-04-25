@@ -11,7 +11,7 @@ enum playerData {
 	pLogged,
 	pIP[16],
 	pLoginDate[36],
-	PlayerText:pTextdraws[83],
+	PlayerText:pTextdraws[87],
 	pUsername[MAX_PLAYER_NAME + 1],
 	pLoginAttempts,
 	pCreated,
@@ -270,10 +270,11 @@ enum ticketData {
     50 to 57: Character textdraw
     58 to 61: Tutorial textdraws
     62: House light
-    63 to 64: Hunger and thirst (percent)
-    65 to 66: Hunger and thirst (model icons)
+    63 to 64: Hunger and thirst (bar backgrounds)
+    65 to 66: Hunger and thirst (bar foregrounds)
     67 to 68: Armor
     69: GPS
+    83 to 86: Hunger and thirst HBE panel and labels
 */
 new PlayerCharacters[MAX_PLAYERS][3][MAX_PLAYER_NAME + 1];
 

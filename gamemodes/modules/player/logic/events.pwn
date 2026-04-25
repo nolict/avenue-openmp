@@ -1564,6 +1564,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
 	{
+		ShowHungerTextdraw(playerid, 0);
+
 	    if (PlayerData[playerid][pBoombox] != INVALID_PLAYER_ID)
 	    {
 	        PlayerData[playerid][pBoombox] = INVALID_PLAYER_ID;
@@ -1602,6 +1604,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	else if (oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_PASSENGER)
 	{
+		ShowHungerTextdraw(playerid, 1);
+
 	    foreach (new i : Player) if (PlayerData[i][pSpectator] == playerid) {
      		PlayerSpectatePlayer(i, playerid);
 		}

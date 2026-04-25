@@ -60,3 +60,27 @@ CMD:toghud(playerid, params[])
 	return 1;
 }
 
+// ====== CMD:testhbe ======
+CMD:testhbe(playerid, params[])
+{
+	static
+	    hunger,
+	    thirst;
+
+	if (PlayerData[playerid][pAdmin] < 2)
+	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
+
+	if (sscanf(params, "ii", hunger, thirst))
+	    return SendSyntaxMessage(playerid, "/testhbe [hunger 0-100] [thirst 0-100]");
+
+	if (hunger < 0 || hunger > 100 || thirst < 0 || thirst > 100)
+	    return SendErrorMessage(playerid, "Hunger and thirst must be between 0 and 100.");
+
+	PlayerData[playerid][pHunger] = hunger;
+	PlayerData[playerid][pThirst] = thirst;
+
+	ShowHungerTextdraw(playerid, 1);
+	SendServerMessage(playerid, "HBE test set: hunger %d, thirst %d.", hunger, thirst);
+	return 1;
+}
+
