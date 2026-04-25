@@ -75,6 +75,7 @@ public OnQueryFinished(extraid, threadid)
 
 			PlayerData[extraid][pID] = -1;
 			PlayerData[extraid][pLogged] = 0;
+			SQL_LoadCharacter(extraid, PlayerData[extraid][pCharacter]);
 	    }
 		case THREAD_CHECK_ACCOUNT:
 		{
@@ -132,8 +133,18 @@ public OnQueryFinished(extraid, threadid)
 		{
 			cache_get_data(rows, fields, g_iHandle);
 
+			CharacterSelection_ResetPlayer(extraid);
+
 			for (new i = 0; i < rows; i ++) {
 			    cache_get_field_content(i, "Character", PlayerCharacters[extraid][i], g_iHandle, MAX_PLAYER_NAME);
+			    CharacterSelection_SetSlotData(
+			    	extraid,
+			    	i,
+			    	cache_get_field_int(i, "Skin"),
+			    	cache_get_field_int(i, "PlayingHours"),
+			    	cache_get_field_int(i, "Money"),
+			    	cache_get_field_int(i, "LastLogin")
+			    );
 		    }
 		    SendServerMessage(extraid, "You have authenticated into your account successfully.");
             ShowCharacterMenu(extraid);
@@ -440,42 +451,23 @@ public OnQueryFinished(extraid, threadid)
 			if (rows)
 			{
 			    static
-			        skin,
-			        birthdate[16],
-			        origin[32],
-					string[128];
+			        skin;
 
 			    skin = cache_get_field_int(0, "Skin");
 
-				cache_get_field_content(0, "Birthdate", birthdate, g_iHandle);
-				cache_get_field_content(0, "Origin", origin, g_iHandle);
-
-				PlayerTextDrawSetPreviewModel(extraid, PlayerData[extraid][pTextdraws][73], skin);
-
-				if (!strlen(birthdate)) {
-				    birthdate = "Not Specified";
-				}
-				if (!strlen(origin)) {
-				    origin = "Not Specified";
-				}
-				format(string, sizeof(string), "~b~DOB:~w~ %s", birthdate);
-				PlayerTextDrawSetString(extraid, PlayerData[extraid][pTextdraws][74], string);
-
-				format(string, sizeof(string), "~b~Origin:~w~ %s", origin);
-				PlayerTextDrawSetString(extraid, PlayerData[extraid][pTextdraws][75], string);
-
-				format(string, sizeof(string), "~b~Creation:~w~ %s", GetDuration(gettime() - cache_get_field_int(0, "CreateDate")));
-				PlayerTextDrawSetString(extraid, PlayerData[extraid][pTextdraws][76], string);
-
-				format(string, sizeof(string), "~b~Played:~w~ %s", GetDuration(gettime() - cache_get_field_int(0, "LastLogin")));
-				PlayerTextDrawSetString(extraid, PlayerData[extraid][pTextdraws][77], string);
+				CharacterSelection_SetSlotData(
+					extraid,
+					PlayerData[extraid][pCharacter] - 1,
+					skin,
+					cache_get_field_int(0, "PlayingHours"),
+					cache_get_field_int(0, "Money"),
+					cache_get_field_int(0, "LastLogin")
+				);
 
 				for (new i = 0; i < 8; i ++) {
 				    PlayerTextDrawHide(extraid, PlayerData[extraid][pTextdraws][i]);
 				}
-			    for (new i = 71; i < 81; i ++) {
-			        PlayerTextDrawShow(extraid, PlayerData[extraid][pTextdraws][i]);
-				}
+				CharacterSelection_Show(extraid, PlayerData[extraid][pCharacter], false);
 			}
 		}
 	}
@@ -1201,11 +1193,8 @@ public OnCharacterCheck(extraid, character[])
 		mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", extraid, THREAD_CREATE_CHAR);
 
 		format(PlayerCharacters[extraid][PlayerData[extraid][pCharacter] - 1], MAX_PLAYER_NAME + 1, character);
+		CharacterSelection_SetSlotData(extraid, PlayerData[extraid][pCharacter] - 1, PlayerData[extraid][pSkin], 1, PlayerData[extraid][pMoney], 0);
 		SendServerMessage(extraid, "You have successfully created character \"%s\".", character);
-
-		ShowCharacterMenu(extraid);
-		PlayerData[extraid][pLogged] = 0;
 	}
 	return 1;
 }
-

@@ -62,6 +62,7 @@ ShowCharacterMenu(playerid)
 	}
 	CancelSelectTextDraw(playerid);
 	CharacterSelection_Show(playerid, 1, false);
+	return 1;
 }
 
 // ====== GetPlayerID ======

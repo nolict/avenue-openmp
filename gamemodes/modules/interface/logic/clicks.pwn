@@ -32,27 +32,18 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 	{
 		if (!PlayerData[playerid][pCharacter])
 		{
-			if (playertextid == PlayerData[playerid][pTextdraws][2])
-				SelectCharacter(playerid, 1);
+			if (playertextid == PlayerData[playerid][pTextdraws][77] || playertextid == PlayerData[playerid][pTextdraws][80])
+				CharacterSelection_Select(playerid);
 
-			else if (playertextid == PlayerData[playerid][pTextdraws][3])
-				SelectCharacter(playerid, 2);
+			else if (playertextid == PlayerData[playerid][pTextdraws][78])
+				CharacterSelection_Previous(playerid);
 
-			else if (playertextid == PlayerData[playerid][pTextdraws][4])
-				SelectCharacter(playerid, 3);
+			else if (playertextid == PlayerData[playerid][pTextdraws][79])
+				CharacterSelection_Next(playerid);
 		}
 		else
 		{
-		    if (playertextid == PlayerData[playerid][pTextdraws][78])
-				SQL_LoadCharacter(playerid, PlayerData[playerid][pCharacter]);
-
-			else if (playertextid == PlayerData[playerid][pTextdraws][79]) {
-			    Dialog_Show(playerid, DeleteChar, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Delete Character"), "Warning: Are you sure you wish to delete character \"%s\"?\n\nYou will not be issued a refund for any lost property.", "Confirm", "Cancel", PlayerCharacters[playerid][PlayerData[playerid][pCharacter] - 1]);
-			}
-			else if (playertextid == PlayerData[playerid][pTextdraws][80]) {
-			    ShowCharacterMenu(playerid);
-			}
-			else if (playertextid == PlayerData[playerid][pTextdraws][19]) {
+		    if (playertextid == PlayerData[playerid][pTextdraws][19]) {
 			    CancelSelectTextDraw(playerid);
 			    Dialog_Show(playerid, Gender, DIALOG_STYLE_LIST, DialogStyle_Title("Gender"), DialogStyle_Body("Male\nFemale"), "Select", "Cancel");
 			}

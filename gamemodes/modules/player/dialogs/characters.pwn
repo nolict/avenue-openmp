@@ -102,7 +102,10 @@ Dialog:DeleteCharacter(playerid, response, listitem, inputtext[])
 Dialog:CreateChar(playerid, response, listitem, inputtext[])
 {
 	if (!response)
-	    return PlayerData[playerid][pCharacter] = 0;
+	{
+	    PlayerData[playerid][pCharacter] = 0;
+	    return ShowCharacterMenu(playerid);
+	}
 
 	else if (isnull(inputtext) || strlen(inputtext) > 20)
         return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters."), "Create", "Cancel");
@@ -233,4 +236,3 @@ Dialog:NewPass(playerid, response, listitem, inputtext[])
 	}
 	return 1;
 }
-

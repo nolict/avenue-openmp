@@ -6,7 +6,7 @@
 
 ResetStatistics(playerid)
 {
-	CharacterSelection_StopCamera(playerid);
+	CharacterSelection_ResetPlayer(playerid);
 
 	for (new i = 0; i < 3; i ++) {
 	    PlayerCharacters[playerid][i][0] = 0;
@@ -307,20 +307,3 @@ IsPlayerInsideTaxi(playerid)
 	return 0;
 }
 
-SelectCharacter(playerid, id)
-{
-	PlayerData[playerid][pCharacter] = id;
-
-	if (!PlayerCharacters[playerid][id - 1][0])
-	    return Dialog_Show(playerid, CreateChar, DIALOG_STYLE_INPUT, DialogStyle_Title("Create Character"), DialogStyle_Body("Please enter the name of your new character below:\n\nWarning: Your name must be in the Firstname_Lastname format and not exceed 20 characters."), "Create", "Cancel");
-
-	static
-	    query[200];
-
-	PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][72], PlayerCharacters[playerid][id - 1]);
-
-	format(query, sizeof(query), "SELECT `Skin`, `Birthdate`, `Origin`, `CreateDate`, `LastLogin` FROM `characters` WHERE `Character` = '%s'", PlayerCharacters[playerid][id - 1]);
-	mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", playerid, THREAD_SHOW_CHARACTER);
-
-	return 1;
-}

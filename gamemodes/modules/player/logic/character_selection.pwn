@@ -7,6 +7,8 @@
 #define CHARACTER_SELECTION_SLOTS (3)
 #define CHARACTER_SELECTION_CAMERA_INTERVAL (30)
 #define CHARACTER_SELECTION_CAMERA_STEPS (100)
+#define CHARACTER_SELECTION_WORLD_BASE (5000)
+#define CHARACTER_SELECTION_DEFAULT_LEVEL (1)
 
 enum e_CharacterSelectionData {
 	csSkin,
@@ -28,47 +30,124 @@ static const CharacterSelectionData[CHARACTER_SELECTION_SLOTS][e_CharacterSelect
 	{60, 1678.0688, -2287.5950, 13.5408, 257.7288, 1680.9000, -2288.6500, 14.5000, 1678.0688, -2287.5950, 14.3400}
 };
 
-static CharacterSelectionActors[CHARACTER_SELECTION_SLOTS] = {INVALID_ACTOR_ID, ...};
+static CharacterSelectionActors[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS] = {{INVALID_ACTOR_ID, ...}, ...};
 static CharacterSelectionCameraTimer[MAX_PLAYERS];
 static CharacterSelectionCameraStep[MAX_PLAYERS];
 static Float:CharacterSelectionCameraFrom[MAX_PLAYERS][6];
 static Float:CharacterSelectionCameraTo[MAX_PLAYERS][6];
 static Float:CharacterSelectionCameraCurrent[MAX_PLAYERS][6];
+static CharacterSelectionSlotSkin[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS];
+static CharacterSelectionSlotLevel[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS];
+static CharacterSelectionSlotMoney[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS];
+static CharacterSelectionSlotLastLogin[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS];
+static bool:CharacterSelectionSlotLoaded[MAX_PLAYERS][CHARACTER_SELECTION_SLOTS];
 
 // ====== CharacterSelection_CreateActors ======
 CharacterSelection_CreateActors()
 {
+	return 1;
+}
+
+// ====== CharacterSelection_GetWorld ======
+CharacterSelection_GetWorld(playerid)
+{
+	return CHARACTER_SELECTION_WORLD_BASE + playerid;
+}
+
+// ====== CharacterSelection_GetSlotSkin ======
+CharacterSelection_GetSlotSkin(playerid, slot)
+{
+	if (slot < 0 || slot >= CHARACTER_SELECTION_SLOTS)
+		return CharacterSelectionData[0][csSkin];
+
+	if (PlayerCharacters[playerid][slot][0] && CharacterSelectionSlotLoaded[playerid][slot])
+		return CharacterSelectionSlotSkin[playerid][slot];
+
+	return CharacterSelectionData[slot][csSkin];
+}
+
+// ====== CharacterSelection_ResetPlayer ======
+CharacterSelection_ResetPlayer(playerid)
+{
+	CharacterSelection_StopCamera(playerid);
+	CharSelect_DestroyActors(playerid);
+
 	for (new i = 0; i < CHARACTER_SELECTION_SLOTS; i ++)
 	{
-		if (IsValidActor(CharacterSelectionActors[i]))
-			continue;
+		CharacterSelectionSlotSkin[playerid][i] = CharacterSelectionData[i][csSkin];
+		CharacterSelectionSlotLevel[playerid][i] = CHARACTER_SELECTION_DEFAULT_LEVEL;
+		CharacterSelectionSlotMoney[playerid][i] = 250;
+		CharacterSelectionSlotLastLogin[playerid][i] = 0;
+		CharacterSelectionSlotLoaded[playerid][i] = false;
+	}
+	return 1;
+}
 
-		CharacterSelectionActors[i] = CreateActor(
-			CharacterSelectionData[i][csSkin],
+// ====== CharacterSelection_SetSlotData ======
+CharacterSelection_SetSlotData(playerid, slot, skin, level, money, lastLogin)
+{
+	if (slot < 0 || slot >= CHARACTER_SELECTION_SLOTS)
+		return 0;
+
+	CharacterSelectionSlotSkin[playerid][slot] = skin;
+	CharacterSelectionSlotLevel[playerid][slot] = (level < CHARACTER_SELECTION_DEFAULT_LEVEL) ? (CHARACTER_SELECTION_DEFAULT_LEVEL) : (level);
+	CharacterSelectionSlotMoney[playerid][slot] = money;
+	CharacterSelectionSlotLastLogin[playerid][slot] = lastLogin;
+	CharacterSelectionSlotLoaded[playerid][slot] = true;
+	return 1;
+}
+
+// ====== CharSelect_DestroyActors ======
+CharSelect_DestroyActors(playerid)
+{
+	for (new i = 0; i < CHARACTER_SELECTION_SLOTS; i ++)
+	{
+		if (CharacterSelectionActors[playerid][i] != INVALID_ACTOR_ID && IsValidActor(CharacterSelectionActors[playerid][i]))
+		{
+			DestroyActor(CharacterSelectionActors[playerid][i]);
+			CharacterSelectionActors[playerid][i] = INVALID_ACTOR_ID;
+		}
+	}
+	return 1;
+}
+
+// ====== CharSelect_CreateActors ======
+CharSelect_CreateActors(playerid)
+{
+	for (new i = 0; i < CHARACTER_SELECTION_SLOTS; i ++)
+	{
+		if (CharacterSelectionActors[playerid][i] != INVALID_ACTOR_ID && IsValidActor(CharacterSelectionActors[playerid][i]))
+			DestroyActor(CharacterSelectionActors[playerid][i]);
+
+		CharacterSelectionActors[playerid][i] = CreateActor(
+			CharacterSelection_GetSlotSkin(playerid, i),
 			CharacterSelectionData[i][csPosX],
 			CharacterSelectionData[i][csPosY],
 			CharacterSelectionData[i][csPosZ],
 			CharacterSelectionData[i][csAngle]
 		);
-		SetActorVirtualWorld(CharacterSelectionActors[i], 0);
+		SetActorVirtualWorld(CharacterSelectionActors[playerid][i], CharacterSelection_GetWorld(playerid));
 	}
-	CharSelect_ApplyActorAnims();
+	CharSelect_ApplyActorAnims(playerid);
 	return 1;
 }
 
-forward CharSelect_ApplyActorAnims();
+forward CharSelect_ApplyActorAnims(playerid);
 
 // ====== CharSelect_ApplyActorAnims ======
-public CharSelect_ApplyActorAnims()
+public CharSelect_ApplyActorAnims(playerid)
 {
-	if (IsValidActor(CharacterSelectionActors[0]))
-		ApplyActorAnimation(CharacterSelectionActors[0], "SMOKING", "M_smklean_loop", 4.1, 1, 0, 0, 0, 0);
+	if (!IsPlayerConnected(playerid))
+		return 0;
 
-	if (IsValidActor(CharacterSelectionActors[1]))
-		ApplyActorAnimation(CharacterSelectionActors[1], "DEALER", "DEALER_IDLE", 4.1, 1, 0, 0, 0, 0);
+	if (IsValidActor(CharacterSelectionActors[playerid][0]))
+		ApplyActorAnimation(CharacterSelectionActors[playerid][0], "SMOKING", "M_smklean_loop", 4.1, 1, 0, 0, 0, 0);
 
-	if (IsValidActor(CharacterSelectionActors[2]))
-		ApplyActorAnimation(CharacterSelectionActors[2], "PED", "IDLE_chat", 4.1, 1, 0, 0, 0, 0);
+	if (IsValidActor(CharacterSelectionActors[playerid][1]))
+		ApplyActorAnimation(CharacterSelectionActors[playerid][1], "DEALER", "DEALER_IDLE", 4.1, 1, 0, 0, 0, 0);
+
+	if (IsValidActor(CharacterSelectionActors[playerid][2]))
+		ApplyActorAnimation(CharacterSelectionActors[playerid][2], "PED", "IDLE_chat", 4.1, 1, 0, 0, 0, 0);
 
 	return 1;
 }
@@ -98,10 +177,10 @@ CharacterSelection_Show(playerid, slot, bool:smooth = false)
 	if (!active)
 	{
 		SetPlayerInterior(playerid, 0);
-		SetPlayerVirtualWorld(playerid, 0);
+		SetPlayerVirtualWorld(playerid, CharacterSelection_GetWorld(playerid));
 		TogglePlayerSpectating(playerid, 1);
-		CharSelect_ApplyActorAnims();
-		SetTimer("CharSelect_ApplyActorAnims", 700, false);
+		CharSelect_CreateActors(playerid);
+		SetTimerEx("CharSelect_ApplyActorAnims", 700, false, "d", playerid);
 	}
 
 	if (smooth)
@@ -125,7 +204,66 @@ CharacterSelection_Show(playerid, slot, bool:smooth = false)
 		CharSelect_SaveCurrentCamera(playerid, slot);
 	}
 
-	CharSelect_SendSlotMsg(playerid);
+	CharSelect_UpdateTextdraw(playerid);
+	CharSelect_ShowTextdraw(playerid);
+	return 1;
+}
+
+// ====== CharSelect_ShowTextdraw ======
+CharSelect_ShowTextdraw(playerid)
+{
+	for (new i = 71; i <= 80; i ++)
+		PlayerTextDrawShow(playerid, PlayerData[playerid][pTextdraws][i]);
+
+	SelectTextDraw(playerid, -1);
+	return 1;
+}
+
+// ====== CharSelect_HideTextdraw ======
+CharSelect_HideTextdraw(playerid)
+{
+	for (new i = 71; i <= 80; i ++)
+		PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
+
+	CancelSelectTextDraw(playerid);
+	return 1;
+}
+
+// ====== CharSelect_UpdateTextdraw ======
+CharSelect_UpdateTextdraw(playerid)
+{
+	new
+		slot = PlayerData[playerid][pCharacterMenu] - 1,
+		string[128];
+
+	if (slot < 0 || slot >= CHARACTER_SELECTION_SLOTS)
+		return 0;
+
+	if (PlayerCharacters[playerid][slot][0])
+	{
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][72], PlayerCharacters[playerid][slot]);
+
+		format(string, sizeof(string), "Level: %d", CharacterSelectionSlotLevel[playerid][slot]);
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][73], string);
+
+		if (CharacterSelectionSlotLastLogin[playerid][slot] > 0)
+			format(string, sizeof(string), "Last Login: %s", GetDuration(gettime() - CharacterSelectionSlotLastLogin[playerid][slot]));
+		else
+			format(string, sizeof(string), "Last Login: Never");
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][74], string);
+
+		format(string, sizeof(string), "Money: %s", FormatNumber(CharacterSelectionSlotMoney[playerid][slot]));
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][75], string);
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][76], "Click To Spawn");
+	}
+	else
+	{
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][72], "Empty Slot");
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][73], "Level: 1");
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][74], "Last Login: Never");
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][75], "Money: $250");
+		PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][76], "Click To Create");
+	}
 	return 1;
 }
 
@@ -221,22 +359,6 @@ public CharSelect_CameraTick(playerid)
 	return 1;
 }
 
-// ====== CharSelect_SendSlotMsg ======
-CharSelect_SendSlotMsg(playerid)
-{
-	new slot = PlayerData[playerid][pCharacterMenu] - 1;
-
-	if (slot < 0 || slot >= CHARACTER_SELECTION_SLOTS)
-		return 0;
-
-	if (PlayerCharacters[playerid][slot][0])
-		SendServerMessage(playerid, "Character slot %d: %s. Use /next, /prev, or /select.", slot + 1, PlayerCharacters[playerid][slot]);
-	else
-		SendServerMessage(playerid, "Character slot %d: Empty Slot. Use /next, /prev, or /select to create.", slot + 1);
-
-	return 1;
-}
-
 // ====== CharacterSelection_Next ======
 CharacterSelection_Next(playerid)
 {
@@ -272,6 +394,8 @@ CharacterSelection_Select(playerid)
 		return SendErrorMessage(playerid, "You are not in character selection.");
 
 	CharacterSelection_StopCamera(playerid);
+	CharSelect_HideTextdraw(playerid);
+	CharSelect_DestroyActors(playerid);
 
 	new slot = PlayerData[playerid][pCharacterMenu];
 
