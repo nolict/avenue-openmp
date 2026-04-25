@@ -272,6 +272,16 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 	return 1;
 }
 
+// ====== OnPlayerClickMap ======
+public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
+{
+	if (PlayerData[playerid][pAdmin] < 1 || !PlayerData[playerid][pAdminDuty])
+	    return 1;
+
+	Player_TeleportToMapMarker(playerid, fX, fY, fZ);
+	return 1;
+}
+
 // ====== OnPlayerTakeDamage ======
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid)
 {

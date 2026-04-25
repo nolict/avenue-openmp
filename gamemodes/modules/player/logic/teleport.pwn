@@ -30,3 +30,38 @@ SendPlayerToPlayer(playerid, targetid)
 	PlayerData[playerid][pEntrance] = PlayerData[targetid][pEntrance];
 	PlayerData[playerid][pHospitalInt]  = PlayerData[targetid][pHospitalInt];
 }
+
+// ====== Player_TeleportToMapMarker ======
+stock Player_TeleportToMapMarker(playerid, Float:x, Float:y, Float:z)
+{
+	new
+	    vehicleid,
+	    Float:angle;
+
+	SetPlayerInterior(playerid, 0);
+	SetPlayerVirtualWorld(playerid, 0);
+
+	PlayerData[playerid][pHouse] = -1;
+	PlayerData[playerid][pBusiness] = -1;
+	PlayerData[playerid][pEntrance] = -1;
+	PlayerData[playerid][pHospitalInt] = -1;
+
+	if (IsPlayerInAnyVehicle(playerid))
+	{
+	    vehicleid = GetPlayerVehicleID(playerid);
+
+	    GetVehicleZAngle(vehicleid, angle);
+	    SetVehiclePos(vehicleid, x, y, z + 3.0);
+	    SetVehicleZAngle(vehicleid, angle);
+	    LinkVehicleToInterior(vehicleid, 0);
+	    SetVehicleVirtualWorld(vehicleid, 0);
+	}
+	else
+	{
+	    SetPlayerPos(playerid, x, y, z + 3.0);
+	}
+
+	SetCameraBehindPlayer(playerid);
+	SendServerMessage(playerid, "Teleported to map marker.");
+	return 1;
+}
