@@ -1636,6 +1636,9 @@ public OnPlayerUpdate(playerid)
 	if (PlayerData[playerid][pKicked])
 		return 0;
 
+	if (FlyMode_UpdateCamera(playerid))
+	    return 1;
+
 	if (GetPlayerWeapon(playerid) > 1 && (PlayerData[playerid][pHoldWeapon] > 0 || PlayerData[playerid][pMining] > 0))
 	    SetPlayerArmedWeapon(playerid, 0);
 
@@ -2019,6 +2022,8 @@ public OnPlayerConnect(playerid)
 // ====== OnPlayerDisconnect ======
 public OnPlayerDisconnect(playerid, reason)
 {
+	FlyMode_Reset(playerid);
+
 	PlayerData[playerid][pLeaveTime] = GetTickCount();
 
 	format(PlayerData[playerid][pLeaveIP], 16, PlayerData[playerid][pIP]);

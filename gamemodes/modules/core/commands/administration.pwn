@@ -122,7 +122,7 @@ CMD:ahelp(playerid, params[])
 	    SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 2]:{FFFFFF} /respawn, /warn, /checkstats, /shooter, /goto, /bring, /setinterior, /setvw.");
 	    SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 2]:{FFFFFF} /sendto, /clearchat, /spawn, /refill, /revive, /aslap, /acceptname, /declinename, /atalk.");
 	    SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 2]:{FFFFFF} /masked, /listguns, /respawncar, /respawncars, /respawnnear, /heal, /bringcar, /gotocar.");
-		SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 2]:{FFFFFF} /x /y /z");
+		SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 2]:{FFFFFF} /x /y /z /coord /flymode");
  	}
 	if (PlayerData[playerid][pAdmin] >= 3) {
 	    SendClientMessage(playerid, COLOR_YELLOW, "[LEVEL 3]:{FFFFFF} /unban, /blacklist, /getip, /togooc, /health, /armor, /resetweps, /arepair, /listwarns.");
@@ -2097,6 +2097,45 @@ CMD:jetpack(playerid, params[])
 	}
 	return 1;
 }
+
+
+// ====== CMD:flymode ======
+CMD:flymode(playerid, params[])
+{
+	if (PlayerData[playerid][pAdmin] < 2)
+	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
+
+	if (PlayerData[playerid][pJailTime] > 0 || PlayerData[playerid][pCuffed] || PlayerData[playerid][pInjured])
+	    return SendErrorMessage(playerid, "You can't use flymode right now.");
+
+	if (!g_FlyMode[playerid])
+	{
+	    FlyMode_Enable(playerid);
+	    SendServerMessage(playerid, "Flymode enabled. Move with virtual controls, drag camera to aim, sprint for fast movement.");
+	    SendServerMessage(playerid, "Use /coord to print current position, camera look-at, facing, interior, and virtual world.");
+	}
+	else
+	{
+	    FlyMode_Disable(playerid);
+	    SendServerMessage(playerid, "Flymode disabled. You have been placed at the camera position.");
+	}
+	return 1;
+}
+
+
+// ====== CMD:coord ======
+CMD:coord(playerid, params[])
+{
+	if (PlayerData[playerid][pAdmin] < 2)
+	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
+
+	return FlyMode_PrintCoordinates(playerid);
+}
+
+
+// ====== CMD:coords ======
+CMD:coords(playerid, params[])
+	return cmd_coord(playerid, params);
 
 
 // ====== CMD:setweather ======

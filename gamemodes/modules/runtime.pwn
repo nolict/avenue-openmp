@@ -15,6 +15,7 @@
 #include "modules/system/logic/reports.pwn"
 #include "modules/interface/dialogs/styles.pwn"
 #include "modules/interface/logic/playertextdraws.pwn"
+#include "modules/core/logic/flymode.pwn"
 
 #include "modules/player/logic/session.pwn"
 #include "modules/core/logic/validation.pwn"
