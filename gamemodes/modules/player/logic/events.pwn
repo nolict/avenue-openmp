@@ -392,7 +392,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    DisablePlayerCheckpoint(playerid);
 
 		PlayerData[playerid][pTutorialStage] = 2;
-	    SendClientMessage(playerid, COLOR_SERVER, "Tekan 'N' untuk pickup item terdekat.");
+	    SendClientMessage(playerid, COLOR_SERVER, "Press 'N' to pick up the nearest item.");
 	}
 	if (newkeys & KEY_YES && IsPlayerSpawned(playerid))
 	{
@@ -595,7 +595,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		    DestroyPlayerObject(playerid, PlayerData[playerid][pTutorialObject]);
 
             PlayerData[playerid][pTutorialStage] = 3;
- 		    SendClientMessage(playerid, COLOR_SERVER, "Tekan 'Y' untuk membuka inventory dan pilih soda bottle.");
+ 		    SendClientMessage(playerid, COLOR_SERVER, "Press 'Y' to open your inventory and select the soda bottle.");
 		    return 1;
 		}
 		if (PlayerData[playerid][pHoldWeapon] > 0)
@@ -825,7 +825,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		        SendClientMessage(playerid, -1, "");
 			}
 		    SetDefaultSpawn(playerid);
-		    Dialog_Show(playerid, TutorialConfirm, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial"), DialogStyle_Body("Apakah kamu ingin melihat main tutorial server?"), "Yes", "No");
+		    Dialog_Show(playerid, TutorialConfirm, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial"), DialogStyle_Body("Do you want to view the main server tutorial?"), "Yes", "No");
 		}
 		if (IsPlayerInRangeOfPoint(playerid, 2.5, -204.5334, -1735.3131, 675.7687) && PlayerData[playerid][pHospitalInt] != -1)
 		{

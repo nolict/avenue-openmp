@@ -22,7 +22,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 	            if (!strcmp(string, "Demo Soda") && PlayerData[playerid][pTutorialStage] == 3)
 			    {
         			PlayerData[playerid][pThirst] = 100;
-        			Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("Kamu sudah belajar cara pickup items dan menggunakannya dengan benar.\nKamu baru saja pickup soda bottle dan memakainya untuk mengisi thirst.\n\nIcon hunger dan thirst ditampilkan di sisi kanan screen kamu.\nJika hunger atau thirst mencapai nol persen, player kamu akan mulai kehilangan energy."), "Continue", "");
+        			Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("You have learned how to pick up items and use them correctly.\nYou just picked up a soda bottle and used it to refill your thirst.\n\nThe hunger and thirst icons are shown on the right side of your screen.\nIf hunger or thirst reaches zero percent, your character will start losing energy."), "Continue", "");
 			    }
 			    else
 			    {
@@ -47,7 +47,7 @@ Dialog:Inventory(playerid, response, listitem, inputtext[])
 				if (PlayerData[playerid][pTutorialStage] == 4)
 				{
 					Inventory_Remove(playerid, "Demo Soda");
-					Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("Kamu sudah drop soda bottle. Kamu bisa pickup dropped items dengan 'N'.\nKamu juga bisa give atau trade items dari inventory ke player lain.\n\nKamu juga bisa menyimpan items ke house storage atau vehicle trunk.\nInventory character kamu hanya bisa memuat sampai %d unique items sekaligus."), "Next", "", MAX_INVENTORY);
+					Dialog_Show(playerid, Tutorial, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Tutorial Message"), DialogStyle_Body("You have dropped the soda bottle. You can pick up dropped items with 'N'.\nYou can also give or trade items from your inventory to other players.\n\nYou can store items in house storage or a vehicle trunk.\nYour character inventory can hold up to %d unique items at once."), "Next", "", MAX_INVENTORY);
 					return 1;
 				}
 	            if (IsPlayerInAnyVehicle(playerid) || !IsPlayerSpawned(playerid))
@@ -102,4 +102,3 @@ Dialog:DropItem(playerid, response, listitem, inputtext[])
 	}
 	return 1;
 }
-

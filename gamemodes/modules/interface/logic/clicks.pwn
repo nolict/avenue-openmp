@@ -130,7 +130,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 			    PlayerData[playerid][pTutorialObject] = CreatePlayerObject(playerid, 1543, -226.4219, 1408.4594, 26.7734, 0.0, 0.0, 0.0);
 
 			    SetPlayerCheckpoint(playerid, -226.4219, 1408.4594, 27.7734, 0.5);
-			    SendClientMessage(playerid, COLOR_SERVER, "Silakan menuju item lalu tekan 'ALT'.");
+			    SendClientMessage(playerid, COLOR_SERVER, "Please go to the item and press 'ALT'.");
 
 				SetPlayerPos(playerid, -226.2436, 1400.4767, 27.7656);
 				SetPlayerFacingAngle(playerid, 0.0000);

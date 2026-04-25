@@ -10,13 +10,13 @@ Dialog:Tutorial(playerid, response, listitem, inputtext[])
 	if (PlayerData[playerid][pTutorialStage] == 3)
 	{
 		PlayerData[playerid][pTutorialStage] = 4;
-		SendClientMessage(playerid, COLOR_SERVER, "Tekan 'Y', pilih soda bottle, lalu drop item tersebut.");
+		SendClientMessage(playerid, COLOR_SERVER, "Press 'Y', select the soda bottle, then drop the item.");
 	}
 	else if (PlayerData[playerid][pTutorialStage] == 4)
 	{
 		PlayerData[playerid][pTutorialStage] = 5;
 
-		SendClientMessage(playerid, COLOR_SERVER, "Silakan menuju exit dan tekan 'F'.");
+		SendClientMessage(playerid, COLOR_SERVER, "Please go to the exit and press 'F'.");
 		SetPlayerCheckpoint(playerid, -228.8403, 1401.1831, 27.7656, 1.0);
 	}
 	return 1;
@@ -35,7 +35,7 @@ Dialog:TutorialConfirm(playerid, response, listitem, inputtext[])
   		PlayerData[playerid][pTutorial] = 0;
 		PlayerData[playerid][pTutorialTime] = 0;
 
-		SendServerMessage(playerid, "Ketik /tasks untuk melihat tasks yang perlu kamu selesaikan.");
+		SendServerMessage(playerid, "Type /tasks to view the tasks you need to complete.");
 	}
 	else
 	{
