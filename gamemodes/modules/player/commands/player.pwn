@@ -4,6 +4,18 @@
     Notes: Keep command parsing here and delegate reusable gameplay work to logic files.
 */
 
+// ====== CMD:next ======
+CMD:next(playerid, params[])
+	return CharacterSelection_Next(playerid);
+
+// ====== CMD:prev ======
+CMD:prev(playerid, params[])
+	return CharacterSelection_Previous(playerid);
+
+// ====== CMD:select ======
+CMD:select(playerid, params[])
+	return CharacterSelection_Select(playerid);
+
 // ====== CMD:b ======
 CMD:b(playerid, params[])
 {

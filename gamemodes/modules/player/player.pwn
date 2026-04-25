@@ -18,4 +18,5 @@
 #include "modules/player/logic/animations.pwn"
 #include "modules/player/logic/tutorial.pwn"
 #include "modules/player/logic/identity.pwn"
+#include "modules/player/logic/character_selection.pwn"
 #include "modules/player/logic/tickets.pwn"

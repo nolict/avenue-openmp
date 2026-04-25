@@ -101,6 +101,7 @@ public OnGameModeInit()
 		Create3DTextLabel("[Hospital Deliver]\n{FFFFFF}/dropinjured to deliver a patient.", COLOR_DARKBLUE, arrHospitalDeliver[i][0], arrHospitalDeliver[i][1], arrHospitalDeliver[i][2], 15.0, 0);
 	}
 	Interface_CreateGlobalTextdraws();
+	CharacterSelection_CreateActors();
 	Mapping_LoadStaticWorld(arrVirtualWorlds, id);
 
 	DisableInteriorEnterExits();

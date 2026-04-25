@@ -49,8 +49,6 @@ SQL_LoadCharacter(playerid, characterid)
 // ====== ShowCharacterMenu ======
 ShowCharacterMenu(playerid)
 {
-	new str[32];
-
 	if (PlayerData[playerid][pCharacter] != 0)
 	{
 	    PlayerData[playerid][pCharacter] = 0;
@@ -59,20 +57,11 @@ ShowCharacterMenu(playerid)
   			PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
 		}
 		for (new i = 71; i < 81; i ++) {
-  			PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
+			PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
 		}
 	}
-	for (new i = 0; i < 8; i ++)
-	{
-	    if (i < 3) {
-	        format(str, sizeof(str), "%s", (!PlayerCharacters[playerid][i][0]) ? ("Empty Slot") : (PlayerCharacters[playerid][i]));
-
-			PlayerTextDrawSetString(playerid, PlayerData[playerid][pTextdraws][i + 5], str);
-	    }
-	    PlayerTextDrawHide(playerid, PlayerData[playerid][pTextdraws][i]);
-		PlayerTextDrawShow(playerid, PlayerData[playerid][pTextdraws][i]);
-	}
-	SelectTextDraw(playerid, -1);
+	CancelSelectTextDraw(playerid);
+	CharacterSelection_Show(playerid, 1, false);
 }
 
 // ====== GetPlayerID ======

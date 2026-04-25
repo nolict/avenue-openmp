@@ -6,6 +6,8 @@
 
 ResetStatistics(playerid)
 {
+	CharacterSelection_StopCamera(playerid);
+
 	for (new i = 0; i < 3; i ++) {
 	    PlayerCharacters[playerid][i][0] = 0;
 
@@ -85,6 +87,7 @@ ResetStatistics(playerid)
 	PlayerData[playerid][pSpamCount] = 0;
 	PlayerData[playerid][pCommandCount] = 0;
 	PlayerData[playerid][pDisplayStats] = 0;
+	PlayerData[playerid][pCharacterMenu] = 0;
 	PlayerData[playerid][pToggleGlasses] = 0;
 	PlayerData[playerid][pToggleHat] = 0;
 	PlayerData[playerid][pToggleBandana] = 0;

@@ -2068,6 +2068,11 @@ public OnPlayerRequestClass(playerid, classid)
 // ====== OnPlayerCommandReceived ======
 public OnPlayerCommandReceived(playerid, cmdtext[])
 {
+	if (!SQL_IsLogged(playerid) && CharacterSelection_IsActive(playerid))
+	{
+		if (!strcmp(cmdtext, "/next", true) || !strcmp(cmdtext, "/prev", true) || !strcmp(cmdtext, "/select", true))
+			return 1;
+	}
 	if (!SQL_IsLogged(playerid) || (PlayerData[playerid][pTutorial] > 0 || PlayerData[playerid][pTutorialStage] > 0 || PlayerData[playerid][pKilled] > 0 || PlayerData[playerid][pHospital] != -1))
 	    return 0;
 
