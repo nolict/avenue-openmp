@@ -2111,7 +2111,7 @@ CMD:flymode(playerid, params[])
 	if (!g_FlyMode[playerid])
 	{
 	    FlyMode_Enable(playerid);
-	    SendServerMessage(playerid, "Flymode enabled. Move with virtual controls, drag camera to aim, sprint for fast movement.");
+	    SendServerMessage(playerid, "Flymode enabled. Move with analog controls and drag camera to aim.");
 	    SendServerMessage(playerid, "Use /coord to print current position, camera look-at, facing, interior, and virtual world.");
 	}
 	else

@@ -8,6 +8,8 @@
 #define FLYMODE_ACCEL_RATE          (0.03)
 #define FLYMODE_LOOK_DISTANCE       (25.0)
 #define FLYMODE_MOVE_OFFSET         (6000.0)
+#define FLYMODE_ANALOG_DEADZONE     (32)
+#define FLYMODE_AXIS_DOMINANCE      (2)
 
 #define FLYMODE_MOVE_NONE           (0)
 #define FLYMODE_MOVE_FORWARD        (1)
@@ -27,6 +29,38 @@ new g_FlyModeOldUD[MAX_PLAYERS];
 new g_FlyModeLastMove[MAX_PLAYERS];
 new g_FlyModeLastCoordTick[MAX_PLAYERS];
 new Float:g_FlyModeAccel[MAX_PLAYERS];
+
+// ====== FlyMode_Abs ======
+stock FlyMode_Abs(value)
+{
+	return (value < 0) ? (-value) : (value);
+}
+
+// ====== FlyMode_FilterAnalog ======
+stock FlyMode_FilterAnalog(&updown, &leftright)
+{
+	new
+	    absUD = FlyMode_Abs(updown),
+	    absLR = FlyMode_Abs(leftright);
+
+	if (absUD < FLYMODE_ANALOG_DEADZONE)
+	{
+	    updown = 0;
+	    absUD = 0;
+	}
+	if (absLR < FLYMODE_ANALOG_DEADZONE)
+	{
+	    leftright = 0;
+	    absLR = 0;
+	}
+
+	if (absUD >= FLYMODE_ANALOG_DEADZONE && absLR > 0 && absUD >= absLR * FLYMODE_AXIS_DOMINANCE)
+	    leftright = 0;
+	else if (absLR >= FLYMODE_ANALOG_DEADZONE && absUD > 0 && absLR >= absUD * FLYMODE_AXIS_DOMINANCE)
+	    updown = 0;
+
+	return 1;
+}
 
 // ====== FlyMode_GetCameraFacing ======
 stock Float:FlyMode_GetCameraFacing(Float:vx, Float:vy)
@@ -138,6 +172,22 @@ stock FlyMode_GetNextCameraPosition(moveMode, Float:cameraPos[3], Float:frontVec
 	return 1;
 }
 
+// ====== FlyMode_StopMovement ======
+stock FlyMode_StopMovement(playerid)
+{
+	if (!g_FlyMode[playerid])
+	    return 0;
+
+	if (IsValidDynamicObject(g_FlyModeObject[playerid]))
+	    StopDynamicObject(g_FlyModeObject[playerid]);
+
+	g_FlyModeMoveMode[playerid] = FLYMODE_MOVE_NONE;
+	g_FlyModeAccel[playerid] = 0.0;
+	g_FlyModeOldLR[playerid] = 0;
+	g_FlyModeOldUD[playerid] = 0;
+	return 1;
+}
+
 // ====== FlyMode_MoveCamera ======
 stock FlyMode_MoveCamera(playerid)
 {
@@ -183,6 +233,7 @@ stock FlyMode_UpdateCamera(playerid)
 	    return 0;
 
 	GetPlayerKeys(playerid, keys, updown, leftright);
+	FlyMode_FilterAnalog(updown, leftright);
 
 	if (g_FlyModeMoveMode[playerid] && GetTickCount() - g_FlyModeLastMove[playerid] > 100)
 	    FlyMode_MoveCamera(playerid);
@@ -190,11 +241,7 @@ stock FlyMode_UpdateCamera(playerid)
 	if (g_FlyModeOldUD[playerid] != updown || g_FlyModeOldLR[playerid] != leftright)
 	{
 		if ((g_FlyModeOldUD[playerid] != 0 || g_FlyModeOldLR[playerid] != 0) && updown == 0 && leftright == 0)
-		{
-			StopDynamicObject(g_FlyModeObject[playerid]);
-			g_FlyModeMoveMode[playerid] = FLYMODE_MOVE_NONE;
-			g_FlyModeAccel[playerid] = 0.0;
-		}
+		    FlyMode_StopMovement(playerid);
 		else
 		{
 			g_FlyModeMoveMode[playerid] = FlyMode_GetMoveDirection(updown, leftright);
