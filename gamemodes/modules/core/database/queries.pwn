@@ -58,7 +58,7 @@ stock SQL_AttemptLogin(playerid, const password[])
 
 	WP_Hash(buffer, sizeof(buffer), password);
 
-	format(query, sizeof(query), "SELECT `ID` FROM `accounts` WHERE `Username` = '%s' AND `Password` = '%s'", PlayerData[playerid][pUsername], buffer);
+	format(query, sizeof(query), "SELECT `ID`, `Admin` FROM `accounts` WHERE `Username` = '%s' AND `Password` = '%s'", PlayerData[playerid][pUsername], buffer);
     mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", playerid, THREAD_LOGIN);
 }
 
@@ -104,7 +104,7 @@ stock SQL_SaveCharacter(playerid)
 			UpdateWeapons(playerid);
 		}
 	}
-	format(query, sizeof(query), "UPDATE `characters` SET `Created` = '%d', `Gender` = '%d', `Birthdate` = '%s', `Origin` = '%s', `Skin` = '%d', `PosX` = '%.4f', `PosY` = '%.4f', `PosZ` = '%.4f', `PosA` = '%.4f', `Health` = '%.4f', `Interior` = '%d', `World` = '%d', `Hospital` = '%d', `HospitalInt` = '%d', `Money` = '%d', `BankMoney` = '%d', `OwnsBillboard` = '%d', `Savings` = '%d', `Admin` = '%d', `JailTime` = '%d', `Muted` = '%d', `Tester` = '%d'",
+	format(query, sizeof(query), "UPDATE `characters` SET `Created` = '%d', `Gender` = '%d', `Birthdate` = '%s', `Origin` = '%s', `Skin` = '%d', `PosX` = '%.4f', `PosY` = '%.4f', `PosZ` = '%.4f', `PosA` = '%.4f', `Health` = '%.4f', `Interior` = '%d', `World` = '%d', `Hospital` = '%d', `HospitalInt` = '%d', `Money` = '%d', `BankMoney` = '%d', `OwnsBillboard` = '%d', `Savings` = '%d', `JailTime` = '%d', `Muted` = '%d', `Tester` = '%d'",
 		PlayerData[playerid][pCreated],
 		PlayerData[playerid][pGender],
 		PlayerData[playerid][pBirthdate],
@@ -123,7 +123,6 @@ stock SQL_SaveCharacter(playerid)
 		PlayerData[playerid][pBankMoney],
 		PlayerData[playerid][pOwnsBillboard],
 		PlayerData[playerid][pSavings],
-		PlayerData[playerid][pAdmin],
 		PlayerData[playerid][pJailTime],
 		PlayerData[playerid][pMuted],
   		PlayerData[playerid][pTester]

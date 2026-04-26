@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `ID` int(12) NOT NULL AUTO_INCREMENT,
   `Username` varchar(24) DEFAULT NULL,
   `Password` varchar(129) DEFAULT NULL,
+  `Admin` int(12) DEFAULT '0',
   `RegisterDate` varchar(36) DEFAULT NULL,
   `LoginDate` varchar(36) DEFAULT NULL,
   `IP` varchar(16) DEFAULT 'n/a',

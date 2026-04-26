@@ -56,6 +56,7 @@ CMD:admin(playerid, params[])
 CMD:makeadmin(playerid, params[])
 {
 	static
+		query[128],
 		userid,
 	    level;
 
@@ -81,8 +82,12 @@ CMD:makeadmin(playerid, params[])
 	    SendAdminAction(playerid, "You have demoted %s to a lower admin level (%d).", ReturnName(userid, 0), level);
 	    SendAdminAction(userid, "%s has demoted you to a lower admin level (%d).", ReturnName(playerid, 0), level);
 	}
-	PlayerData[userid][pAdmin] = level;
- 	Log_Write("logs/admin_log.txt", "[%s] %s has set %s's admin level to %d.", ReturnDate(), ReturnName(playerid, 0), ReturnName(userid, 0), level);
+	format(query, sizeof(query), "UPDATE `accounts` SET `Admin` = '%d' WHERE `Username` = '%s'", level, SQL_ReturnEscaped(PlayerData[userid][pUsername]));
+	mysql_tquery(g_iHandle, query);
+	foreach (new i : Player) if (!strcmp(PlayerData[i][pUsername], PlayerData[userid][pUsername], true)) {
+		PlayerData[i][pAdmin] = level;
+	}
+	Log_Write("logs/admin_log.txt", "[%s] %s has set %s's admin level to %d.", ReturnDate(), ReturnName(playerid, 0), ReturnName(userid, 0), level);
 
 	return 1;
 }
@@ -1879,7 +1884,7 @@ CMD:aojail(playerid, params[])
 		format(string, sizeof(string), "Attempting to jail %s's account for %d minutes...", tmpName, minutes);
 		SendClientMessageEx(playerid, COLOR_LIGHTYELLOW, string);
 
-		format(query,sizeof(query),"UPDATE `characters` SET `JailTime` = %d WHERE `Admin` < %d AND `Username` = '%s'", minutes*60, PlayerData[playerid][pAdmin], tmpName);
+		format(query,sizeof(query),"UPDATE `characters` c LEFT JOIN `accounts` a ON a.`Username` = c.`Username` SET c.`JailTime` = %d WHERE IFNULL(a.`Admin`, 0) < %d AND c.`Username` = '%s'", minutes*60, PlayerData[playerid][pAdmin], tmpName);
 		mysql_tquery(g_iHandle, query, "OnJailAccount", "i", playerid);
 	}
 	return 1;

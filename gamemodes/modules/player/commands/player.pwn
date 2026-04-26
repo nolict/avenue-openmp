@@ -753,7 +753,7 @@ CMD:declinename(playerid, params[])
 CMD:deleteaccount(playerid, params[])
 {
 	static
-	    query[64];
+	    query[256];
 
     if (PlayerData[playerid][pAdmin] < 6)
 	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
@@ -767,7 +767,7 @@ CMD:deleteaccount(playerid, params[])
 	foreach (new i : Player) if (!strcmp(PlayerData[i][pUsername], params, true)) {
 	    return SendErrorMessage(playerid, "You can't delete an online player's account.");
 	}
-	format(query, sizeof(query), "SELECT * FROM `characters` WHERE `Username` = '%s'", SQL_ReturnEscaped(params));
+	format(query, sizeof(query), "SELECT c.`ID`, a.`Admin` FROM `accounts` a LEFT JOIN `characters` c ON c.`Username` = a.`Username` WHERE a.`Username` = '%s'", SQL_ReturnEscaped(params));
 	mysql_tquery(g_iHandle, query, "OnDeleteAccount", "ds", playerid, params);
 
 	return 1;
@@ -900,7 +900,7 @@ CMD:supporters(playerid, params[])
 CMD:deletechar(playerid, params[])
 {
 	static
-	    query[128];
+	    query[256];
 
     if (PlayerData[playerid][pAdmin] < 6)
 	    return SendErrorMessage(playerid, "You don't have permission to use this command.");
@@ -911,7 +911,7 @@ CMD:deletechar(playerid, params[])
     if (!IsValidPlayerName(params))
 	    return SendErrorMessage(playerid, "You have specified an invalid name format.");
 
-	format(query, sizeof(query), "SELECT `ID`, `Admin` FROM `characters` WHERE `Character` = '%s'", SQL_ReturnEscaped(params));
+	format(query, sizeof(query), "SELECT c.`ID`, a.`Admin` FROM `characters` c LEFT JOIN `accounts` a ON a.`Username` = c.`Username` WHERE c.`Character` = '%s'", SQL_ReturnEscaped(params));
 	mysql_tquery(g_iHandle, query, "OnDeleteCharacter", "ds", playerid, params);
 
 	return 1;

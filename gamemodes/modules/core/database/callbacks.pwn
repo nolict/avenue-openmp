@@ -118,13 +118,16 @@ public OnQueryFinished(extraid, threadid)
 			else
 			{
 				static
-					query[128];
+					query[256];
 
 				// Update the last login date.
                 format(query, sizeof(query), "UPDATE `accounts` SET `IP` = '%s', `LoginDate` = '%s' WHERE `Username` = '%s'", PlayerData[extraid][pIP], ReturnDate(), PlayerData[extraid][pUsername]);
 				mysql_tquery(g_iHandle, query);
 
     			// Load the character data.
+				PlayerData[extraid][pAccount] = cache_get_field_int(0, "ID");
+				PlayerData[extraid][pAdmin] = cache_get_field_int(0, "Admin");
+
 				format(query, sizeof(query), "SELECT * FROM `characters` WHERE `Username` = '%s' LIMIT 3", PlayerData[extraid][pUsername]);
 				mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", extraid, THREAD_CHARACTERS);
 			}
@@ -198,7 +201,6 @@ public OnQueryFinished(extraid, threadid)
 			        PlayerData[extraid][pBankMoney] = cache_get_field_int(0, "BankMoney");
 			        PlayerData[extraid][pOwnsBillboard] = cache_get_field_int(0, "OwnsBillboard");
 					PlayerData[extraid][pSavings] = cache_get_field_int(0, "Savings");
-			        PlayerData[extraid][pAdmin] = cache_get_field_int(0, "Admin");
 			        PlayerData[extraid][pJailTime] = cache_get_field_int(0, "JailTime");
 			        PlayerData[extraid][pMuted] = cache_get_field_int(0, "Muted");
 			        PlayerData[extraid][pTester] = cache_get_field_int(0, "Tester");
@@ -754,6 +756,9 @@ public OnDeleteAccount(playerid, name[])
 
 	if (!rows)
 	    return SendErrorMessage(playerid, "The username \"%s\" doesn't exist.", name);
+
+	if (cache_get_field_int(0, "Admin") > PlayerData[playerid][pAdmin])
+	    return SendErrorMessage(playerid, "You are not authorized to delete a higher admin's account.");
 
 	static
 	    query[128];

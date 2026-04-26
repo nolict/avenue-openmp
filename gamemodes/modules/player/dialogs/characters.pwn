@@ -15,9 +15,9 @@ Dialog:CharList(playerid, response, listitem, inputtext[])
 		    return SendErrorMessage(playerid, "The selected character slot is empty.");
 
 		new
-		    string[160];
+		    string[256];
 
-		format(string, sizeof(string), "SELECT `Admin`, `Skin`, `CreateDate`, `LastLogin` FROM `characters` WHERE `Username` = '%s' AND `Character` = '%s'", PlayerData[playerid][pUsername], PlayerCharacters[playerid][listitem]);
+		format(string, sizeof(string), "SELECT a.`Admin`, c.`Skin`, c.`CreateDate`, c.`LastLogin` FROM `characters` c LEFT JOIN `accounts` a ON a.`Username` = c.`Username` WHERE c.`Username` = '%s' AND c.`Character` = '%s'", PlayerData[playerid][pUsername], PlayerCharacters[playerid][listitem]);
 		mysql_tquery(g_iHandle, string, "OnCharacterLookup", "dds", playerid, listitem + 1, PlayerCharacters[playerid][listitem]);
 	}
 	return 1;
