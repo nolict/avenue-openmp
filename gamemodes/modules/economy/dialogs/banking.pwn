@@ -81,7 +81,7 @@ Dialog:TransferCash(playerid, response, listitem, inputtext[])
 			return Dialog_Show(playerid, TransferCash, DIALOG_STYLE_INPUT, DialogStyle_Title("Make a transfer"), DialogStyle_Body("Error: Insufficient funds!\n\nYour bank account's balance: %s\n\nPlease enter the amount of money to transfer to %s:"), "Continue", "Back", FormatNumber(PlayerData[playerid][pBankMoney]), ReturnName(PlayerData[playerid][pTransfer], 0));
 
 		if (!strcmp(PlayerData[playerid][pIP], PlayerData[PlayerData[playerid][pTransfer]][pIP])) {
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s (%s) has transferred %s to %s (%s).", ReturnName(playerid, 0), PlayerData[playerid][pIP], FormatNumber(amount), ReturnName(PlayerData[playerid][pTransfer], 0), PlayerData[playerid][pIP]);
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s (%s) has transferred %s to %s (%s).", ReturnName(playerid, 0), PlayerData[playerid][pIP], FormatNumber(amount), ReturnName(PlayerData[playerid][pTransfer], 0), PlayerData[playerid][pIP]);
 		}
 		PlayerData[playerid][pBankMoney] -= amount;
 		PlayerData[PlayerData[playerid][pTransfer]][pBankMoney] += amount;

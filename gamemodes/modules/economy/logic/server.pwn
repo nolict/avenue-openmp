@@ -45,7 +45,7 @@ public LotteryUpdate()
 			}
 			else
 			{
-		    	SendClientMessage(i, COLOR_WHITE, "[LOTTERY]: You didn't win the lottery draw this time.");
+		    	SendClientMessage(i, COLOR_WHITE, "LOTTERY: You didn't win the lottery draw this time.");
 			}
 			PlayerData[i][pLottery] = 0;
 			PlayerData[i][pLotteryB] = 0;

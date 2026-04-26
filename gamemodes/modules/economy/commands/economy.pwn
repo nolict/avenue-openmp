@@ -76,8 +76,8 @@ CMD:pay(playerid, params[])
 	if (isnull(params))
 	    return SendSyntaxMessage(playerid, "/(r)adio [radio text]");
 
-	SendFactionMessage(PlayerData[playerid][pFaction], COLOR_RADIO, "[RADIO] %s %s: %s", Faction_GetRank(playerid), ReturnName(playerid, 0), params);
-	SendNearbyMessage(playerid, 5.0, COLOR_WHITE, "[RADIO] %s: %s", ReturnName(playerid, 0), params);
+	SendFactionMessage(PlayerData[playerid][pFaction], COLOR_RADIO, "RADIO: %s %s: %s", Faction_GetRank(playerid), ReturnName(playerid, 0), params);
+	SendNearbyMessage(playerid, 5.0, COLOR_WHITE, "RADIO: %s: %s", ReturnName(playerid, 0), params);
 	Log_Write("logs/faction_chat.txt", "[%s][Radio] %s %s: %s", ReturnDate(), Faction_GetRank(playerid), ReturnName(playerid, 0), params);
 	return 1;
 }*/
@@ -100,7 +100,7 @@ CMD:givecash(playerid, params[])
 
 	GiveMoney(userid, amount);
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has given %s to %s.", ReturnName(playerid, 0), FormatNumber(amount), ReturnName(userid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has given %s to %s.", ReturnName(playerid, 0), FormatNumber(amount), ReturnName(userid, 0));
  	Log_Write("logs/admin_log.txt", "[%s] %s has given %s to %s.", ReturnDate(), ReturnName(playerid, 0), FormatNumber(amount), ReturnName(userid, 0));
 
 	return 1;

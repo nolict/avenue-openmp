@@ -107,8 +107,8 @@ CMD:text(playerid, params[])
         GiveMoney(playerid, -1);
 		ShowPlayerFooter(playerid, "You've been ~r~charged~w~ $1 to send a text.");
 
-		SendClientMessageEx(targetid, COLOR_YELLOW, "[TEXT]: %s - %s (%d)", text, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
-		SendClientMessageEx(playerid, COLOR_YELLOW, "[TEXT]: %s - %s (%d)", text, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
+		SendClientMessageEx(targetid, COLOR_YELLOW, "TEXT: %s - %s (%d)", text, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
+		SendClientMessageEx(playerid, COLOR_YELLOW, "TEXT: %s - %s (%d)", text, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
 
         PlayerPlaySoundEx(targetid, 21001);
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their phone and sends a text.", ReturnName(playerid, 0));
@@ -138,8 +138,8 @@ CMD:answer(playerid, params[])
 	PlayerData[playerid][pIncomingCall] = 0;
 	PlayerData[targetid][pIncomingCall] = 0;
 
-	SendClientMessage(playerid, COLOR_YELLOW, "[SERVER]:{FFFFFF} You have answered the call.");
-	SendClientMessage(targetid, COLOR_YELLOW, "[SERVER]:{FFFFFF} The other line has accepted the call.");
+	SendClientMessage(playerid, COLOR_YELLOW, "SERVER: {FFFFFF}You have answered the call.");
+	SendClientMessage(targetid, COLOR_YELLOW, "SERVER: {FFFFFF}The other line has accepted the call.");
 
 	SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has accepted the incoming call.", ReturnName(playerid, 0));
 	return 1;
@@ -164,15 +164,15 @@ CMD:hangup(playerid, params[])
 
 	if (PlayerData[playerid][pIncomingCall])
 	{
-	    SendClientMessage(playerid, COLOR_YELLOW, "[PHONE]:{FFFFFF} You have declined the incoming call.");
-	    SendClientMessage(targetid, COLOR_YELLOW, "[PHONE]:{FFFFFF} The other line has declined the call.");
+	    SendClientMessage(playerid, COLOR_YELLOW, "PHONE: {FFFFFF}You have declined the incoming call.");
+	    SendClientMessage(targetid, COLOR_YELLOW, "PHONE: {FFFFFF}The other line has declined the call.");
 
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has declined the call.", ReturnName(playerid, 0));
 	}
 	else
 	{
-        SendClientMessage(playerid, COLOR_YELLOW, "[PHONE]:{FFFFFF} You have hung up the call.");
-	    SendClientMessage(targetid, COLOR_YELLOW, "[PHONE]:{FFFFFF} The other line has hung up the call.");
+        SendClientMessage(playerid, COLOR_YELLOW, "PHONE: {FFFFFF}You have hung up the call.");
+	    SendClientMessage(targetid, COLOR_YELLOW, "PHONE: {FFFFFF}The other line has hung up the call.");
 
 	    SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has hung up their cellphone.", ReturnName(playerid, 0));
 	    SendNearbyMessage(targetid, 30.0, COLOR_PURPLE, "** %s has hung up their cellphone.", ReturnName(targetid, 0));
@@ -274,7 +274,7 @@ CMD:createcrate(playerid, params[])
 	if (sscanf(params, "d", type))
 	{
 	    SendSyntaxMessage(playerid, "/createcrate [type]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Melee | 2: Pistol Parts | 3: SMG Parts | 4: Shotgun Parts | 5: Rifle Parts | 6: Drugs");
+	    SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Melee | 2: Pistol Parts | 3: SMG Parts | 4: Shotgun Parts | 5: Rifle Parts | 6: Drugs");
 		return 1;
 	}
 	if (type < 1 || type > 6)
@@ -623,7 +623,7 @@ CMD:creategarbage(playerid, params[])
 	if (sscanf(params, "d", type))
 	{
 	    SendSyntaxMessage(playerid, "/creategarbage [type]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Dumpster | 2: Trash Can");
+	    SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Dumpster | 2: Trash Can");
 		return 1;
 	}
 	if (type < 1 || type > 2)
@@ -737,7 +737,7 @@ CMD:createvendor(playerid, params[])
 	if (sscanf(params, "d", type))
 	{
 	    SendSyntaxMessage(playerid, "/createvendor [type]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Food | 2: Soda");
+	    SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Food | 2: Soda");
 		return 1;
 	}
 	if (type < 1 || type > 2)
@@ -1834,7 +1834,7 @@ CMD:boombox(playerid, params[])
 	if (sscanf(params, "s[24]S()[128]", type, string))
 	{
 	    SendSyntaxMessage(playerid, "/boombox [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} place, pickup, url");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}place, pickup, url");
 	    return 1;
 	}
 	if (!strcmp(type, "place", true))
@@ -1926,7 +1926,7 @@ CMD:search(playerid, params[])
 	if (sscanf(params, "u", userid))
 	{
 		SendSyntaxMessage(playerid, "/search [playerid/name]");
-		SendClientMessage(playerid, COLOR_YELLOW, "[HINT]:{FFFFFF} Use /searchbp to search a player's backpack.");
+		SendClientMessage(playerid, COLOR_YELLOW, "HINT: {FFFFFF}Use /searchbp to search a player's backpack.");
 		return 1;
 	}
 	if (userid == INVALID_PLAYER_ID || !IsPlayerNearPlayer(playerid, userid, 5.0))
@@ -2410,7 +2410,7 @@ CMD:clearinventory(playerid, params[])
 	SendAdminAction(playerid, "You have cleared %s's inventory from all items.", ReturnName(userid, 0));
 	SendAdminAction(userid, "%s has cleared your inventory from all items.", ReturnName(playerid, 0));
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has cleared %s's inventory.", ReturnName(playerid, 0), ReturnName(userid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has cleared %s's inventory.", ReturnName(playerid, 0), ReturnName(userid, 0));
 	return 1;
 }
 

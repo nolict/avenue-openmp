@@ -416,7 +416,7 @@ CMD:createcar(playerid, params[])
 	if (sscanf(params, "s[32]I(-1)I(-1)I(0)", model, color1, color2, type))
  	{
 	 	SendSyntaxMessage(playerid, "/createcar [model id/name] [color 1] [color 2] <faction>");
-	 	SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Police | 2: News | 3: Medical | 4: Government");
+	 	SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Police | 2: News | 3: Medical | 4: Government");
 	 	return 1;
 	}
 	if ((model[0] = GetVehicleModelByName(model)) == 0)
@@ -529,7 +529,7 @@ CMD:editimpound(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editimpound [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, release");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, release");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_IMPOUND_LOTS) || !ImpoundData[id][impoundExists])
@@ -551,7 +551,7 @@ CMD:editimpound(playerid, params[])
 		Impound_Refresh(id);
 		Impound_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of impound ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of impound ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "release", true))
 	{
@@ -570,7 +570,7 @@ CMD:editimpound(playerid, params[])
 		ImpoundData[id][impoundRelease][3] = angle;
 
 		Impound_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the release point of impound ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the release point of impound ID: %d.", ReturnName(playerid, 0), id);
 	}
 	return 1;
 }
@@ -863,7 +863,7 @@ CMD:editcar(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editcar [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, faction, color1, color2");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, faction, color1, color2");
 		return 1;
 	}
 	if (!IsValidVehicle(id) || Car_GetID(id) == -1)
@@ -880,7 +880,7 @@ CMD:editcar(playerid, params[])
 		Car_Spawn(id);
 
 		SetPlayerPosEx(playerid, CarData[id][carPos][0], CarData[id][carPos][1], CarData[id][carPos][2] + 2.0, 1000);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of vehicle ID: %d.", ReturnName(playerid, 0), CarData[id][carVehicle]);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of vehicle ID: %d.", ReturnName(playerid, 0), CarData[id][carVehicle]);
 	}
 	else if (!strcmp(type, "faction", true))
 	{
@@ -889,7 +889,7 @@ CMD:editcar(playerid, params[])
 	    if (sscanf(string, "d", typeint))
      	{
      	    SendSyntaxMessage(playerid, "/editcar [id] [faction] [type]");
-		 	SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Police | 2: News | 3: Medical | 4: Government");
+		 	SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Police | 2: News | 3: Medical | 4: Government");
 		 	return 1;
 		}
 		if (typeint < 0 || typeint > 4)
@@ -898,7 +898,7 @@ CMD:editcar(playerid, params[])
 		CarData[id][carFaction] = typeint;
 
 		Car_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], typeint);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], typeint);
 	}
     else if (!strcmp(type, "color1", true))
 	{
@@ -914,7 +914,7 @@ CMD:editcar(playerid, params[])
 		ChangeVehicleColor(CarData[id][carVehicle], CarData[id][carColor1], CarData[id][carColor2]);
 
 		Car_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the color 1 of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], color1);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the color 1 of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], color1);
 	}
     else if (!strcmp(type, "color2", true))
 	{
@@ -930,7 +930,7 @@ CMD:editcar(playerid, params[])
 		ChangeVehicleColor(CarData[id][carVehicle], CarData[id][carColor1], CarData[id][carColor2]);
 
 		Car_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the color 2 of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], color2);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the color 2 of vehicle ID: %d to %d.", ReturnName(playerid, 0), CarData[id][carVehicle], color2);
 	}
 	return 1;
 }

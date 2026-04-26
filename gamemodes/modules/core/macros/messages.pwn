@@ -7,13 +7,19 @@
 // ====== Message Macros ======
 
 #define SendServerMessage(%0,%1) \
-	SendClientMessageEx(%0, COLOR_SERVER, "[SERVER]:{FFFFFF} "%1)
+	SendClientMessageEx(%0, X11_LIGHT_SKY_BLUE_1, "SERVER: {FFFFFF}"%1)
+
+#define SendCustomMessage(%0,%1,%2) \
+	SendClientMessageEx(%0, X11_LIGHT_SKY_BLUE_1, %1": {FFFFFF}"%2)
 
 #define SendSyntaxMessage(%0,%1) \
-	SendClientMessageEx(%0, COLOR_GREY, "[SYNTAX]:{FFFFFF} "%1)
+	SendClientMessageEx(%0, X11_GREY_80, "USAGE: "%1)
 
 #define SendErrorMessage(%0,%1) \
-	SendClientMessageEx(%0, COLOR_LIGHTRED, "[ERROR]:{FFFFFF} "%1)
+	SendClientMessageEx(%0, X11_GREY_80, "ERROR: "%1)
 
 #define SendAdminAction(%0,%1) \
-	SendClientMessageEx(%0, COLOR_CLIENT, "[ADMIN]:{FFFFFF} "%1)
+	SendClientMessageEx(%0, X11_TOMATO, "ADMIN: "%1)
+
+#define PermissionError(%0) \
+	SendClientMessageEx(%0, X11_GREY_80, "ERROR: You don't have any permissions!")

@@ -72,7 +72,7 @@ CMD:createfaction(playerid, params[])
 	if (sscanf(params, "ds[32]", type, name))
 	{
 	    SendSyntaxMessage(playerid, "/createfaction [type] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Police | 2: News | 3: Medical | 4: Government | 5: Gang");
+	    SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Police | 2: News | 3: Medical | 4: Government | 5: Gang");
 		return 1;
 	}
 	if (type < 1 || type > 5)
@@ -285,7 +285,7 @@ CMD:editfaction(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editfaction [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} name, color, type, models, locker, ranks, maxranks");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}name, color, type, models, locker, ranks, maxranks");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_FACTIONS) || !FactionData[id][factionExists])
@@ -301,7 +301,7 @@ CMD:editfaction(playerid, params[])
 	    format(FactionData[id][factionName], 32, name);
 
 	    Faction_Save(id);
-		SendFactionAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the name of faction ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
+		SendFactionAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the name of faction ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
 	}
 	else if (!strcmp(type, "maxranks", true))
 	{
@@ -316,7 +316,7 @@ CMD:editfaction(playerid, params[])
 	    FactionData[id][factionRanks] = ranks;
 
 	    Faction_Save(id);
-		SendFactionAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the maximum ranks of faction ID: %d to %d.", ReturnName(playerid, 0), id, ranks);
+		SendFactionAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the maximum ranks of faction ID: %d to %d.", ReturnName(playerid, 0), id, ranks);
 	}
 	else if (!strcmp(type, "ranks", true))
 	{
@@ -333,7 +333,7 @@ CMD:editfaction(playerid, params[])
 	    Faction_Update(id);
 
 	    Faction_Save(id);
-		SendFactionAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the {%06x}color{FF6347} of faction ID: %d.", ReturnName(playerid, 0), color >>> 8, id);
+		SendFactionAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the {%06x}color{FF6347} of faction ID: %d.", ReturnName(playerid, 0), color >>> 8, id);
 	}
 	else if (!strcmp(type, "type", true))
 	{
@@ -342,7 +342,7 @@ CMD:editfaction(playerid, params[])
 	    if (sscanf(string, "d", typeint))
      	{
 		 	SendSyntaxMessage(playerid, "/editfaction [id] [type] [faction type]");
-            SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Police | 2: News | 3: Medical | 4: Government | 5: Gang");
+            SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Police | 2: News | 3: Medical | 4: Government | 5: Gang");
             return 1;
 		}
 		if (typeint < 1 || typeint > 5)
@@ -351,7 +351,7 @@ CMD:editfaction(playerid, params[])
 	    FactionData[id][factionType] = typeint;
 
 	    Faction_Save(id);
-		SendFactionAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of faction ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
+		SendFactionAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of faction ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
 	}
 	else if (!strcmp(type, "models", true))
 	{
@@ -381,7 +381,7 @@ CMD:color(playerid, params[])
 
 	if (sscanf(params, "h", color)) {
 	 	SendSyntaxMessage(playerid, "/color [hex color]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[EXAMPLE]:{FFFFFF} 0xFFFFFFFF is white, 0xFF0000FF is red, etc.");
+	    SendClientMessage(playerid, COLOR_YELLOW, "EXAMPLE: {FFFFFF}0xFFFFFFFF is white, 0xFF0000FF is red, etc.");
 	}
 	else {
 	    SendClientMessageEx(playerid, color, "This is a test message, testing color 0x%06xFF.", color >>> 8);
@@ -1063,7 +1063,7 @@ CMD:arrest(playerid, params[])
 	PlayerTextDrawShow(userid, PlayerData[userid][pTextdraws][70]);
     SetPlayerSpecialAction(userid, SPECIAL_ACTION_NONE);
 
-    SendClientMessageToAllEx(COLOR_LIGHTRED, "[PRISON] %s was imprisoned for %d days at San Andreas Prison.", ReturnName(userid, 0), time);
+    SendClientMessageToAllEx(COLOR_LIGHTRED, "PRISON: %s was imprisoned for %d days at San Andreas Prison.", ReturnName(userid, 0), time);
     return 1;
 }
 
@@ -1295,13 +1295,13 @@ CMD:bc(playerid, params[])
 
 	if (strlen(params) > 64) {
 	    foreach (new i : Player) if (!PlayerData[i][pDisableBC]) {
-		    SendClientMessageEx(i, COLOR_LIGHTGREEN, "[NEWS] Reporter %s: %.64s", ReturnName(playerid, 0), params);
+		    SendClientMessageEx(i, COLOR_LIGHTGREEN, "NEWS: Reporter %s: %.64s", ReturnName(playerid, 0), params);
 		    SendClientMessageEx(i, COLOR_LIGHTGREEN, "...%s", params[64]);
 		}
 	}
 	else {
         foreach (new i : Player) if (!PlayerData[i][pDisableBC]) {
-		    SendClientMessageEx(i, COLOR_LIGHTGREEN, "[NEWS] Reporter %s: %s", ReturnName(playerid, 0), params);
+		    SendClientMessageEx(i, COLOR_LIGHTGREEN, "NEWS: Reporter %s: %s", ReturnName(playerid, 0), params);
 		}
 	}
 	return 1;
@@ -1419,7 +1419,7 @@ CMD:twithdraw(playerid, params[])
 	GiveMoney(playerid, amount);
 	SendServerMessage(playerid, "You have withdrawn %s from the treasury (%s available).", FormatNumber(amount), FormatNumber(g_TaxVault));
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has withdrawn %s from the treasury.", ReturnName(playerid, 0), FormatNumber(amount));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has withdrawn %s from the treasury.", ReturnName(playerid, 0), FormatNumber(amount));
 	Log_Write("logs/tax_vault.txt", "[%s] %s has withdrawn %s from the treasury.", ReturnDate(), ReturnName(playerid, 0), FormatNumber(amount));
 	return 1;
 }
@@ -1451,7 +1451,7 @@ CMD:tdeposit(playerid, params[])
 	GiveMoney(playerid, -amount);
 	SendServerMessage(playerid, "You have deposited %s into the treasury (%s available).", FormatNumber(amount), FormatNumber(g_TaxVault));
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has deposited %s into the treasury.", ReturnName(playerid, 0), FormatNumber(amount));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has deposited %s into the treasury.", ReturnName(playerid, 0), FormatNumber(amount));
 	Log_Write("logs/tax_vault.txt", "[%s] %s has deposited %s into the treasury.", ReturnDate(), ReturnName(playerid, 0), FormatNumber(amount));
 	return 1;
 }
@@ -1466,7 +1466,7 @@ CMD:spike(playerid, params[])
 	if (isnull(params))
  	{
 	 	SendSyntaxMessage(playerid, "/spike [option]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[OPTIONS]:{FFFFFF} drop, destroy, destroyall");
+	    SendClientMessage(playerid, COLOR_YELLOW, "OPTIONS: {FFFFFF}drop, destroy, destroyall");
 		return 1;
 	}
 	static
@@ -1540,7 +1540,7 @@ CMD:roadblock(playerid, params[])
 	if (isnull(params))
  	{
 	 	SendSyntaxMessage(playerid, "/roadblock [option]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[OPTIONS]:{FFFFFF} drop, destroy, destroyall");
+	    SendClientMessage(playerid, COLOR_YELLOW, "OPTIONS: {FFFFFF}drop, destroy, destroyall");
 		return 1;
 	}
 	static
@@ -1660,7 +1660,7 @@ CMD:editgate(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editgate [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, speed, radius, time, model, pos, move, pass, linkid, faction");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, speed, radius, time, model, pos, move, pass, linkid, faction");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_GATES) || !GateData[id][gateExists])
@@ -1693,7 +1693,7 @@ CMD:editgate(playerid, params[])
 		GateData[id][gateOpened] = false;
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the position of gate ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the position of gate ID: %d.", ReturnName(playerid, 0), id);
 		return 1;
 	}
 	else if (!strcmp(type, "speed", true))
@@ -1710,7 +1710,7 @@ CMD:editgate(playerid, params[])
         GateData[id][gateSpeed] = speed;
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the speed of gate ID: %d to %.2f.", ReturnName(playerid, 0), id, speed);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the speed of gate ID: %d to %.2f.", ReturnName(playerid, 0), id, speed);
 		return 1;
 	}
 	else if (!strcmp(type, "radius", true))
@@ -1727,7 +1727,7 @@ CMD:editgate(playerid, params[])
         GateData[id][gateRadius] = radius;
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the radius of gate ID: %d to %.2f.", ReturnName(playerid, 0), id, radius);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the radius of gate ID: %d to %.2f.", ReturnName(playerid, 0), id, radius);
 		return 1;
 	}
 	else if (!strcmp(type, "time", true))
@@ -1744,7 +1744,7 @@ CMD:editgate(playerid, params[])
         GateData[id][gateTime] = time;
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the close time of gate ID: %d to %d.", ReturnName(playerid, 0), id, time);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the close time of gate ID: %d to %d.", ReturnName(playerid, 0), id, time);
 		return 1;
 	}
 	else if (!strcmp(type, "model", true))
@@ -1764,7 +1764,7 @@ CMD:editgate(playerid, params[])
 		GateData[id][gateObject] = CreateDynamicObject(GateData[id][gateModel], GateData[id][gatePos][0], GateData[id][gatePos][1], GateData[id][gatePos][2], GateData[id][gatePos][3], GateData[id][gatePos][4], GateData[id][gatePos][5], GateData[id][gateWorld], GateData[id][gateInterior]);
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the model of gate ID: %d to %d.", ReturnName(playerid, 0), id, model);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the model of gate ID: %d to %d.", ReturnName(playerid, 0), id, model);
 		return 1;
 	}
     else if (!strcmp(type, "pos", true))
@@ -1804,10 +1804,10 @@ CMD:editgate(playerid, params[])
 		Gate_Save(id);
 
 		if (id == -1)
-			SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the faction of gate ID: %d to no gate.", ReturnName(playerid, 0), id);
+			SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the faction of gate ID: %d to no gate.", ReturnName(playerid, 0), id);
 
 		else
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the faction of gate ID: %d to ID: %d.", ReturnName(playerid, 0), id, linkid);
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the faction of gate ID: %d to ID: %d.", ReturnName(playerid, 0), id, linkid);
 
 		return 1;
 	}
@@ -1826,10 +1826,10 @@ CMD:editgate(playerid, params[])
 		Gate_Save(id);
 
 		if (factionid == -1)
-			SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the faction of gate ID: %d to no faction.", ReturnName(playerid, 0), id);
+			SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the faction of gate ID: %d to no faction.", ReturnName(playerid, 0), id);
 
 		else
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the faction of gate ID: %d to \"%s\".", ReturnName(playerid, 0), id, FactionData[factionid][factionName]);
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the faction of gate ID: %d to \"%s\".", ReturnName(playerid, 0), id, FactionData[factionid][factionName]);
 
 		return 1;
 	}
@@ -1847,7 +1847,7 @@ CMD:editgate(playerid, params[])
 		else format(GateData[id][gatePass], 32, pass);
 
 		Gate_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the password of gate ID: %d to %s.", ReturnName(playerid, 0), id, pass);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the password of gate ID: %d to %s.", ReturnName(playerid, 0), id, pass);
 		return 1;
 	}
 	return 1;
@@ -1889,7 +1889,7 @@ CMD:channel(playerid, params[])
 	 	SendSyntaxMessage(playerid, "/channel [radio channel] (0 to disable)");
 
 	 	if (PlayerData[playerid][pChannel] > 0)
-			SendClientMessageEx(playerid, COLOR_YELLOW, "[NOTE]:{FFFFFF} Your current radio channel is set to %d.", PlayerData[playerid][pChannel]);
+			SendClientMessageEx(playerid, COLOR_YELLOW, "NOTE: {FFFFFF}Your current radio channel is set to %d.", PlayerData[playerid][pChannel]);
 
 		return 1;
 	}

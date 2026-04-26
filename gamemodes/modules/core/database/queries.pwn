@@ -19,10 +19,10 @@ SQL_Connect() {
 	g_iHandle = mysql_connect(SQL_HOSTNAME, SQL_USERNAME, SQL_DATABASE, SQL_PASSWORD);
 
 	if (mysql_errno(g_iHandle) != 0) {
-	    printf("[SQL] Connection to \"%s\" failed! Please check the connection settings...\a", SQL_HOSTNAME);
+	    printf("SQL: Connection to \"%s\" failed! Please check the connection settings...\a", SQL_HOSTNAME);
 	}
 	else {
-		printf("[SQL] Connection to \"%s\" passed!", SQL_HOSTNAME);
+		printf("SQL: Connection to \"%s\" passed!", SQL_HOSTNAME);
 	}
 }
 

@@ -175,14 +175,14 @@ CMD:o(playerid, params[])
     if (strlen(params) > 64)
 	{
         foreach (new i : Player) if (!PlayerData[i][pDisableOOC] && PlayerData[i][pCreated]) {
-		    SendClientMessageEx(i, 0xAAC4E5FF, "(( [OOC] %s: %.64s", ReturnName(playerid, 0), params);
+		    SendClientMessageEx(i, 0xAAC4E5FF, "(( OOC: %s: %.64s", ReturnName(playerid, 0), params);
 		    SendClientMessageEx(i, 0xAAC4E5FF, "...%s ))", params[64]);
 		}
 	}
 	else
 	{
         foreach (new i : Player) if (!PlayerData[i][pDisableOOC] && PlayerData[i][pCreated]) {
-		    SendClientMessageEx(i, 0xAAC4E5FF, "(( [OOC] %s: %s ))", ReturnName(playerid, 0), params);
+		    SendClientMessageEx(i, 0xAAC4E5FF, "(( OOC: %s: %s ))", ReturnName(playerid, 0), params);
 		}
 	}
 	return 1;
@@ -527,7 +527,7 @@ CMD:seekhelp(playerid, params[])
 	    return SendErrorMessage(playerid, "You must wait %d seconds before sending another request.", PlayerData[playerid][pHelpTime] - gettime());
 
 	PlayerData[playerid][pSeekHelp] = 1;
-	SendTesterMessage(COLOR_CYAN, "[HELP]: %s (ID: %d) asks: \"%s\"", ReturnName(playerid, 0), playerid, params);
+	SendTesterMessage(COLOR_CYAN, "HELP: %s (ID: %d) asks: \"%s\"", ReturnName(playerid, 0), playerid, params);
 
 	PlayerData[playerid][pHelpTime] = gettime() + 15;
 	SendServerMessage(playerid, "You have sent a help request to the tester team.");
@@ -572,7 +572,7 @@ CMD:tog(playerid, params[])
 	if (isnull(params))
 	{
 	    SendSyntaxMessage(playerid, "/tog [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} ooc, pm, faction, tester, broadcast, speedo");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}ooc, pm, faction, tester, broadcast, speedo");
 	    return 1;
 	}
 	if (!strcmp(params, "ooc", true))
@@ -780,7 +780,7 @@ CMD:usedrug(playerid, params[])
 	if (isnull(params))
 	{
 	    SendSyntaxMessage(playerid, "/usedrug [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} marijuana, cocaine, heroin, steroids");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}marijuana, cocaine, heroin, steroids");
 		return 1;
 	}
 	if (PlayerData[playerid][pDrugTime] > 0)
@@ -1027,7 +1027,7 @@ CMD:warn(playerid, params[])
 	        ResetWarnings(userid);
 
 	        SendAdminAction(userid, "You've been banned for exceeding your warnings (\"%s\").", reason);
-	        SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s was banned for 3 warnings by %s, reason: %s", ReturnName(userid, 0), ReturnName(playerid, 0), reason);
+	        SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s was banned for 3 warnings by %s, reason: %s", ReturnName(userid, 0), ReturnName(playerid, 0), reason);
 
 			Blacklist_Add(PlayerData[userid][pIP], PlayerData[userid][pUsername], PlayerData[playerid][pUsername], reason);
 			KickEx(userid);
@@ -1058,7 +1058,7 @@ CMD:clearwarns(playerid, params[])
 	SendAdminAction(playerid, "You have cleared %s's warnings.", ReturnName(userid, 0));
 	SendAdminAction(userid, "%s has cleared your warnings.", ReturnName(playerid, 0));
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has cleared %s's warnings.", ReturnName(playerid, 0), ReturnName(userid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has cleared %s's warnings.", ReturnName(playerid, 0), ReturnName(userid, 0));
 	return 1;
 }
 
@@ -1166,7 +1166,7 @@ CMD:call(playerid, params[])
 		PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
 
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their cellphone and places a call.", ReturnName(playerid, 0));
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, "[OPERATOR]:{FFFFFF} Which service do you require: \"police\" or \"medics\"?");
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, "OPERATOR: {FFFFFF}Which service do you require: \"police\" or \"medics\"?");
 	}
 	else if (number == 1222)
 	{
@@ -1174,7 +1174,7 @@ CMD:call(playerid, params[])
 	    PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
 
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their cellphone and places a call.", ReturnName(playerid, 0));
-		SendClientMessage(playerid, COLOR_YELLOW, "[OPERATOR]:{FFFFFF} The taxi department has been notified of your call.");
+		SendClientMessage(playerid, COLOR_YELLOW, "OPERATOR: {FFFFFF}The taxi department has been notified of your call.");
 
         SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s has hung up their cellphone.", ReturnName(playerid, 0));
 		SendJobMessage(3, COLOR_YELLOW, "** %s is requesting a taxi at %s (use /acceptcall to accept).", ReturnName(playerid, 0), GetPlayerLocation(playerid));
@@ -1187,14 +1187,14 @@ CMD:call(playerid, params[])
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their cellphone and places a call.", ReturnName(playerid, 0));
 
 		if (PlayerData[playerid][pPlayingHours] < 4) {
-            SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Sorry, you must play 4 hours to place an advertisement.");
+            SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Sorry, you must play 4 hours to place an advertisement.");
 		    cmd_hangup(playerid, "\1");
 		}
 		else if (PlayerData[playerid][pAdTime] < 1) {
-			SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Please say \"yes\" if you wish to advertise for $500.");
+			SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Please say \"yes\" if you wish to advertise for $500.");
 		}
 		else {
-		    SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} You've already advertised in the last 2 minutes. Please try again later.");
+		    SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}You've already advertised in the last 2 minutes. Please try again later.");
 		    cmd_hangup(playerid, "\1");
 		}
 	}
@@ -1205,10 +1205,10 @@ CMD:call(playerid, params[])
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their cellphone and places a call.", ReturnName(playerid, 0));
 
 		if (PlayerData[playerid][pPlayingHours] < 4) {
-            SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Sorry, you must play 4 hours to rent a billboard.");
+            SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Sorry, you must play 4 hours to rent a billboard.");
 		    cmd_hangup(playerid, "\1");
 		}
-		SendClientMessageEx(playerid, COLOR_YELLOW, "[PHONE]:{FFFFFF} Hello, this is the Los Santos Billboard Agency, please listen to the following choices!");
+		SendClientMessageEx(playerid, COLOR_YELLOW, "PHONE: {FFFFFF}Hello, this is the Los Santos Billboard Agency, please listen to the following choices!");
 		ViewBillboards(playerid);
 	}
 	else if ((targetid = GetNumberOwner(number)) != INVALID_PLAYER_ID)
@@ -1225,8 +1225,8 @@ CMD:call(playerid, params[])
 		PlayerData[targetid][pCallLine] = playerid;
 		PlayerData[playerid][pCallLine] = targetid;
 
-		SendClientMessageEx(playerid, COLOR_YELLOW, "[PHONE]:{FFFFFF} Attempting to dial #%d, please wait for an answer...", number);
-		SendClientMessageEx(targetid, COLOR_YELLOW, "[PHONE]:{FFFFFF} Incoming call from #%d (type \"/answer\" to answer the phone).", PlayerData[playerid][pPhone]);
+		SendClientMessageEx(playerid, COLOR_YELLOW, "PHONE: {FFFFFF}Attempting to dial #%d, please wait for an answer...", number);
+		SendClientMessageEx(targetid, COLOR_YELLOW, "PHONE: {FFFFFF}Incoming call from #%d (type \"/answer\" to answer the phone).", PlayerData[playerid][pPhone]);
 
         PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
         PlayerPlaySoundEx(targetid, 23000);

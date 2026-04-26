@@ -10,13 +10,13 @@ Dialog:Tutorial(playerid, response, listitem, inputtext[])
 	if (PlayerData[playerid][pTutorialStage] == 3)
 	{
 		PlayerData[playerid][pTutorialStage] = 4;
-		SendClientMessage(playerid, COLOR_SERVER, "Press 'Y', select the soda bottle, then drop the item.");
+		SendServerMessage(playerid, "Press 'Y', select the soda bottle, then drop the item.");
 	}
 	else if (PlayerData[playerid][pTutorialStage] == 4)
 	{
 		PlayerData[playerid][pTutorialStage] = 5;
 
-		SendClientMessage(playerid, COLOR_SERVER, "Please go to the exit and press 'F'.");
+		SendServerMessage(playerid, "Please go to the exit and press 'F'.");
 		SetPlayerCheckpoint(playerid, -228.8403, 1401.1831, 27.7656, 1.0);
 	}
 	return 1;

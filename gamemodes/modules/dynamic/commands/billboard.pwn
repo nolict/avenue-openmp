@@ -74,7 +74,7 @@ CMD:editbillboard(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editbillboard [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, name, price, message, owner, range");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, name, price, message, owner, range");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_BILLBOARDS) || !BillBoardData[id][bbExists])
@@ -87,7 +87,7 @@ CMD:editbillboard(playerid, params[])
 		Billboard_Refresh(id);
 		Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of billboard ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of billboard ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "price", true))
 	{
@@ -101,7 +101,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the price of billboard ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the price of billboard ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
 	}
 	else if (!strcmp(type, "name", true))
 	{
@@ -115,7 +115,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the name of billboard ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the name of billboard ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
 	}
 	else if (!strcmp(type, "message", true))
 	{
@@ -129,7 +129,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the message of billboard ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the message of billboard ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
 	}
 	else if (!strcmp(type, "owner", true))
 	{
@@ -145,7 +145,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the owner of billboard ID: %d", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the owner of billboard ID: %d", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "removeowner", true))
 	{
@@ -157,7 +157,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has removed the owner of billboard ID: %d", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has removed the owner of billboard ID: %d", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "range", true))
 	{
@@ -183,7 +183,7 @@ CMD:editbillboard(playerid, params[])
 	    Billboard_Refresh(id);
 	    Billboard_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the range of billboard ID: %d to %d.", ReturnName(playerid, 0), id, range);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the range of billboard ID: %d to %d.", ReturnName(playerid, 0), id, range);
 	}
 	return 1;
 }

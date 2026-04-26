@@ -110,7 +110,7 @@ CMD:editjob(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editjob [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, type, point, deliver");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, type, point, deliver");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_DYNAMIC_JOBS) || !JobData[id][jobExists])
@@ -135,7 +135,7 @@ CMD:editjob(playerid, params[])
 		Job_Refresh(id);
 		Job_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of job ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of job ID: %d.", ReturnName(playerid, 0), id);
 	}
  	else if (!strcmp(type, "type", true))
 	{
@@ -152,7 +152,7 @@ CMD:editjob(playerid, params[])
 	    Job_Refresh(id);
 	    Job_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of job ID: %d to %s.", ReturnName(playerid, 0), id, Job_GetName(typeint));
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of job ID: %d to %s.", ReturnName(playerid, 0), id, Job_GetName(typeint));
 	}
 	else if (!strcmp(type, "point", true))
 	{
@@ -172,7 +172,7 @@ CMD:editjob(playerid, params[])
 		Job_Refresh(id);
 		Job_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the point of job ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the point of job ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "deliver", true))
 	{
@@ -193,7 +193,7 @@ CMD:editjob(playerid, params[])
 		Job_Refresh(id);
 		Job_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the deliver point of job ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the deliver point of job ID: %d.", ReturnName(playerid, 0), id);
 	}
 	return 1;
 }
@@ -464,7 +464,7 @@ CMD:taxi(playerid, params[])
 		SetPlayerColor(playerid, 0xF5DEB300);
 
 	    PlayerData[playerid][pTaxiDuty] = true;
-	    SendClientMessageToAllEx(COLOR_GREEN, "[TAXI]: %s is now on taxi duty. Type \"/call 1222\" to call a taxi!", ReturnName(playerid, 0));
+	    SendClientMessageToAllEx(COLOR_GREEN, "TAXI: %s is now on taxi duty. Type \"/call 1222\" to call a taxi!", ReturnName(playerid, 0));
 	}
 	return 1;
 }
@@ -516,7 +516,7 @@ CMD:sellfood(playerid, params[])
 	if (sscanf(params, "us[24]d", userid, food, price))
 	{
 	    SendSyntaxMessage(playerid, "/sellfood [playerid/name] [food name] [price]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} water, soda, burger, pizza, chicken");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}water, soda, burger, pizza, chicken");
 	    return 1;
 	}
 	if (userid == INVALID_PLAYER_ID || !IsPlayerNearPlayer(playerid, userid, 7.0))

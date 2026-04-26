@@ -143,8 +143,8 @@ Dialog:TextMessage(playerid, response, listitem, inputtext[])
 		GiveMoney(playerid, -1);
 		ShowPlayerFooter(playerid, "You've been ~r~charged~w~ $1 to send a text.");
 
-		SendClientMessageEx(targetid, COLOR_YELLOW, "[TEXT]: %s - %s (%d)", inputtext, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
-		SendClientMessageEx(playerid, COLOR_YELLOW, "[TEXT]: %s - %s (%d)", inputtext, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
+		SendClientMessageEx(targetid, COLOR_YELLOW, "TEXT: %s - %s (%d)", inputtext, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
+		SendClientMessageEx(playerid, COLOR_YELLOW, "TEXT: %s - %s (%d)", inputtext, ReturnName(playerid, 0), PlayerData[playerid][pPhone]);
 
         PlayerPlaySoundEx(targetid, 21001);
 		SendNearbyMessage(playerid, 30.0, COLOR_PURPLE, "** %s takes out their phone and sends a text.", ReturnName(playerid, 0));

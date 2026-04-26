@@ -168,7 +168,7 @@ CMD:report(playerid, params[])
 	if (isnull(params))
 	{
 	    SendSyntaxMessage(playerid, "/report [reason]");
-	    SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} Please only use this command for valid purposes only.");
+	    SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}Please only use this command for valid purposes only.");
 	    return 1;
 	}
 	if (Report_GetCount(playerid) > 5)
@@ -246,7 +246,7 @@ CMD:ar(playerid, params[])
 	ShowPlayerFooter(playerid, string);
 
 	SendAdminAction(ReportData[reportid][rPlayer], "%s (ID: %d) has accepted your report.", ReturnName(playerid, 0), playerid);
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has accepted %s's report.", ReturnName(playerid, 0), ReturnName(ReportData[reportid][rPlayer], 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has accepted %s's report.", ReturnName(playerid, 0), ReturnName(ReportData[reportid][rPlayer], 0));
 
 	Report_Remove(reportid);
 	return 1;
@@ -273,7 +273,7 @@ CMD:dr(playerid, params[])
 	ShowPlayerFooter(playerid, string);
 
 	SendAdminAction(ReportData[reportid][rPlayer], "%s (ID: %d) has denied your report.", ReturnName(playerid, 0), playerid);
-    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has denied %s's report.", ReturnName(playerid, 0), ReturnName(ReportData[reportid][rPlayer], 0));
+    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has denied %s's report.", ReturnName(playerid, 0), ReturnName(ReportData[reportid][rPlayer], 0));
 
     Report_Remove(reportid);
 	return 1;
@@ -377,7 +377,7 @@ CMD:ajail(playerid, params[])
 	SendAdminAction(playerid, "You have jailed %s for %d minutes (%s).", ReturnName(userid, 0), minutes, reason);
 	SendAdminAction(userid, "%s has jailed you for %d minutes (%s).", ReturnName(playerid, 0), minutes, reason);
 
-	SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has jailed %s for %d minutes for: %s", ReturnName(playerid, 0), ReturnName(userid, 0), minutes, reason);
+	SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has jailed %s for %d minutes for: %s", ReturnName(playerid, 0), ReturnName(userid, 0), minutes, reason);
 	Log_Write("logs/jail_log.txt", "[%s] %s has jailed %s for %d minutes, reason: %s.", ReturnDate(), ReturnName(playerid, 0), ReturnName(userid, 0), minutes, reason);
 	return 1;
 }
@@ -435,7 +435,7 @@ CMD:aslap(playerid, params[])
 	SetPlayerPos(userid, x, y, z + 5);
 
 	PlayerPlaySound(userid, 1130, 0.0, 0.0, 0.0);
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has slapped %s.", ReturnName(playerid, 0), ReturnName(userid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has slapped %s.", ReturnName(playerid, 0), ReturnName(userid, 0));
 	return 1;
 }
 
@@ -459,7 +459,7 @@ CMD:kick(playerid, params[])
     if (PlayerData[userid][pAdmin] > PlayerData[playerid][pAdmin])
 	    return SendErrorMessage(playerid, "The specified player has higher authority.");
 
-	SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has kicked %s for: %s.", ReturnName(playerid, 0), ReturnName(userid, 0), reason);
+	SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has kicked %s for: %s.", ReturnName(playerid, 0), ReturnName(userid, 0), reason);
 	Log_Write("logs/kick_log.txt", "[%s] %s has kicked %s for: %s.", ReturnDate(), ReturnName(playerid, 0), ReturnName(userid, 0), reason);
 
 	KickEx(userid);
@@ -711,7 +711,7 @@ CMD:ban(playerid, params[])
 	}
 	Dialog_Show(userid, ShowOnly, DIALOG_STYLE_MSGBOX, DialogStyle_Title("Banned"), DialogStyle_Body("Your account has been banned by the server.\n\nUsername: %s\nReason: %s\nAdmin who banned you: %s\n\nPress F8 to take a screenshot and request a ban appeal on our forums."), "Close", "", PlayerData[userid][pUsername], reason, ReturnName(playerid, 0));
 
-	SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s was banned by %s for: %s.", ReturnName(userid, 0), ReturnName(playerid, 0), reason);
+	SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s was banned by %s for: %s.", ReturnName(userid, 0), ReturnName(playerid, 0), reason);
 	Log_Write("logs/ban_log.txt", "[%s] %s was banned by %s for: %s.", ReturnDate(), ReturnName(userid, 0), ReturnName(playerid, 0), reason);
 
 	Blacklist_Add(PlayerData[userid][pIP], PlayerData[userid][pUsername], PlayerData[playerid][pUsername], reason);
@@ -811,7 +811,7 @@ CMD:goto(playerid, params[])
 	if (sscanf(params, "u", id))
  	{
 	 	SendSyntaxMessage(playerid, "/goto [player or name]");
-		SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} spawn, prison, house, business, entrance, job, gate, interior, billboard");
+		SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}spawn, prison, house, business, entrance, job, gate, interior, billboard");
 		return 1;
 	}
     if (id == INVALID_PLAYER_ID)
@@ -819,7 +819,7 @@ CMD:goto(playerid, params[])
 	    if (sscanf(params, "s[24]S()[64]", type, string))
 		{
 		    SendSyntaxMessage(playerid, "/goto [player or name]");
-			SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} spawn, prison, house, business, entrance, job, gate, interior, billboard");
+			SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}spawn, prison, house, business, entrance, job, gate, interior, billboard");
 			return 1;
 	    }
 	    if (!strcmp(type, "spawn", true)) {
@@ -967,7 +967,7 @@ CMD:send(playerid, params[])
 	if (sscanf(params, "us[32]", userid, type))
  	{
 	 	SendSyntaxMessage(playerid, "/send [player] [name]");
-		SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} spawn, prison");
+		SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}spawn, prison");
 		return 1;
 	}
     if (userid == INVALID_PLAYER_ID)
@@ -1083,10 +1083,10 @@ CMD:atalk(playerid, params[])
 	if (userid == INVALID_PLAYER_ID)
 	    return SendErrorMessage(playerid, "You have specified an invalid player.");
 
-	SendClientMessageEx(userid, COLOR_YELLOW, "[ADMIN]: %s says: %s", ReturnName(playerid, 0), text);
+	SendClientMessageEx(userid, COLOR_YELLOW, "ADMIN: %s says: %s", ReturnName(playerid, 0), text);
 
 	if (playerid != userid) {
-		SendClientMessageEx(playerid, COLOR_YELLOW, "[ADMIN]: %s says: %s", ReturnName(playerid, 0), text);
+		SendClientMessageEx(playerid, COLOR_YELLOW, "ADMIN: %s says: %s", ReturnName(playerid, 0), text);
 	}
 	return 1;
 }
@@ -1125,14 +1125,14 @@ CMD:unban(playerid, params[])
 	if (isnull(params) || strlen(params) > 24)
 	{
 		SendSyntaxMessage(playerid, "/unban [username]");
-		SendClientMessage(playerid, COLOR_LIGHTRED, "[NOTE]:{FFFFFF} Type \"/username\" to resolve the username from a character's name.");
+		SendClientMessage(playerid, COLOR_LIGHTRED, "NOTE: {FFFFFF}Type \"/username\" to resolve the username from a character's name.");
 	}
 	else
 	{
 	    Blacklist_Remove(params);
 
 	    SendServerMessage(playerid, "You have unbanned \"%s\" successfully.", params);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has unbanned account \"%s\".", ReturnName(playerid, 0), params);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has unbanned account \"%s\".", ReturnName(playerid, 0), params);
 
 	    Log_Write("logs/ban_log.txt", "[%s] %s has unbanned account \"%s\".", ReturnDate(), ReturnName(playerid, 0), params);
 	}
@@ -1152,7 +1152,7 @@ CMD:blacklist(playerid, params[])
 	if (sscanf(params, "s[24]s[128]", type, params))
  	{
 	 	SendSyntaxMessage(playerid, "/blacklist [name] [parameter]");
-	 	SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} ban, banip, unbanip");
+	 	SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}ban, banip, unbanip");
 	 	return 1;
 	}
 	if (!strcmp(type, "ban", true))
@@ -1166,7 +1166,7 @@ CMD:blacklist(playerid, params[])
 		Blacklist_Add("0.0.0.0", params, PlayerData[playerid][pUsername], "Name Ban (/blacklist)");
 
 	    SendServerMessage(playerid, "You have banned \"%s\" successfully.", params);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has banned \"%s\".", ReturnName(playerid, 0), params);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has banned \"%s\".", ReturnName(playerid, 0), params);
 
 	    Log_Write("logs/ban_log.txt", "[%s] %s has banned \"%s\".", ReturnDate(), ReturnName(playerid, 0), params);
 	}
@@ -1181,7 +1181,7 @@ CMD:blacklist(playerid, params[])
 		Blacklist_Add(params, "", PlayerData[playerid][pUsername], "IP Ban (/blacklist)");
 
 	    SendServerMessage(playerid, "You have banned IP \"%s\" successfully.", params);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has banned IP \"%s\".", ReturnName(playerid, 0), params);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has banned IP \"%s\".", ReturnName(playerid, 0), params);
 
 	    Log_Write("logs/ban_log.txt", "[%s] %s has banned IP \"%s\".", ReturnDate(), ReturnName(playerid, 0), params);
 	}
@@ -1193,7 +1193,7 @@ CMD:blacklist(playerid, params[])
 		Blacklist_RemoveIP(params);
 
 	    SendServerMessage(playerid, "You have unbanned IP \"%s\" successfully.", params);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has unbanned IP \"%s\".", ReturnName(playerid, 0), params);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has unbanned IP \"%s\".", ReturnName(playerid, 0), params);
 
 	    Log_Write("logs/ban_log.txt", "[%s] %s has unbanned IP \"%s\".", ReturnDate(), ReturnName(playerid, 0), params);
 	}
@@ -1229,12 +1229,12 @@ CMD:togooc(playerid, params[])
 
 	if (!g_StatusOOC)
 	{
-	    SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has disabled global OOC chat.", ReturnName(playerid, 0));
+	    SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has disabled global OOC chat.", ReturnName(playerid, 0));
 	    g_StatusOOC = true;
 	}
 	else
 	{
-	    SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has enabled global OOC chat.", ReturnName(playerid, 0));
+	    SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has enabled global OOC chat.", ReturnName(playerid, 0));
 	    g_StatusOOC = false;
 	}
 	return 1;
@@ -1593,8 +1593,8 @@ CMD:setplayer(playerid, params[])
 	if (sscanf(params, "us[16]S()[32]", userid, type, amount))
  	{
 	 	SendSyntaxMessage(playerid, "/setplayer [playerid/name] [name]");
-	 	SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} gender, birthdate, origin, bank, savings, hunger, thirst, playinghours");
-		SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} job, warrants, channel");
+	 	SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}gender, birthdate, origin, bank, savings, hunger, thirst, playinghours");
+		SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}job, warrants, channel");
 		return 1;
 	}
 	if (userid == INVALID_PLAYER_ID)
@@ -1718,7 +1718,7 @@ CMD:baninfo(playerid, params[])
 	if (isnull(params) || strlen(params) > 24)
 	{
 		SendSyntaxMessage(playerid, "/baninfo [username]");
-		SendClientMessage(playerid, COLOR_LIGHTRED, "[NOTE]:{FFFFFF} Type \"/username\" to resolve the username from a character's name.");
+		SendClientMessage(playerid, COLOR_LIGHTRED, "NOTE: {FFFFFF}Type \"/username\" to resolve the username from a character's name.");
 	}
 	else
 	{
@@ -1957,7 +1957,7 @@ CMD:restart(playerid, params[])
 	    g_ServerRestart = 0;
 	    g_RestartTime = 0;
 
-	    return SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has postponed the server restart.", ReturnName(playerid, 0));
+	    return SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has postponed the server restart.", ReturnName(playerid, 0));
 	}
 	if (sscanf(params, "d", time))
 	    return SendSyntaxMessage(playerid, "/restart [seconds]");
@@ -1970,7 +1970,7 @@ CMD:restart(playerid, params[])
 	g_ServerRestart = 1;
 	g_RestartTime = time;
 
-	SendClientMessageToAllEx(COLOR_LIGHTRED, "[ADMIN]: %s has initiated a server restart in %d seconds.", ReturnName(playerid, 0), time);
+	SendClientMessageToAllEx(COLOR_LIGHTRED, "ADMIN: %s has initiated a server restart in %d seconds.", ReturnName(playerid, 0), time);
 	return 1;
 }
 
@@ -2210,7 +2210,7 @@ CMD:ah(playerid, params[])
 	PlayerData[userid][pSeekHelp] = 0;
 
 	SendServerMessage(userid, "%s has accepted your help request.", ReturnName(playerid, 0));
-	SendTesterMessage(COLOR_LIGHTRED, "[TESTER]: %s has accepted %s's help request.", ReturnName(playerid, 0), ReturnName(userid, 0));
+	SendTesterMessage(COLOR_LIGHTRED, "TESTER: %s has accepted %s's help request.", ReturnName(playerid, 0), ReturnName(userid, 0));
 	return 1;
 }
 
@@ -2238,7 +2238,7 @@ CMD:dh(playerid, params[])
 	PlayerData[userid][pSeekHelp] = 0;
 
 	SendServerMessage(userid, "%s has denied your help request.", ReturnName(playerid, 0));
-	SendTesterMessage(COLOR_LIGHTRED, "[TESTER]: %s has denied %s's help request.", ReturnName(playerid, 0), ReturnName(userid, 0));
+	SendTesterMessage(COLOR_LIGHTRED, "TESTER: %s has denied %s's help request.", ReturnName(playerid, 0), ReturnName(userid, 0));
 	return 1;
 }
 
@@ -2286,7 +2286,7 @@ CMD:healall(playerid, params[])
 	foreach (new i : Player) {
 	    SetPlayerHealth(i, 100.0);
 	}
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has healed all players online.", ReturnName(playerid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has healed all players online.", ReturnName(playerid, 0));
 	return 1;
 }
 
@@ -2300,7 +2300,7 @@ CMD:saveall(playerid, params[])
 	foreach (new i : Player) {
 		SQL_SaveCharacter(i);
 	}
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has saved all players accounts.", ReturnName(playerid, 0));
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has saved all players accounts.", ReturnName(playerid, 0));
 	return 1;
 }
 

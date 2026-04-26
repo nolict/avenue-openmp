@@ -21,7 +21,7 @@ Dialog:ServerPanel(playerid, response, listitem, inputtext[])
 				    g_ServerLocked = false;
 
 				    SendRconCommand("password 0");
-				    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has unlocked the server.", ReturnName(playerid, 0));
+				    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has unlocked the server.", ReturnName(playerid, 0));
 				}
 				else Dialog_Show(playerid, LockServer, DIALOG_STYLE_INPUT, DialogStyle_Title("Lock Server"), DialogStyle_Body("Please enter the specified password below to lock the server with:"), "Lock", "Back");
 			}
@@ -56,7 +56,7 @@ Dialog:LockServer(playerid, response, listitem, inputtext[])
 		g_ServerLocked = true;
 
 		SendRconCommand(str);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has locked the server (password: %s).", ReturnName(playerid, 0), inputtext);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has locked the server (password: %s).", ReturnName(playerid, 0), inputtext);
 	}
 	else cmd_panel(playerid, "\1");
 	return 1;
@@ -79,7 +79,7 @@ Dialog:SetHostname(playerid, response, listitem, inputtext[])
 	    format(str, sizeof(str), "hostname %s", inputtext);
 
 		SendRconCommand(str);
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has set the hostname to \"%s\".", ReturnName(playerid, 0), inputtext);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has set the hostname to \"%s\".", ReturnName(playerid, 0), inputtext);
 	}
 	else cmd_panel(playerid, "\1");
 	return 1;

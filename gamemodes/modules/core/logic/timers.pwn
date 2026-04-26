@@ -313,14 +313,14 @@ public PlayerCheck()
 		}
 		if (GetPlayerSpecialAction(i) == SPECIAL_ACTION_USEJETPACK && !PlayerData[i][pJetpack])
 		{
-	    	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has spawned a jetpack using hacks.", ReturnName(i, 0));
+	    	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has spawned a jetpack using hacks.", ReturnName(i, 0));
 	    	Log_Write("logs/cheat_log.txt", "[%s] %s has spawned a jetpack using hacks.", ReturnDate(), ReturnName(i, 0));
 		}
 		if (GetPlayerSpeed(i) > 210 && PlayerData[i][pAdmin] < 1)
 		{
 		    if (!IsAPlane(GetPlayerVehicleID(i)) && GetPlayerState(i) != PLAYER_STATE_PASSENGER)
 		    {
-		        SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has possibly used speed hacks (%.0f mph).", ReturnName(i, 0), GetPlayerSpeed(i));
+		        SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has possibly used speed hacks (%.0f mph).", ReturnName(i, 0), GetPlayerSpeed(i));
 		        Log_Write("logs/cheat_log.txt", "[%s] %s has possibly used speed hacks (%.0f mph).", ReturnDate(), ReturnName(i, 0), GetPlayerSpeed(i));
 			}
 		}
@@ -636,18 +636,18 @@ public PlayerCheck()
 		    if (!IsPlayerInRangeOfPoint(i, 100.0, g_arrDrivingCheckpoints[PlayerData[i][pTestStage]][0], g_arrDrivingCheckpoints[PlayerData[i][pTestStage]][1], g_arrDrivingCheckpoints[PlayerData[i][pTestStage]][2]))
 			{
 		        CancelDrivingTest(i);
-				SendClientMessage(i, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You have failed the test due to leaving the test area.");
+				SendClientMessage(i, COLOR_LIGHTRED, "WARNING: {FFFFFF}You have failed the test due to leaving the test area.");
     		}
 			else if (GetPlayerSpeed(i) >= 55.0)
    			{
 				if (++PlayerData[i][pTestWarns] < 3)
 				{
-    				SendClientMessageEx(i, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are going too fast, slow down! (%d/3)", PlayerData[i][pTestWarns]);
+    				SendClientMessageEx(i, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are going too fast, slow down! (%d/3)", PlayerData[i][pTestWarns]);
         		}
 	       		else
 				{
     				CancelDrivingTest(i);
-        			SendClientMessage(i, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You have failed the test due to excessive speeding!");
+        			SendClientMessage(i, COLOR_LIGHTRED, "WARNING: {FFFFFF}You have failed the test due to excessive speeding!");
 			    }
 			}
 		}
@@ -813,7 +813,7 @@ public FuelUpdate()
 
 			if (CoreVehicles[i][vehFuel] >= 1 && CoreVehicles[i][vehFuel] <= 5)
 			{
-			    SendClientMessage(GetVehicleDriver(i), COLOR_LIGHTRED, "[WARNING]:{FFFFFF} This vehicle is low on fuel. You must visit a fuel station!");
+			    SendClientMessage(GetVehicleDriver(i), COLOR_LIGHTRED, "WARNING: {FFFFFF}This vehicle is low on fuel. You must visit a fuel station!");
 			}
 		}
 		if (CoreVehicles[i][vehFuel] <= 0)

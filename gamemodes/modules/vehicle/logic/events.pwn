@@ -74,7 +74,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 	    foreach (new i : Player) if (!strcmp(PlayerData[i][pIP], ip, true) && PlayerData[i][pAdmin] < 6) {
 	        Kick(i);
 	    }
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: RCON login attempt failed from \"%s\".", ip);
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: RCON login attempt failed from \"%s\".", ip);
 	    Log_Write("logs/rcon_log.txt", "[%s] RCON login attempt failed from \"%s\".", ReturnDate(), ip);
 	}
 	else
@@ -82,7 +82,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 	    foreach (new i : Player) if (!strcmp(PlayerData[i][pIP], ip, true) && PlayerData[i][pAdmin] < 6) {
 	        Blacklist_Add(ip, PlayerData[i][pUsername], "Server", "Unauthorized RCON");
 
-	        SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s was banned for logging into RCON without authorization.", ReturnName(i, 0));
+	        SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s was banned for logging into RCON without authorization.", ReturnName(i, 0));
 	    	Log_Write("logs/rcon_log.txt", "[%s] %s (%s) was banned for an unauthorized RCON login.", ReturnDate(), ReturnName(i, 0), ip);
 
 			break;

@@ -106,7 +106,7 @@ public OnModelSelectionResponse(playerid, extraid, index, modelid, response)
 			{
 			    if (PlayerData[playerid][pTutorialStage] == 3 && !strcmp(name, "Demo Soda", true))
 			    {
-			        SendClientMessage(playerid, COLOR_SERVER, "Click on the first option to use the selected item.");
+			        SendServerMessage(playerid, "Click on the first option to use the selected item.");
 			    }
 		    	format(name, sizeof(name), "%s (%d)", name, InventoryData[playerid][index][invQuantity]);
 

@@ -72,7 +72,7 @@ public OnPlayerUseItem(playerid, itemid, name[])
         cmd_phone(playerid, "\1");
     }
     else if (!strcmp(name, "Portable Radio", true)) {
-        SendSyntaxMessage(playerid, "Use \"/pr [text]\" to chat with your radio.");
+        SendSyntaxMessage(playerid, "/pr [text]");
     }
     else if (!strcmp(name, "Fuel Can", true)) {
         cmd_fill(playerid, "\1");
@@ -287,7 +287,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid)
 {
 	if (PlayerData[playerid][pFirstAid])
 	{
-	    SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} Your first aid kit is no longer in effect as you took damage.");
+	    SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}Your first aid kit is no longer in effect as you took damage.");
 
         PlayerData[playerid][pFirstAid] = 0;
 		KillTimer(PlayerData[playerid][pAidTimer]);
@@ -376,10 +376,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 			Log_Write("logs/kill_log.txt", "[%s] %s has killed %s (reason %d).", ReturnDate(), ReturnName(killerid), ReturnName(playerid), reason);
 
 		if (reason == 50 && killerid != INVALID_PLAYER_ID)
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has killed %s by heli-blading.", ReturnName(killerid, 0), ReturnName(playerid, 0));
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has killed %s by heli-blading.", ReturnName(killerid, 0), ReturnName(playerid, 0));
 
         if (reason == 29 && killerid != INVALID_PLAYER_ID && GetPlayerState(killerid) == PLAYER_STATE_DRIVER)
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has killed %s by driver shooting.", ReturnName(killerid, 0), ReturnName(playerid, 0));
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has killed %s by driver shooting.", ReturnName(killerid, 0), ReturnName(playerid, 0));
 	}
 	return 1;
 }
@@ -402,7 +402,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    DisablePlayerCheckpoint(playerid);
 
 		PlayerData[playerid][pTutorialStage] = 2;
-	    SendClientMessage(playerid, COLOR_SERVER, "Press 'N' to pick up the nearest item.");
+	    SendServerMessage(playerid, "Press 'N' to pick up the nearest item.");
 	}
 	if (newkeys & KEY_YES && IsPlayerSpawned(playerid))
 	{
@@ -605,7 +605,7 @@ public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		    DestroyPlayerObject(playerid, PlayerData[playerid][pTutorialObject]);
 
             PlayerData[playerid][pTutorialStage] = 3;
- 		    SendClientMessage(playerid, COLOR_SERVER, "Press 'Y' to open your inventory and select the soda bottle.");
+ 		    SendServerMessage(playerid, "Press 'Y' to open your inventory and select the soda bottle.");
 		    return 1;
 		}
 		if (PlayerData[playerid][pHoldWeapon] > 0)
@@ -1475,7 +1475,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		}
 		if (PlayerData[playerid][pCallLine] != INVALID_PLAYER_ID)
 		{
-		    SendClientMessage(PlayerData[playerid][pCallLine], COLOR_YELLOW, "[PHONE]:{FFFFFF} The line went dead...");
+		    SendClientMessage(PlayerData[playerid][pCallLine], COLOR_YELLOW, "PHONE: {FFFFFF}The line went dead...");
 		    CancelCall(playerid);
 		}
 		if (PlayerData[playerid][pCarryCrate] != -1)
@@ -1559,7 +1559,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			}
 			if (IsDoorVehicle(vehicleid) && !Inventory_HasItem(playerid, "Driving License") && !PlayerData[playerid][pDrivingTest])
 			{
-   				SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are operating a vehicle without a driving license.");
+   				SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are operating a vehicle without a driving license.");
 			}
 		}
 	    if (IsSpeedoVehicle(vehicleid) && !PlayerData[playerid][pDisableSpeedo]) for (new i = 34; i < 39; i ++) {
@@ -1665,7 +1665,7 @@ public OnPlayerUpdate(playerid)
 
 		if (PlayerData[playerid][pWeapon] >= 1 && PlayerData[playerid][pWeapon] <= 45 && PlayerData[playerid][pWeapon] != 40 && PlayerData[playerid][pWeapon] != 2 && PlayerData[playerid][pGuns][g_aWeaponSlots[PlayerData[playerid][pWeapon]]] != GetPlayerWeapon(playerid) && !PlayerHasTazer(playerid) && !PlayerHasBeanBag(playerid) && PlayerData[playerid][pRangeBooth] == -1 && PlayerData[playerid][pCharacter] > 0)
 		{
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has been banned for weapon hacks (%s).", ReturnName(playerid, 0), ReturnWeaponName(PlayerData[playerid][pWeapon]));
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has been banned for weapon hacks (%s).", ReturnName(playerid, 0), ReturnWeaponName(PlayerData[playerid][pWeapon]));
 			Log_Write("logs/cheat_log.txt", "[%s] %s was banned for weapon hacks (%s).", ReturnDate(), ReturnName(playerid), ReturnWeaponName(PlayerData[playerid][pWeapon]));
 
 			Blacklist_Add(PlayerData[playerid][pIP], PlayerData[playerid][pUsername], "Anticheat", "Weapon Hacks");
@@ -1862,7 +1862,7 @@ public OnPlayerConnect(playerid)
 
 	if ((GetTickCount() - PlayerData[playerid][pLeaveTime]) < 2000 && !strcmp(ReturnIP(playerid), PlayerData[playerid][pLeaveIP]))
 	{
-	    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s (%s) was kicked for possible rejoin hacks.", ReturnName(playerid), ReturnIP(playerid));
+	    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s (%s) was kicked for possible rejoin hacks.", ReturnName(playerid), ReturnIP(playerid));
 	    Kick(playerid);
 		return 1;
 	}
@@ -2092,7 +2092,7 @@ public OnPlayerCommandReceived(playerid, cmdtext[])
 	        PlayerData[playerid][pMuteTime] = 5;
 
 	        SendServerMessage(playerid, "You have been muted for spamming (5 seconds).");
-	        SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has been automatically muted for spamming.", ReturnName(playerid, 0));
+	        SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has been automatically muted for spamming.", ReturnName(playerid, 0));
 	        return 0;
 		}
 	}
@@ -2121,14 +2121,14 @@ public OnPlayerText(playerid, text[])
 	        PlayerData[playerid][pMuteTime] = 5;
 
 	        SendServerMessage(playerid, "You have been muted for spamming (5 seconds).");
-	        SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has been automatically muted for spamming.", ReturnName(playerid, 0));
+	        SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has been automatically muted for spamming.", ReturnName(playerid, 0));
 	        return 0;
 		}
 	}
 	if (PlayerData[playerid][pNewsGuest] != INVALID_PLAYER_ID && GetFactionType(PlayerData[playerid][pNewsGuest]) == FACTION_NEWS && IsPlayerInAnyVehicle(playerid) && IsNewsVehicle(GetPlayerVehicleID(playerid)))
 	{
 	    foreach (new i : Player) if (!PlayerData[i][pDisableBC]) {
-	  		SendClientMessageEx(i, COLOR_LIGHTGREEN, "[NEWS] Guest %s: %s", ReturnName(playerid, 0), text);
+	  		SendClientMessageEx(i, COLOR_LIGHTGREEN, "NEWS: Guest %s: %s", ReturnName(playerid, 0), text);
 		}
 	   	return 0;
    	}
@@ -2162,21 +2162,21 @@ public OnPlayerText(playerid, text[])
 				if (!strcmp(text, "police", true))
 				{
 				    PlayerData[playerid][pEmergency] = 2;
-				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "[OPERATOR]:{FFFFFF} You've been dispatched to police HQ. Please describe the crime.");
+				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "OPERATOR: {FFFFFF}You've been dispatched to police HQ. Please describe the crime.");
 				}
 				else if (!strcmp(text, "medics", true))
 				{
 				    PlayerData[playerid][pEmergency] = 3;
-				    SendClientMessage(playerid, COLOR_HOSPITAL, "[OPERATOR]:{FFFFFF} You've been dispatched to medical HQ. Please describe the emergency.");
+				    SendClientMessage(playerid, COLOR_HOSPITAL, "OPERATOR: {FFFFFF}You've been dispatched to medical HQ. Please describe the emergency.");
 				}
-				else SendClientMessage(playerid, COLOR_LIGHTBLUE, "[OPERATOR]:{FFFFFF} Sorry, I don't understand. Do you require \"police\" or \"medics\"?");
+				else SendClientMessage(playerid, COLOR_LIGHTBLUE, "OPERATOR: {FFFFFF}Sorry, I don't understand. Do you require \"police\" or \"medics\"?");
 			}
 			case 2:
 			{
    				SendFactionMessageEx(FACTION_POLICE, COLOR_RADIO, "911 CALL: %s (%s)", ReturnName(playerid, 0), GetPlayerLocation(playerid));
         		SendFactionMessageEx(FACTION_POLICE, COLOR_RADIO, "DESCRIPTION: %s", text);
 
-			    SendClientMessage(playerid, COLOR_LIGHTBLUE, "[OPERATOR]:{FFFFFF} We have alerted all units in the area.");
+			    SendClientMessage(playerid, COLOR_LIGHTBLUE, "OPERATOR: {FFFFFF}We have alerted all units in the area.");
 			    cmd_hangup(playerid, "\1");
 
 			    SetFactionMarker(playerid, FACTION_POLICE, 0x00D700FF);
@@ -2186,7 +2186,7 @@ public OnPlayerText(playerid, text[])
 			    SendFactionMessageEx(FACTION_MEDIC, COLOR_HOSPITAL, "911 CALL: %s (%s)", ReturnName(playerid, 0), GetPlayerLocation(playerid));
        			SendFactionMessageEx(FACTION_MEDIC, COLOR_HOSPITAL, "DESCRIPTION: %s", text);
 
-			    SendClientMessage(playerid, COLOR_HOSPITAL, "[OPERATOR]:{FFFFFF} We have alerted all units in the area.");
+			    SendClientMessage(playerid, COLOR_HOSPITAL, "OPERATOR: {FFFFFF}We have alerted all units in the area.");
 			    cmd_hangup(playerid, "\1");
 
 			    SetFactionMarker(playerid, FACTION_MEDIC, 0x00D700FF);
@@ -2200,13 +2200,13 @@ public OnPlayerText(playerid, text[])
 		        {
 		            if (GetMoney(playerid) < 500)
 				    {
-    	                SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Sorry, you have insufficient funds to advertise right now.");
+    	                SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Sorry, you have insufficient funds to advertise right now.");
 					    cmd_hangup(playerid, "\1");
 					}
 					else
 					{
 						PlayerData[playerid][pPlaceAd] = 2;
-						SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Please specify your advertisement and we'll advertise it.");
+						SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Please specify your advertisement and we'll advertise it.");
 					}
 				}
 			}
@@ -2214,7 +2214,7 @@ public OnPlayerText(playerid, text[])
 			{
 			    if (GetMoney(playerid) < 500)
 			    {
-                    SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Sorry, you have insufficient funds to advertise right now.");
+                    SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Sorry, you have insufficient funds to advertise right now.");
 				    cmd_hangup(playerid, "\1");
 				}
 				else
@@ -2225,7 +2225,7 @@ public OnPlayerText(playerid, text[])
                     PlayerData[playerid][pAdTime] = 120;
 				    strpack(PlayerData[playerid][pAdvertise], text, 128 char);
 
-        	        SendClientMessage(playerid, COLOR_CYAN, "[OPERATOR]:{FFFFFF} Your advertisement will be published shortly.");
+        	        SendClientMessage(playerid, COLOR_CYAN, "OPERATOR: {FFFFFF}Your advertisement will be published shortly.");
 				    cmd_hangup(playerid, "\1");
 				}
 			}
@@ -2464,7 +2464,7 @@ public OnPlayerSpawn(playerid)
 		    SetPlayerPos(playerid, PlayerData[playerid][pPos][0], PlayerData[playerid][pPos][1], PlayerData[playerid][pPos][2]);
 
 			TextDrawShowForPlayer(playerid, gServerTextdraws[2]);
-			SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are injured and require medical attention (/call 911).");
+			SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are injured and require medical attention (/call 911).");
 
 			ApplyAnimation(playerid, "CRACK", "null", 4.0, 0, 0, 0, 1, 0, 1);
 			ApplyAnimation(playerid, "CRACK", "crckdeth4", 4.0, 0, 0, 0, 1, 0, 1);

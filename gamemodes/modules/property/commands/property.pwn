@@ -145,7 +145,7 @@ CMD:abandon(playerid, params[])
 	    if (isnull(params) || (!isnull(params) && strcmp(params, "confirm", true) != 0))
 	    {
 	        SendSyntaxMessage(playerid, "/abandon [confirm]");
-	        SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are about to abandon your house with no refund.");
+	        SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are about to abandon your house with no refund.");
 		}
 		else if (!strcmp(params, "confirm", true))
 		{
@@ -163,7 +163,7 @@ CMD:abandon(playerid, params[])
 	    if (isnull(params) || (!isnull(params) && strcmp(params, "confirm", true) != 0))
 	    {
 	        SendSyntaxMessage(playerid, "/abandon [confirm]");
-	        SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are about to abandon your business with no refund.");
+	        SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are about to abandon your business with no refund.");
 		}
 		else if (!strcmp(params, "confirm", true))
 		{
@@ -181,7 +181,7 @@ CMD:abandon(playerid, params[])
 	    if (isnull(params) || (!isnull(params) && strcmp(params, "confirm", true) != 0))
 	    {
 	        SendSyntaxMessage(playerid, "/abandon [confirm]");
-	        SendClientMessage(playerid, COLOR_LIGHTRED, "[WARNING]:{FFFFFF} You are about to abandon your vehicle with no refund.");
+	        SendClientMessage(playerid, COLOR_LIGHTRED, "WARNING: {FFFFFF}You are about to abandon your vehicle with no refund.");
 		}
 		else if (CarData[id][carImpounded] != -1)
     		return SendErrorMessage(playerid, "This vehicle is impounded and you can't use it.");
@@ -345,7 +345,7 @@ CMD:sell(playerid, params[])
 	if (sscanf(params, "us[24]S()[128]", targetid, type, string))
 	{
 	    SendSyntaxMessage(playerid, "/sell [playerid/name] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} house, business, vehicle");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}house, business, vehicle");
 	    return 1;
 	}
 	if (targetid == INVALID_PLAYER_ID || !IsPlayerNearPlayer(playerid, targetid, 5.0))
@@ -434,7 +434,7 @@ CMD:approve(playerid, params[])
 	if (isnull(params))
  	{
 	 	SendSyntaxMessage(playerid, "/approve [name]");
-		SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} house, business, car, food, faction, greet, frisk");
+		SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}house, business, car, food, faction, greet, frisk");
 		return 1;
 	}
 	if (!strcmp(params, "house", true) && PlayerData[playerid][pHouseSeller] != INVALID_PLAYER_ID)
@@ -736,7 +736,7 @@ CMD:edithouse(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/edithouse [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, interior, price, address, type");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, interior, price, address, type");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_HOUSES) || !HouseData[id][houseExists])
@@ -753,7 +753,7 @@ CMD:edithouse(playerid, params[])
 		House_Refresh(id);
 		House_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of house ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of house ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "interior", true))
 	{
@@ -774,7 +774,7 @@ CMD:edithouse(playerid, params[])
 			}
 		}
 		House_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the interior spawn of house ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the interior spawn of house ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "price", true))
 	{
@@ -788,7 +788,7 @@ CMD:edithouse(playerid, params[])
 	    House_Refresh(id);
 	    House_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the price of house ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the price of house ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
 	}
 	else if (!strcmp(type, "address", true))
 	{
@@ -802,7 +802,7 @@ CMD:edithouse(playerid, params[])
 	    House_Refresh(id);
 	    House_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the address of house ID: %d to \"%s\".", ReturnName(playerid, 0), id, address);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the address of house ID: %d to \"%s\".", ReturnName(playerid, 0), id, address);
 	}
 	else if (!strcmp(type, "type", true))
 	{
@@ -832,7 +832,7 @@ CMD:edithouse(playerid, params[])
 			}
 		}
 	    House_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of house ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of house ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
 	}
 	return 1;
 }
@@ -910,7 +910,7 @@ CMD:createbiz(playerid, params[])
 	if (sscanf(params, "dd", type, price))
  	{
 	 	SendSyntaxMessage(playerid, "/createbiz [type] [price]");
-    	SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Retail | 2: Weapons | 3: Clothes | 4: Fast Food | 5: Dealership | 6: Gas Station | 7: Furniture");
+    	SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Retail | 2: Weapons | 3: Clothes | 4: Fast Food | 5: Dealership | 6: Gas Station | 7: Furniture");
     	return 1;
 	}
 	if (type < 1 || type > 7)
@@ -940,7 +940,7 @@ CMD:editbiz(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editbiz [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, interior, deliver, name, price, stock, type, cars, spawn");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, interior, deliver, name, price, stock, type, cars, spawn");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_BUSINESSES) || !BusinessData[id][bizExists])
@@ -957,7 +957,7 @@ CMD:editbiz(playerid, params[])
 		Business_Refresh(id);
 		Business_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of business ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of business ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "interior", true))
 	{
@@ -978,7 +978,7 @@ CMD:editbiz(playerid, params[])
 			}
 		}
 		Business_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the interior spawn of business ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the interior spawn of business ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "deliver", true))
 	{
@@ -992,7 +992,7 @@ CMD:editbiz(playerid, params[])
 		Business_Refresh(id);
 
 		Business_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the deliver point of business ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the deliver point of business ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "price", true))
 	{
@@ -1006,7 +1006,7 @@ CMD:editbiz(playerid, params[])
 	    Business_Refresh(id);
 	    Business_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the price of business ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the price of business ID: %d to %s.", ReturnName(playerid, 0), id, FormatNumber(price));
 	}
 	else if (!strcmp(type, "stock", true))
 	{
@@ -1020,7 +1020,7 @@ CMD:editbiz(playerid, params[])
 	    Business_Refresh(id);
 	    Business_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the stock of business ID: %d to %s products.", ReturnName(playerid, 0), id, FormatNumber(amount, ""));
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the stock of business ID: %d to %s products.", ReturnName(playerid, 0), id, FormatNumber(amount, ""));
 	}
 	else if (!strcmp(type, "name", true))
 	{
@@ -1034,7 +1034,7 @@ CMD:editbiz(playerid, params[])
 	    Business_Refresh(id);
 	    Business_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the name of business ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the name of business ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
 	}
 	else if (!strcmp(type, "type", true))
 	{
@@ -1043,7 +1043,7 @@ CMD:editbiz(playerid, params[])
 	    if (sscanf(string, "d", typeint))
 	    {
 	        SendSyntaxMessage(playerid, "/editbiz [id] [type] [business type]");
-			SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 1: Retail | 2: Weapons | 3: Clothes | 4: Fast Food | 5: Dealership | 6: Gas Station | 7: Furniture");
+			SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}1: Retail | 2: Weapons | 3: Clothes | 4: Fast Food | 5: Dealership | 6: Gas Station | 7: Furniture");
 			return 1;
 		}
 		if (typeint < 1 || typeint > 7)
@@ -1116,7 +1116,7 @@ CMD:editbiz(playerid, params[])
 		Business_Refresh(id);
 
 	    Business_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of business ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of business ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
 	}
 	else if (!strcmp(type, "cars", true))
 	{
@@ -1140,7 +1140,7 @@ CMD:editbiz(playerid, params[])
 		BusinessData[id][bizExterior] = GetPlayerInterior(playerid);
 
 		Business_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the vehicle spawn of business ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the vehicle spawn of business ID: %d.", ReturnName(playerid, 0), id);
 	}
 	return 1;
 }
@@ -1352,7 +1352,7 @@ CMD:vault(playerid, params[])
 	    if (sscanf(params, "s[24]S()[12]", type, str))
 	    {
 			SendSyntaxMessage(playerid, "/vault [name] (%s available)", FormatNumber(BusinessData[bizid][bizVault]));
-	        SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} withdraw, deposit, balance");
+	        SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}withdraw, deposit, balance");
 	        return 1;
 		}
 		if (!strcmp(type, "withdraw", true))
@@ -1426,7 +1426,7 @@ CMD:editentrance(playerid, params[])
 	if (sscanf(params, "ds[24]S()[128]", id, type, string))
  	{
 	 	SendSyntaxMessage(playerid, "/editentrance [id] [name]");
-	    SendClientMessage(playerid, COLOR_YELLOW, "[NAMES]:{FFFFFF} location, interior, password, name, locked, mapicon, type, custom, virtual");
+	    SendClientMessage(playerid, COLOR_YELLOW, "NAMES: {FFFFFF}location, interior, password, name, locked, mapicon, type, custom, virtual");
 		return 1;
 	}
 	if ((id < 0 || id >= MAX_ENTRANCES) || !EntranceData[id][entranceExists])
@@ -1443,7 +1443,7 @@ CMD:editentrance(playerid, params[])
 		Entrance_Refresh(id);
 		Entrance_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the location of entrance ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the location of entrance ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "interior", true))
 	{
@@ -1464,7 +1464,7 @@ CMD:editentrance(playerid, params[])
 			}
 		}
 		Entrance_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the interior spawn of entrance ID: %d.", ReturnName(playerid, 0), id);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the interior spawn of entrance ID: %d.", ReturnName(playerid, 0), id);
 	}
 	else if (!strcmp(type, "custom", true))
 	{
@@ -1480,10 +1480,10 @@ CMD:editentrance(playerid, params[])
 	    Entrance_Save(id);
 
 	    if (status) {
-			SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has enabled custom interior mode for entrance ID: %d.", ReturnName(playerid, 0), id);
+			SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has enabled custom interior mode for entrance ID: %d.", ReturnName(playerid, 0), id);
 		}
 		else {
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has disabled custom interior mode for entrance ID: %d.", ReturnName(playerid, 0), id);
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has disabled custom interior mode for entrance ID: %d.", ReturnName(playerid, 0), id);
 		}
 	}
 	else if (!strcmp(type, "virtual", true))
@@ -1499,7 +1499,7 @@ CMD:editentrance(playerid, params[])
 			SetPlayerVirtualWorld(i, worldid);
 		}
 		Entrance_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the virtual of entrance ID: %d to %d.", ReturnName(playerid, 0), id, worldid);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the virtual of entrance ID: %d to %d.", ReturnName(playerid, 0), id, worldid);
 	}
 	else if (!strcmp(type, "mapicon", true))
 	{
@@ -1516,7 +1516,7 @@ CMD:editentrance(playerid, params[])
 	    Entrance_Refresh(id);
 	    Entrance_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the price of entrance ID: %d to %d.", ReturnName(playerid, 0), id, icon);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the price of entrance ID: %d to %d.", ReturnName(playerid, 0), id, icon);
 	}
 	else if (!strcmp(type, "password", true))
 	{
@@ -1532,7 +1532,7 @@ CMD:editentrance(playerid, params[])
 		    format(EntranceData[id][entrancePass], 32, password);
 		}
 	    Entrance_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the password of entrance ID: %d to \"%s\".", ReturnName(playerid, 0), id, password);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the password of entrance ID: %d to \"%s\".", ReturnName(playerid, 0), id, password);
 	}
 	else if (!strcmp(type, "locked", true))
 	{
@@ -1548,9 +1548,9 @@ CMD:editentrance(playerid, params[])
 	    Entrance_Save(id);
 
 	    if (locked) {
-			SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has locked entrance ID: %d.", ReturnName(playerid, 0), id);
+			SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has locked entrance ID: %d.", ReturnName(playerid, 0), id);
 		} else {
-		    SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has unlocked entrance ID: %d.", ReturnName(playerid, 0), id);
+		    SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has unlocked entrance ID: %d.", ReturnName(playerid, 0), id);
 		}
 	}
 	else if (!strcmp(type, "name", true))
@@ -1565,7 +1565,7 @@ CMD:editentrance(playerid, params[])
 	    Entrance_Refresh(id);
 	    Entrance_Save(id);
 
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the name of entrance ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the name of entrance ID: %d to \"%s\".", ReturnName(playerid, 0), id, name);
 	}
 	else if (!strcmp(type, "type", true))
 	{
@@ -1574,7 +1574,7 @@ CMD:editentrance(playerid, params[])
 	    if (sscanf(string, "d", typeint))
 	    {
 	        SendSyntaxMessage(playerid, "/editentrance [id] [type] [entrance type]");
-			SendClientMessage(playerid, COLOR_YELLOW, "[TYPES]:{FFFFFF} 0: None | 1: DMV | 2: Bank | 3: Warehouse | 4: City Hall | 5: Shooting Range");
+			SendClientMessage(playerid, COLOR_YELLOW, "TYPES: {FFFFFF}0: None | 1: DMV | 2: Bank | 3: Warehouse | 4: City Hall | 5: Shooting Range");
 			return 1;
 		}
 		if (typeint < 0 || typeint > 5)
@@ -1637,7 +1637,7 @@ CMD:editentrance(playerid, params[])
 			}
 		}
 	    Entrance_Save(id);
-		SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s has adjusted the type of entrance ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
+		SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s has adjusted the type of entrance ID: %d to %d.", ReturnName(playerid, 0), id, typeint);
 	}
 	return 1;
 }

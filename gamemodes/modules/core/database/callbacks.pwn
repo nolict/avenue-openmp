@@ -89,11 +89,11 @@ public OnQueryFinished(extraid, threadid)
 			    cache_get_row(0, 0, loginDate, g_iHandle);
 
 				format(PlayerData[extraid][pLoginDate], 36, loginDate);
-		        Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
+		        Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to {E1997F}Avenue Roleplay{FFFFFF}!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
 			}
 			else
 			{
-			    Dialog_Show(extraid, RegisterScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Registration"), DialogStyle_Body("Welcome to Avenue Roleplay, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:"), "Register", "Cancel", ReturnName(extraid));
+			    Dialog_Show(extraid, RegisterScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Registration"), DialogStyle_Body("Welcome to {E1997F}Avenue Roleplay{FFFFFF}, %s.\n\nNotice: Your account is not registered yet. Please enter your desired password:"), "Register", "Cancel", ReturnName(extraid));
 			}
     	}
     	case THREAD_LOGIN:
@@ -111,7 +111,7 @@ public OnQueryFinished(extraid, threadid)
 				}
 				else
 				{
-    	        	Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to Avenue Roleplay!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
+    	        	Dialog_Show(extraid, LoginScreen, DIALOG_STYLE_PASSWORD, DialogStyle_Title("Account Login"), DialogStyle_Body("Welcome back to {E1997F}Avenue Roleplay{FFFFFF}!\n\nYour account was last seen on: %s.\n\nPlease enter your password below to login to your account:"), "Login", "Cancel", PlayerData[extraid][pLoginDate]);
     	        	SendClientMessageEx(extraid, COLOR_LIGHTRED, "Notice: Incorrect password specified (%d/3 attempts).", PlayerData[extraid][pLoginAttempts]);
 				}
 			}
@@ -262,7 +262,7 @@ public OnQueryFinished(extraid, threadid)
 					}
 				    if (PlayerData[extraid][pTester] > 0)
 			    	{
-						SendClientMessage(extraid, COLOR_CYAN, "[SERVER]:{FFFFFF} You have logged in as a tester.");
+						SendClientMessage(extraid, COLOR_CYAN, "SERVER: {FFFFFF}You have logged in as a tester.");
 				    }
 				    if (PlayerData[extraid][pAdmin] > 0)
 				    {
@@ -692,7 +692,7 @@ public OnVerifyNameChange(playerid, newname[])
 	}
 	format(PlayerData[playerid][pNameChange], 24, newname);
 
-	SendAdminAlert(COLOR_LIGHTRED, "[ADMIN]: %s is requesting a name change to %s (use \"/acceptname\" or \"/declinename\").", ReturnName(playerid, 0), newname);
+	SendAdminAlert(COLOR_LIGHTRED, "ADMIN: %s is requesting a name change to %s (use \"/acceptname\" or \"/declinename\").", ReturnName(playerid, 0), newname);
 	SendServerMessage(playerid, "Your name change request was sent to the admins.");
 
 	return 1;
