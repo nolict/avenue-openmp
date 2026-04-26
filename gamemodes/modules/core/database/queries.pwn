@@ -53,12 +53,12 @@ stock SQL_CheckAccount(playerid)
 stock SQL_AttemptLogin(playerid, const password[])
 {
 	new
-		query[300],
+		query[512],
 		buffer[129];
 
 	WP_Hash(buffer, sizeof(buffer), password);
 
-	format(query, sizeof(query), "SELECT `ID`, `Admin` FROM `accounts` WHERE `Username` = '%s' AND `Password` = '%s'", PlayerData[playerid][pUsername], buffer);
+	format(query, sizeof(query), "SELECT a.`ID`, a.`Admin`, IFNULL(MAX(c.`Admin`), 0) AS `LegacyAdmin` FROM `accounts` AS a LEFT JOIN `characters` AS c ON c.`Username` = a.`Username` WHERE a.`Username` = '%s' AND a.`Password` = '%s' GROUP BY a.`ID`, a.`Admin`", PlayerData[playerid][pUsername], buffer);
     mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", playerid, THREAD_LOGIN);
 }
 

@@ -128,6 +128,22 @@ public OnQueryFinished(extraid, threadid)
 				PlayerData[extraid][pAccount] = cache_get_field_int(0, "ID");
 				PlayerData[extraid][pAdmin] = cache_get_field_int(0, "Admin");
 
+				new legacyAdmin = cache_get_field_int(0, "LegacyAdmin");
+
+				if (legacyAdmin > 0)
+				{
+				    if (!PlayerData[extraid][pAdmin])
+					{
+					    PlayerData[extraid][pAdmin] = legacyAdmin;
+
+				        format(query, sizeof(query), "UPDATE `accounts` SET `Admin` = '%d' WHERE `ID` = '%d'", legacyAdmin, PlayerData[extraid][pAccount]);
+						mysql_tquery(g_iHandle, query);
+					}
+
+					format(query, sizeof(query), "UPDATE `characters` SET `Admin` = '0' WHERE `Username` = '%s'", SQL_ReturnEscaped(PlayerData[extraid][pUsername]));
+					mysql_tquery(g_iHandle, query);
+				}
+
 				format(query, sizeof(query), "SELECT * FROM `characters` WHERE `Username` = '%s' LIMIT 3", PlayerData[extraid][pUsername]);
 				mysql_tquery(g_iHandle, query, "OnQueryFinished", "dd", extraid, THREAD_CHARACTERS);
 			}
